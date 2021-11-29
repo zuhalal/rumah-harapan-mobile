@@ -1,6 +1,9 @@
 # rumah_harapan
 
-A new Flutter project.
+A PBP B08 Final project.
+
+[![Pre-Release](https://github.com/sabynn/temenin-isoman-mobileapp/actions/workflows/pre-release.yml/badge.svg)](https://github.com/zuhalal/rumah-harapan-mobile/actions/workflows/pre-release.yml)
+[![Release](https://github.com/sabynn/temenin-isoman-mobileapp/actions/workflows/release.yml/badge.svg)](https://github.com/zuhalal/rumah-harapan-mobile/actions/workflows/release.yml)
 
 ## Getting Started
 
