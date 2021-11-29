@@ -2,20 +2,79 @@
 
 A PBP B08 Final project.
 
-Ini apk kelompok kami https://github.com/zuhalal/rumah-harapan-mobile/releases
+Berikut link apk kelompok kami https://github.com/zuhalal/rumah-harapan-mobile/releases
 
 [![Pre-Release](https://github.com/zuhalal/rumah-harapan-mobile/actions/workflows/pre-release.yml/badge.svg)](https://github.com/zuhalal/rumah-harapan-mobile/actions/workflows/pre-release.yml)
 [![Release](https://github.com/zuhalal/rumah-harapan-mobile/actions/workflows/release.yml/badge.svg)](https://github.com/zuhalal/rumah-harapan-mobile/actions/workflows/release.yml)
 
-## Getting Started
+## Nama-nama anggota kelompok B08:
 
-This project is a starting point for a Flutter application.
+1. Andi Afifah Khairunnisa (2006531951)
+2. Frigas Hanifyan Zalwi (2006596005)
+3. Isabelle Yansim (2006534120)
+4. Muhammad Damar Kusumo (2006532903)
+5. Nabilah Faujiah (2006596844)
+6. Regina Febrian Pehry (2006596882)
+7. Zuhal ‘Alimul Hadi (2006531314)
 
-A few resources to get you started if this is your first Flutter project:
+## Cerita aplikasi yang diajukan serta kebermanfaatannya
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Sudah lebih dari satu tahun COVID-19 telah melanda Indonesia. Banyak sekali perubahan masyarakat dalam menjalankan kesehariannya, mulai dari adanya WFH (Work From Home) yang menuntut segala hal dilakukan dengan daring dan sebagainya. Selain itu, banyak sekali informasi mengenai COVID-19 yang beredar di media online. Namun, tidak semua informasi yang ada di media sosial mengandung kebenaran. Banyak informasi yang hanya bersifat ikut-ikutan dengan trend yang ada dan malah membawa kebohongan. Untuk itu perlu adanya media yang mengandung segala informasi yang dapat dipertanggungjawabkan kebenarannya.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web yang dapat menjawab keresahan itu.Aplikasi ini berisikan segala informasi mengenai COVID-19, mulai dari angka penyebaran, angka kematian, sembuh, dan kasus aktif, informasi vaksin, dan sebagainya. Aplikasi ini sangat bermanfaat karena berisikan informasi yang valid dan tercegah dari hoax yang beredar mengenai COVID-19. Selain itu, terdapat artikel-artikel menarik yang dapat ditulis oleh user untuk menyebarkan pengalaman pribadi atau menceritakan sesuatu mengenai COVID-19.
+
+## Daftar modul yang akan diimplementasikan
+
+1. **Home.**
+    Halaman ini berisi tentang ringkasan status penyebaran COVID-19 di Indonesia serta beberapa artikel terbaru terkait COVID-19. Untuk mengakses halaman ini, diperlukan autentikasi pengguna, jika tidak, maka hanya akan tampil halaman selamat datang dan tombol untuk login atau register. Pengaplikasian form pada modul ini adalah pada bagian form login atau register.
+
+2. **Donasi.**
+    Berisi informasi tentang donasi yang sedang diadakan. Apabila sudah login, pengguna dapat menambahkan donasi yang ingin dia buat. Jika tidak, pengguna hanya bisa melihat donasi-donasi yang ada. 
+
+3. **Artikel.**
+    Berisi artikel artikel seputar COVID-19 yang bisa diakses semua pengguna. Namun, hanya pengguna yang sudah login yang dapat berkontribusi untuk menambahkan artikel baru.
+
+4. **Tentang Vaksin.**
+    Pada halaman ini diberikan informasi perkembangan vaksin saat ini serta forum diskusi untuk masyarakat membagikan info terkait vaksin seperti jenis, gejala setelah vaksin, KIPI, dan lainnya.
+
+5. **Kontak dan Nomor Penting.**
+    Pada halaman ini diberikan informasi kontak lembaga pemerintah, kesehatan, serta kemasyarakatan yang menangani COVID-19. Pengguna yang sudah login dapat menambahkan kontak atau nomor penting setelah melalui validasi oleh admin. 
+
+6. **Update harian COVID-19 di provinsi-provinsi di Indonesia.**
+    Pada halaman ini ditampilkan kasus harian COVID-19 pada provinsi di Indonesia dan berisi pesan dan harapan untuk kasus COVID-19 di Indonesia.
+
+7. **Kritik dan Saran.**
+    Pada halaman ini ditampilkan kritik dan saran terkait performa aplikasi yang dapat diakses oleh guest maupun pengguna yang telah melakukan login. Namun, akses untuk menyampaikan kritik dan saran hanya dimiliki oleh pengguna yang telah melakukan login.
+
+## Persona 
+    1. User Yang Tidak Login    
+        - User 1
+            - General Information
+                1. Nama : Budi
+                2. Usia : 28 tahun
+                3. Pekerjaan : Karyawan Kantoran
+            - Additional Information
+                1. Goals : Mencari informasi terkait status COVID-19 di daerah tempat ia bekerja
+                2. Motivation : Menghindari hal-hal yang bisa menyebabkan terkena COVID-19
+                3. Frustration : Khawatir tertular COVID-19
+
+    2. User Yang Sudah Login  
+        - User 2
+            - General Information
+                1. Nama : Muhammad Uzumaki
+                2. Usia : 30 tahun
+                3. Pekerjaan : Penyintas COVID-19
+            - Additional Information
+                1. Goals : Membagikan pengalaman hidupnya ketika positif COVID-19
+                2. Motivation : Memberitahu orang lain mengenai hal apa yang dapat dilakukan ketika terkena COVID-19
+                3. Frustration : Tingkat positif COVID-19 tidak kunjung menurun
+
+        - User 3
+            - General information
+                1. Nama : Albertus
+                2. Usia : 24 tahun
+                3. Pekerjaan : Freelancer
+            - Additional Information
+                1. Goals : Mendapat kontak rumah sakit terdekat
+                2. Motivation : Mencari kontak rumah sakit karena dirinya terkena gejala COVID-19
+                3. Frustration : Tidak memiliki daftar kontak penting untuk penanganan COVID-19
