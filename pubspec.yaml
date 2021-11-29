@@ -23,6 +23,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  artikel:
+    path: artikel
+  donasi:
+    path: donasi
+  home:
+    path: home
+  kontak:
+    path: kontak
+  kritik_saran:
+    path: kritik_saran
+  update_covid:
+    path: update_covid
+  vaksin:
+    path: vaksin
 
 
   # The following adds the Cupertino Icons font to your application.
