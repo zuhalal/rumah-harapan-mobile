@@ -1,4 +1,4 @@
-# rumah_harapan
+# RUMAH HARAPAN
 
 A PBP B08 Final project.
 
