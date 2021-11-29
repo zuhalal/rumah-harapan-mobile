@@ -1,4 +1,4 @@
-# RUMAH HARAPAN
+# Rumah Harapan 🏠
 
 A PBP B08 Final project.
 
