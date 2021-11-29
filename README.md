@@ -2,6 +2,8 @@
 
 A PBP B08 Final project.
 
+Ini apk kelompok kami https://github.com/zuhalal/rumah-harapan-mobile/releases
+
 [![Pre-Release](https://github.com/zuhalal/rumah-harapan-mobile/actions/workflows/pre-release.yml/badge.svg)](https://github.com/zuhalal/rumah-harapan-mobile/actions/workflows/pre-release.yml)
 [![Release](https://github.com/zuhalal/rumah-harapan-mobile/actions/workflows/release.yml/badge.svg)](https://github.com/zuhalal/rumah-harapan-mobile/actions/workflows/release.yml)
 
