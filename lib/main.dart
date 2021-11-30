@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rumah_harapan/widgets/drawer.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Rumah Harapan🏠'),
     );
   }
 }
@@ -73,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
+      drawer: DrawerScreen(),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
