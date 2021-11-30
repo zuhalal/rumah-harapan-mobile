@@ -14,6 +14,10 @@ class DonasiHome extends StatefulWidget {
 class _DonasiHomeState extends State<DonasiHome> {
   @override
 
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   Widget build(BuildContext context) {
     List<dynamic> extractedData = [];
     fetchData() async {
@@ -31,12 +35,6 @@ class _DonasiHomeState extends State<DonasiHome> {
       }
     }
 
-    void didChangeDependencies() {
-      super.didChangeDependencies();
-      setState(() {
-        fetchData();
-      });
-    }
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
