@@ -13,29 +13,30 @@ class DonasiHome extends StatefulWidget {
 
 class _DonasiHomeState extends State<DonasiHome> {
   @override
+
+  Widget build(BuildContext context) {
     List<dynamic> extractedData = [];
     fetchData() async {
-    const url = 'http://10.0.2.2:8000/donasi/all_donasi';
-    // buat di localhost
-    // const url = 'http://rumah-harapan.herokuapp.com/donasi/all_donasi';
-    try {
-      final response = await http.get(Uri.parse(url));
-      // print(response.body);
-      extractedData = jsonDecode(response.body);
-      print(extractedData);
-      return extractedData;
-    } catch (error) {
-      print(error);
+      const url = 'http://10.0.2.2:8000/donasi/all_donasi';
+      // buat di localhost
+      // const url = 'http://rumah-harapan.herokuapp.com/donasi/all_donasi';
+      try {
+        final response = await http.get(Uri.parse(url));
+        // print(response.body);
+        extractedData = jsonDecode(response.body);
+        print(extractedData);
+        return extractedData;
+      } catch (error) {
+        print(error);
+      }
     }
-  }
 
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    setState(() {
-      fetchData();
-    });
-  }
-  Widget build(BuildContext context) {
+    void didChangeDependencies() {
+      super.didChangeDependencies();
+      setState(() {
+        fetchData();
+      });
+    }
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
