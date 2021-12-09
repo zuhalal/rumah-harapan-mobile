@@ -42,14 +42,22 @@ Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web 
     Pada halaman ini diberikan informasi kontak lembaga pemerintah, kesehatan, serta kemasyarakatan yang menangani COVID-19. Pengguna yang sudah login dapat menambahkan kontak atau nomor penting setelah melalui validasi oleh admin. 
 
 6. **Update harian COVID-19 di provinsi-provinsi di Indonesia.**
-    Pada halaman ini ditampilkan kasus harian COVID-19 pada provinsi di Indonesia dan berisi pesan dan harapan untuk kasus COVID-19 di Indonesia. Adapun pada modul ini integrasi dengan web service, data akan diambil dengan http.GET melalui halaman https://rumah-harapan.herokuapp.com/updateCovid/json (untuk yang harapan) dan melalui API yang sama dengan yang digunakan pada Web (untuk update kasus covid). Sementara untuk pengiriman data akan dikirim dengan http.PUSH ke halaman https://rumah-harapan.herokuapp.com/updateCovid/ (untuk menambahkan harapan) dan https://rumah-harapan.herokuapp.com/updateCovid/like (untuk melakukan like & unlike harapan).
+    Pada halaman ini ditampilkan kasus harian COVID-19 pada provinsi di Indonesia. Selain itu ada kotak harapan yang berisi harapan dari pengguna untuk kasus COVID-19 di Indonesia. Untuk menuliskan harapan perlu login terlebih dahulu.
 
 7. **Kritik dan Saran.**
     Pada halaman ini ditampilkan kritik dan saran terkait performa aplikasi yang dapat diakses oleh guest maupun pengguna yang telah melakukan login. Namun, akses untuk menyampaikan kritik dan saran hanya dimiliki oleh pengguna yang telah melakukan login.
 
+## Integrasi dengan Web Service
+
+1. Melengkapi end point pada web untuk tiap modul (baik untuk mengambil dan mengirim data)
+2. Menambahkan middleware di Django agar dapat diakses dari luar website
+3. Membuat fungsi async untuk setiap proses yang berkaitan dengan mengambil dan mengirim data
+4. Untuk mengabmil data akan digunakan http.GET dari end point data di web yang hasil pemanggilannya akan digunakan untuk ditampilkan pada widget yang digunakan
+5. Untuk mengirim data akan digunakan http.POST yang menuju ke end point untuk menyimpan data di web
+
 ## Persona 
-    1. User Yang Tidak Login    
-        - User 1
+1. User Yang Tidak Login  
+    User 1
             - General Information
                 1. Nama : Budi
                 2. Usia : 28 tahun
@@ -58,9 +66,9 @@ Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web 
                 1. Goals : Mencari informasi terkait status COVID-19 di daerah tempat ia bekerja
                 2. Motivation : Menghindari hal-hal yang bisa menyebabkan terkena COVID-19
                 3. Frustration : Khawatir tertular COVID-19
-
-    2. User Yang Sudah Login  
-        - User 2
+  
+2. User Yang Sudah Login  
+    User 2
             - General Information
                 1. Nama : Muhammad Uzumaki
                 2. Usia : 30 tahun
@@ -69,8 +77,7 @@ Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web 
                 1. Goals : Membagikan pengalaman hidupnya ketika positif COVID-19
                 2. Motivation : Memberitahu orang lain mengenai hal apa yang dapat dilakukan ketika terkena COVID-19
                 3. Frustration : Tingkat positif COVID-19 tidak kunjung menurun
-
-        - User 3
+    User 3
             - General information
                 1. Nama : Albertus
                 2. Usia : 24 tahun
@@ -79,3 +86,5 @@ Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web 
                 1. Goals : Mendapat kontak rumah sakit terdekat
                 2. Motivation : Mencari kontak rumah sakit karena dirinya terkena gejala COVID-19
                 3. Frustration : Tidak memiliki daftar kontak penting untuk penanganan COVID-19
+
+
