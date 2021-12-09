@@ -56,33 +56,34 @@ Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web 
 6. Untuk mengubah data akan digunakan http.PUT yang menuju ke end point untuk mengubah data yang disimpan di database Django
 
 ## Persona 
-1. User Yang Tidak Login  
-    User 1:
-        - General Information
-            1. Nama : Budi
-            2. Usia : 28 tahun
-            3. Pekerjaan : Karyawan Kantoran
-        - Additional Information
-            1. Goals : Mencari informasi terkait status COVID-19 di daerah tempat ia bekerja
-            2. Motivation : Menghindari hal-hal yang bisa menyebabkan terkena COVID-19
-            3. Frustration : Khawatir tertular COVID-19
-  
-2. User Yang Sudah Login  
-    User 2:
-        - General Information
-            1. Nama : Muhammad Uzumaki
-            2. Usia : 30 tahun
-            3. Pekerjaan : Penyintas COVID-19
-        - Additional Information
-            1. Goals : Membagikan pengalaman hidupnya ketika positif COVID-19
-            2. Motivation : Memberitahu orang lain mengenai hal apa yang dapat dilakukan ketika terkena COVID-19
-            3. Frustration : Tingkat positif COVID-19 tidak kunjung menurun
-    User 3:
-        - General information
-            1. Nama : Albertus
-            2. Usia : 24 tahun
-            3. Pekerjaan : Freelancer
-        - Additional Information
-            1. Goals : Mendapat kontak rumah sakit terdekat
-            2. Motivation : Mencari kontak rumah sakit karena dirinya terkena gejala COVID-19
-            3. Frustration : Tidak memiliki daftar kontak penting untuk penanganan COVID-19
+    1. User Yang Tidak Login    
+        - User 1
+            - General Information
+                1. Nama : Budi
+                2. Usia : 28 tahun
+                3. Pekerjaan : Karyawan Kantoran
+            - Additional Information
+                1. Goals : Mencari informasi terkait status COVID-19 di daerah tempat ia bekerja
+                2. Motivation : Menghindari hal-hal yang bisa menyebabkan terkena COVID-19
+                3. Frustration : Khawatir tertular COVID-19
+
+    2. User Yang Sudah Login  
+        - User 2
+            - General Information
+                1. Nama : Muhammad Uzumaki
+                2. Usia : 30 tahun
+                3. Pekerjaan : Penyintas COVID-19
+            - Additional Information
+                1. Goals : Membagikan pengalaman hidupnya ketika positif COVID-19
+                2. Motivation : Memberitahu orang lain mengenai hal apa yang dapat dilakukan ketika terkena COVID-19
+                3. Frustration : Tingkat positif COVID-19 tidak kunjung menurun
+
+        - User 3
+            - General information
+                1. Nama : Albertus
+                2. Usia : 24 tahun
+                3. Pekerjaan : Freelancer
+            - Additional Information
+                1. Goals : Mendapat kontak rumah sakit terdekat
+                2. Motivation : Mencari kontak rumah sakit karena dirinya terkena gejala COVID-19
+                3. Frustration : Tidak memiliki daftar kontak penting untuk penanganan COVID-19
