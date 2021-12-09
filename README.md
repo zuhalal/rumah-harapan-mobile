@@ -48,12 +48,12 @@ Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web 
     Pada halaman ini ditampilkan kritik dan saran terkait performa aplikasi yang dapat diakses oleh guest maupun pengguna yang telah melakukan login. Namun, akses untuk menyampaikan kritik dan saran hanya dimiliki oleh pengguna yang telah melakukan login.
 
 ## Integrasi dengan Web Service
-
 1. Melengkapi end point pada web untuk tiap modul (baik untuk mengambil dan mengirim data)
-2. Menambahkan middleware di Django agar dapat diakses dari luar website
-3. Membuat fungsi async untuk setiap proses yang berkaitan dengan mengambil dan mengirim data
-4. Untuk mengabmil data akan digunakan http.GET dari end point data di web yang hasil pemanggilannya akan digunakan untuk ditampilkan pada widget yang digunakan
-5. Untuk mengirim data akan digunakan http.POST yang menuju ke end point untuk menyimpan data di web
+2. Menambahkan middleware di Django agar API dapat diakses dari luar website
+3. Membuat fungsi async untuk setiap proses yang berkaitan dengan mengambil, mengirim, ataupun mengubah data
+4. Untuk mengambil data akan digunakan http.GET dari end point data di web yang hasil pemanggilannya akan digunakan untuk ditampilkan pada widget yang digunakan
+5. Untuk mengirim data akan digunakan http.POST yang menuju ke end point untuk menyimpan data yang disimpan di database Django
+6. Untuk mengubah data akan digunakan http.PUT yang menuju ke end point untuk mengubah data yang disimpan di database Django
 
 ## Persona 
 1. User Yang Tidak Login  

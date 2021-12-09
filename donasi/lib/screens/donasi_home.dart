@@ -48,7 +48,7 @@ class _DonasiHomeState extends State<DonasiHome> {
                   padding: EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      Image.asset('assets/images/3724843.png'),
+                      Image.asset('assets/images/donasi/3724843.png'),
                       Text("Donasi", textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32, color: const Color(0xff59A5D8))),
                       SizedBox(height: 24,),
                       Container(

@@ -14,7 +14,7 @@ class _CardCarouselState extends State<CardCarousel> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Image.asset('assets/images/donate.jpg'),
+          Image.asset('assets/images/donasi/donate.jpg'),
           Container(
             padding: EdgeInsets.all(12),
             child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis enim vitae arcu lacinia pretium. Cras nisi nulla, posuere a sem sed, blandit vulputate lectus. Duis faucibus odio at dui porttitor tempor.",
