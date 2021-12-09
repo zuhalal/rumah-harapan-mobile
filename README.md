@@ -42,7 +42,7 @@ Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web 
     Pada halaman ini diberikan informasi kontak lembaga pemerintah, kesehatan, serta kemasyarakatan yang menangani COVID-19. Pengguna yang sudah login dapat menambahkan kontak atau nomor penting setelah melalui validasi oleh admin. 
 
 6. **Update harian COVID-19 di provinsi-provinsi di Indonesia.**
-    Pada halaman ini ditampilkan kasus harian COVID-19 pada provinsi di Indonesia dan berisi pesan dan harapan untuk kasus COVID-19 di Indonesia.
+    Pada halaman ini ditampilkan kasus harian COVID-19 pada provinsi di Indonesia dan berisi pesan dan harapan untuk kasus COVID-19 di Indonesia. Adapun pada modul ini integrasi dengan web service, data akan diambil dengan http.GET melalui halaman https://rumah-harapan.herokuapp.com/updateCovid/json (untuk yang harapan) dan melalui API yang sama dengan yang digunakan pada Web (untuk update kasus covid). Sementara untuk pengiriman data akan dikirim dengan http.PUSH ke halaman https://rumah-harapan.herokuapp.com/updateCovid/ (untuk menambahkan harapan) dan https://rumah-harapan.herokuapp.com/updateCovid/like (untuk melakukan like & unlike harapan).
 
 7. **Kritik dan Saran.**
     Pada halaman ini ditampilkan kritik dan saran terkait performa aplikasi yang dapat diakses oleh guest maupun pengguna yang telah melakukan login. Namun, akses untuk menyampaikan kritik dan saran hanya dimiliki oleh pengguna yang telah melakukan login.
