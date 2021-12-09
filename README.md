@@ -57,7 +57,7 @@ Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web 
 
 ## Persona 
 1. User Yang Tidak Login  
-    User 1
+    User 1:
         - General Information
             1. Nama : Budi
             2. Usia : 28 tahun
@@ -68,7 +68,7 @@ Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web 
             3. Frustration : Khawatir tertular COVID-19
   
 2. User Yang Sudah Login  
-    User 2
+    User 2:
         - General Information
             1. Nama : Muhammad Uzumaki
             2. Usia : 30 tahun
@@ -77,7 +77,7 @@ Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web 
             1. Goals : Membagikan pengalaman hidupnya ketika positif COVID-19
             2. Motivation : Memberitahu orang lain mengenai hal apa yang dapat dilakukan ketika terkena COVID-19
             3. Frustration : Tingkat positif COVID-19 tidak kunjung menurun
-    User 3
+    User 3:
         - General information
             1. Nama : Albertus
             2. Usia : 24 tahun
