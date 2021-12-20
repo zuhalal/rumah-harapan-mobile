@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
       home: DonasiHome(),
       routes: <String, WidgetBuilder>{
         '/donasi': (context) => DonasiHome(),
-        '/donasi-detail': (context) => DonasiDetail()
       },
     );
   }

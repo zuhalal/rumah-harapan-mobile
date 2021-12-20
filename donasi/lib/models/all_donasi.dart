@@ -41,7 +41,7 @@ class Fields {
     required this.penggalang,
     required this.penerima,
     required this.target,
-    // required this.dueDate,
+    required this.dueDate,
     required this.linkDonasi,
   });
 
@@ -52,7 +52,7 @@ class Fields {
   String penggalang;
   String penerima;
   int target;
-  // DateTime dueDate;
+  String dueDate;
   String linkDonasi;
 
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
@@ -63,7 +63,7 @@ class Fields {
     penggalang: json["penggalang"],
     penerima: json["penerima"],
     target: json["target"],
-    //dueDate: json["due_date"],
+    dueDate: json["due_date"],
     linkDonasi: json["link_donasi"],
   );
 
@@ -75,7 +75,7 @@ class Fields {
     "penggalang": penggalang,
     "penerima": penerima,
     "target": target,
-    //"due_date": "${dueDate.year.toString().padLeft(4, '0')}-${dueDate.month.toString().padLeft(2, '0')}-${dueDate.day.toString().padLeft(2, '0')}",
+    "due_date": dueDate,
     "link_donasi": linkDonasi,
   };
 }

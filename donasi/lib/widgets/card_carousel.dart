@@ -1,4 +1,5 @@
-import 'package:donasi/models/model.dart';
+import 'package:donasi/models/all_donasi.dart';
+import 'package:donasi/screens/donasi_detail.dart';
 import 'package:flutter/material.dart';
 
 class CardCarousel extends StatefulWidget {
@@ -51,7 +52,12 @@ class _CardCarouselState extends State<CardCarousel> {
                               borderRadius: new BorderRadius.circular(8.0)),
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/donasi-detail');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DonasiDetail(
+                                        data: widget.data.fields,
+                                      )));
                         },
                         child: const Text('Lihat'),
                       ),
@@ -102,7 +108,12 @@ class _CardCarouselState extends State<CardCarousel> {
                               borderRadius: new BorderRadius.circular(8.0)),
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/donasi-detail');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DonasiDetail(
+                                        data: widget.data.fields,
+                                      )));
                         },
                         child: const Text('Lihat'),
                       ),

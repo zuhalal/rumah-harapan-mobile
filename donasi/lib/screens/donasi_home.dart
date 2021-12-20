@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:donasi/models/model.dart';
+import 'package:donasi/models/all_donasi.dart';
 import 'package:flutter/material.dart';
 import 'package:donasi/widgets/card_carousel.dart';
 import 'package:http/http.dart' as http;
@@ -34,6 +34,7 @@ class _DonasiHomeState extends State<DonasiHome> {
             penggalang: data["fields"]["penggalang"],
             penerima: data["fields"]["penerima"],
             target: data["fields"]["target"],
+            dueDate: data["fields"]["due_date"],
             linkDonasi: data["fields"]["link_donasi"]);
         AllDonasi donate =
             AllDonasi(fields: fields, model: data["model"], pk: data["pk"]);
@@ -121,7 +122,16 @@ class _DonasiHomeState extends State<DonasiHome> {
                                     borderRadius:
                                         new BorderRadius.circular(8.0))),
                             onPressed: () {
-                              fetchData();
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                        child: Card(
+                                      child: Column(
+                                        children: [Text("INI MODAL")],
+                                      ),
+                                    ));
+                                  });
                             },
                             child: const Text('Donasi Sekarang'),
                           ),

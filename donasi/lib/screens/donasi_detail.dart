@@ -1,9 +1,10 @@
+import 'package:donasi/models/all_donasi.dart';
 import 'package:flutter/material.dart';
 import 'package:donasi/widgets/card_detail_donasi.dart';
-import 'package:rumah_harapan/widgets/drawer.dart';
 
 class DonasiDetail extends StatefulWidget {
-  const DonasiDetail({Key? key}) : super(key: key);
+  const DonasiDetail({Key? key, required this.data}) : super(key: key);
+  final Fields data;
 
   @override
   _DonasiDetailState createState() => _DonasiDetailState();
@@ -25,21 +26,22 @@ class _DonasiDetailState extends State<DonasiDetail> {
                   children: [
                     Row(
                       children: [
-                        Text("Author: Zuhal 'Alimul Hadi",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 20, color: const Color(0xff59A5D8)))
+                        // Text("Author: ",
+                        //     textAlign: TextAlign.left,
+                        //     style: TextStyle(
+                        //         fontSize: 20, color: const Color(0xff59A5D8)))
                       ],
                     ),
                     SizedBox(height: 24),
                     Text(
-                      "Mari Kita Bantu Orang ini",
+                      widget.data.title,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 36, color: const Color(0xff59A5D8)),
                     ),
                     SizedBox(height: 24),
-                    Image.asset('assets/images/donate.jpg'),
+                    Image.network('https://res.cloudinary.com/dnrjqdl6n/' +
+                        widget.data.image),
                     SizedBox(height: 48),
                     Row(
                       children: [
@@ -50,10 +52,14 @@ class _DonasiDetailState extends State<DonasiDetail> {
                       ],
                     ),
                     SizedBox(height: 16),
-                    Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a nisi fringilla, ultricies sapien id, cursus tortor. In hendrerit tellus nec ligula imperdiet, sed congue ipsum cursus. Nunc vestibulum hendrerit neque in venenatis. Pellentesque eu ipsum iaculis, ullamcorper neque ac, pharetra urna. Praesent eget ullamcorper massa, nec efficitur metus. Duis risus nulla, cursus convallis tortor quis, posuere vulputate erat. Nullam ac ex auctor, imperdiet sem vitae, tincidunt tellus. Etiam posuere tortor vel nulla ultrices, in ultricies dolor faucibus. Phasellus ac neque eget urna euismod cursus quis ac urna. Cras vulputate arcu vel felis pretium, ac tincidunt lacus venenatis. Vestibulum lacinia sit amet urna eget sodales. ",
-                      textAlign: TextAlign.justify,
-                      style: TextStyle(fontSize: 16),
+                    Row(
+                      children: [
+                        Text(
+                          widget.data.deskripsi,
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(fontSize: 16),
+                        )
+                      ],
                     ),
                     SizedBox(height: 48),
                     Row(
@@ -68,23 +74,23 @@ class _DonasiDetailState extends State<DonasiDetail> {
                     CardDetailDonasi(
                       icon: Icons.monetization_on,
                       title: "Penggalang Dana:",
-                      name: "Zuhal 'Alimul Hadi",
+                      name: widget.data.penggalang,
                     ),
                     SizedBox(height: 24),
                     CardDetailDonasi(
                         icon: Icons.people_sharp,
                         title: "Penerima Dana:",
-                        name: "Siapa yaa"),
+                        name: widget.data.penerima),
                     SizedBox(height: 16),
                     CardDetailDonasi(
                         icon: Icons.attach_money,
                         title: "Target:",
-                        name: "Rp200.000"),
+                        name: "${widget.data.target}"),
                     SizedBox(height: 24),
                     CardDetailDonasi(
                         icon: Icons.calendar_today,
                         title: "Tenggat Waktu:",
-                        name: "14 November 2021"),
+                        name: widget.data.dueDate),
                     SizedBox(height: 24),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
