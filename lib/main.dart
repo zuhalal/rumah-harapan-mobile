@@ -1,4 +1,4 @@
-import 'package:donasi/screens/donasi_detail.dart';
+import 'package:donasi/screens/donasi_add_form.dart';
 import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       home: DonasiHome(),
       routes: <String, WidgetBuilder>{
         '/donasi': (context) => DonasiHome(),
+        '/add-donasi': (context) => AddDonasiForm(),
       },
     );
   }
