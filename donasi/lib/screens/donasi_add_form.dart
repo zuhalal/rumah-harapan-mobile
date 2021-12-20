@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class AddDonasiForm extends StatefulWidget {
   const AddDonasiForm({Key? key}) : super(key: key);
@@ -8,6 +10,7 @@ class AddDonasiForm extends StatefulWidget {
 }
 
 class _AddDonasiFormState extends State<AddDonasiForm> {
+  TextEditingController dateinput = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String textFieldsValue = "";
   String deskripsiFieldsValue = "";
@@ -19,6 +22,11 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
   String linkFieldsValue = "";
 
   @override
+  void initState() {
+    dateinput.text = ""; //set the initial value of text field
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -149,6 +157,10 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                               height: 36,
                             ),
                             TextFormField(
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              keyboardType: TextInputType.number,
                               autofocus: true,
                               decoration: new InputDecoration(
                                 hintText: "masukan target donasi",
@@ -168,21 +180,31 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                             SizedBox(
                               height: 36,
                             ),
-                            TextFormField(
-                              autofocus: true,
-                              decoration: new InputDecoration(
-                                hintText: "masukan tanggal donasi",
-                                labelText: "Tenggat waktu",
-                                border: OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(5.0)),
-                              ),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Tenggat waktu tidak boleh kosong';
+                            TextField(
+                              controller: dateinput, //editing controller of this TextField
+                              decoration: InputDecoration(
+                                  icon: Icon(Icons.calendar_today), //icon of text field
+                                  labelText: "Enter Date" //label text of field
+                              ), //set it true, so that user will not able to edit text
+                              onTap: () async {
+                                DateTime? pickedDate = await showDatePicker(
+                                    context: context, initialDate: DateTime.now(),
+                                    firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
+                                    lastDate: DateTime(2101)
+                                );
+
+                                if(pickedDate != null ){
+                                  //print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
+                                  String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                                  print(formattedDate); //formatted date output using intl package =>  2021-03-16
+                                  //you can implement different kind of Date Format here according to your requirement
+
+                                  setState(() {
+                                    dateinput.text = formattedDate; //set output date to TextField value.
+                                  });
+                                }else{
+                                  print("Date is not selected");
                                 }
-                                tenggatFieldsValue = value;
-                                return null;
                               },
                             ),
                             SizedBox(
@@ -235,8 +257,12 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                               child: const Text('Donasi Sekarang'),
                             ),
                           ],
-                        ))
+                        )
+                    )
                   ],
-                ))));
+                )
+            )
+        )
+    );
   }
 }
