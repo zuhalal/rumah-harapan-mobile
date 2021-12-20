@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:donasi/models/all_donasi.dart';
+import 'package:donasi/screens/donasi_add_form.dart';
 import 'package:donasi/widgets/container_donasi.dart';
 import 'package:flutter/material.dart';
 import 'package:donasi/widgets/card_carousel.dart';
@@ -18,7 +19,7 @@ class _DonasiHomeState extends State<DonasiHome> {
   List<AllDonasi> extractedData = [];
 
   fetchData() async {
-    //const url = 'http://10.0.2.2:8000/donasi/all_donasi';
+    // const url = 'http://10.0.2.2:8000/donasi/all_donasi';
     // buat di localhost
     const url = 'http://rumah-harapan.herokuapp.com/donasi/all_donasi';
     try {
@@ -43,8 +44,6 @@ class _DonasiHomeState extends State<DonasiHome> {
         AllDonasi donate = AllDonasi(fields: fields, model: data["model"], pk: data["pk"]);
         extractedData.add(donate);
       }
-
-      print(extractedData.length);
 
       return extractedData;
     } catch (error) {
@@ -93,10 +92,8 @@ class _DonasiHomeState extends State<DonasiHome> {
                             return Builder(
                               builder: (BuildContext context) {
                                 return Container(
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
-                                    child: CardCarousel(
-                                        data: data, isUser: true));
+                                  margin: EdgeInsets.symmetric(horizontal: 4.0),
+                                  child: CardCarousel(data: data, isUser: false));
                               },
                             );
                           }).toList(),
@@ -117,41 +114,71 @@ class _DonasiHomeState extends State<DonasiHome> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text("+ Tambah Donasi",
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 20),
+                              primary: const Color(0xffade8f4),
+                              onPrimary: Colors.white,
+                              shadowColor: Colors.transparent,
+                              padding: EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
+                            ),
+                            onPressed: () {
+                              Route route = MaterialPageRoute(builder: (context) => AddDonasiForm());
+                              Navigator.push(context, route);
+                            },
+                            child: Text("+ Tambah Donasi",
                               textAlign: TextAlign.right,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
-                                  color: const Color(0xff59A5D8))),
+                                  color: const Color(0xff59A5D8)
+                              )
+                            ),
+                          )
                         ],
                       ),
                       SizedBox(height: 24),
                       Text("Donasi Saya",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 32,
-                              color: const Color(0xff59A5D8))),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 32,
+                            color: const Color(0xff59A5D8))),
                       SizedBox(height: 24),
-                      // CarouselSlider(
-                      //   options: CarouselOptions(height: 388.0),
-                      //   items: [1,2].map((i) {
-                      //     return Builder(
-                      //       builder: (BuildContext context) {
-                      //         return Container(
-                      //             margin: EdgeInsets.symmetric(horizontal: 4.0),
-                      //             child: CardCarousel()
-                      //         );
-                      //       },
-                      //     );
-                      //   }).toList(),
-                      // ),
-                    ],
-                  ),
-                )),
-          ),
-        ],
-      ))),
+                      FutureBuilder(
+                          future: fetchData(),
+                          builder: (context, AsyncSnapshot snapshot) {
+                            if (snapshot.data == null) {
+                              return Container(
+                                child: Center(
+                                    child: Text(
+                                      "Loading...",
+                                    )),
+                              );
+                            } else {
+                              return CarouselSlider(
+                                options: CarouselOptions(height: 388.0),
+                                items: extractedData.map((data) {
+                                  return Builder(
+                                    builder: (BuildContext context) {
+                                      return Container(
+                                          margin: EdgeInsets.symmetric(horizontal: 4.0),
+                                          child: CardCarousel(data: data, isUser: true));
+                                    },
+                                  );
+                                }).toList(),
+                              );
+                            }
+                          }),
+                      ],
+                    ),
+                  )
+                ),
+              ),
+            ],
+          )
+        )
+      ),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:donasi/models/all_donasi.dart';
 import 'package:donasi/screens/donasi_detail.dart';
+import 'package:donasi/screens/donasi_edit_form.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CardCarousel extends StatefulWidget {
@@ -16,6 +18,7 @@ class _CardCarouselState extends State<CardCarousel> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -23,13 +26,40 @@ class _CardCarouselState extends State<CardCarousel> {
           Column(children: [
             Image.network(
               'https://res.cloudinary.com/dnrjqdl6n/' + widget.data.fields.image,
-              height: 160,
-              width: double.infinity,),
+              height: 180,
+              width: 272,
+              fit: BoxFit.cover,
+            ),
             Container(
               padding: EdgeInsets.all(12),
               child: Text(widget.data.fields.deskripsi, textAlign: TextAlign.justify),
             ),
           ]),
+          Column(
+            children: !widget.isUser ? [
+              Padding(
+                padding: EdgeInsets.fromLTRB(12, 8, 12, 8),
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Target:", style: TextStyle(color: const Color(0xff27ae60), fontSize: 16)),
+                      Text("${widget.data.fields.target}", textAlign: TextAlign.justify, style: TextStyle(color: const Color(0xff27ae60),fontSize: 16)),
+                    ]),
+                    Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Tenggat Waktu:", style: TextStyle(fontSize: 16)),
+                      Text("${widget.data.fields.dueDate}", textAlign: TextAlign.right, style: TextStyle(fontSize: 16)),
+                    ],
+                  ),
+                ],
+                ),
+              )
+            ] : [],
+          ),
           Padding(
             padding: EdgeInsets.all(12),
             child: Row(
@@ -41,20 +71,13 @@ class _CardCarouselState extends State<CardCarousel> {
                           textStyle: const TextStyle(fontSize: 20),
                           onPrimary: Colors.white,
                           primary: const Color(0xff023E8A),
-                          side: BorderSide(
-                              width: 2, color: const Color(0xff023E8A)),
-                          padding: EdgeInsets.only(
-                              left: 12, right: 12, top: 8, bottom: 8),
-                          shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(8.0)),
+                          side: BorderSide(width: 2, color: const Color(0xff023E8A)),
+                          padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
+                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DonasiDetail(
-                                        data: widget.data.fields,
-                                      )));
+                          Route route = MaterialPageRoute(builder: (context) => DonasiDetail(data: widget.data.fields));
+                          Navigator.push(context, route);
                         },
                         child: const Text('Lihat'),
                       ),
@@ -63,15 +86,14 @@ class _CardCarouselState extends State<CardCarousel> {
                         style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(fontSize: 20),
                             primary: Colors.white,
-                            side: BorderSide(
-                                width: 2, color: const Color(0xff023E8A)),
-                            padding: EdgeInsets.only(
-                                left: 12, right: 12, top: 8, bottom: 8),
-                            shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(8.0))),
-                        onPressed: () {},
-                        child: const Text('Edit',
-                            style: TextStyle(color: Colors.black)),
+                            side: BorderSide(width: 2, color: const Color(0xff023E8A)),
+                            padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
+                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0))),
+                        onPressed: () {
+                          Route route = MaterialPageRoute(builder: (context) => EditDonasiForm());
+                          Navigator.push(context, route);
+                        },
+                        child: const Text('Edit', style: TextStyle(color: Colors.black)),
                       ),
                       SizedBox(height: 4),
                       ElevatedButton(
@@ -79,12 +101,9 @@ class _CardCarouselState extends State<CardCarousel> {
                             textStyle: const TextStyle(fontSize: 20),
                             onPrimary: Colors.white,
                             primary: const Color(0xffEB5757),
-                            side: BorderSide(
-                                width: 2, color: const Color(0xffEB5757)),
-                            padding: EdgeInsets.only(
-                                left: 12, right: 12, top: 8, bottom: 8),
-                            shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(8.0))),
+                            side: BorderSide(width: 2, color: const Color(0xffEB5757)),
+                            padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
+                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0))),
                         onPressed: () {
                           showDialog(
                               context: context,
@@ -108,11 +127,7 @@ class _CardCarouselState extends State<CardCarousel> {
                                             side: BorderSide(
                                                 width: 2,
                                                 color: const Color(0xffEB5757)),
-                                            padding: EdgeInsets.only(
-                                                left: 12,
-                                                right: 12,
-                                                top: 8,
-                                                bottom: 8),
+                                            padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
                                             shape: new RoundedRectangleBorder(
                                                 borderRadius:
                                                     new BorderRadius.circular(
@@ -128,11 +143,7 @@ class _CardCarouselState extends State<CardCarousel> {
                                         side: BorderSide(
                                             width: 2,
                                             color: const Color(0xff023E8A)),
-                                        padding: EdgeInsets.only(
-                                            left: 12,
-                                            right: 12,
-                                            top: 8,
-                                            bottom: 8),
+                                        padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
                                         shape: new RoundedRectangleBorder(
                                             borderRadius:
                                                 new BorderRadius.circular(8.0)),
@@ -157,18 +168,13 @@ class _CardCarouselState extends State<CardCarousel> {
                           primary: const Color(0xff023E8A),
                           side: BorderSide(
                               width: 2, color: const Color(0xff023E8A)),
-                          padding: EdgeInsets.only(
-                              left: 12, right: 12, top: 8, bottom: 8),
+                          padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(8.0)),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DonasiDetail(
-                                        data: widget.data.fields,
-                                      )));
+                          Route route = MaterialPageRoute(builder: (context) => DonasiDetail(data: widget.data.fields));
+                          Navigator.push(context, route);
                         },
                         child: const Text('Lihat'),
                       ),
