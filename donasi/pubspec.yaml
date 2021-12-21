@@ -12,6 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  intl: ^0.17.0
+  url_launcher: ^6.0.0
+
   rumah_harapan:
     path: ../.
 
