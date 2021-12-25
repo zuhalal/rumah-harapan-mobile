@@ -37,7 +37,7 @@ class Fields {
     required this.author,
     required this.title,
     required this.deskripsi,
-    required this.image,
+    required this.linkGambar,
     required this.penggalang,
     required this.penerima,
     required this.target,
@@ -48,7 +48,7 @@ class Fields {
   int author;
   String title;
   String deskripsi;
-  String image;
+  String linkGambar;
   String penggalang;
   String penerima;
   int target;
@@ -59,7 +59,7 @@ class Fields {
     author: json["author"],
     title: json["title"],
     deskripsi: json["deskripsi"],
-    image: json["image"],
+    linkGambar: json["link_gambar"],
     penggalang: json["penggalang"],
     penerima: json["penerima"],
     target: json["target"],
@@ -71,7 +71,7 @@ class Fields {
     "author": author,
     "title": title,
     "deskripsi": deskripsi,
-    "image": image,
+    "link_gambar": linkGambar,
     "penggalang": penggalang,
     "penerima": penerima,
     "target": target,

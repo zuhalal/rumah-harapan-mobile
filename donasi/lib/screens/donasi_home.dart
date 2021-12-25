@@ -34,7 +34,7 @@ class _DonasiHomeState extends State<DonasiHome> {
             author: data["fields"]["author"],
             title: data["fields"]["title"],
             deskripsi: data["fields"]["deskripsi"],
-            image: data["fields"]["image"],
+            linkGambar: data["fields"]["link_gambar"],
             penggalang: data["fields"]["penggalang"],
             penerima: data["fields"]["penerima"],
             target: data["fields"]["target"],
@@ -45,7 +45,6 @@ class _DonasiHomeState extends State<DonasiHome> {
             AllDonasi(fields: fields, model: data["model"], pk: data["pk"]);
         extractedData.add(donate);
       }
-
       return extractedData;
     } catch (error) {
       print(error);
@@ -63,7 +62,7 @@ class _DonasiHomeState extends State<DonasiHome> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DonasiContainer(isUser: true),
+                  DonasiContainer(isUser: false),
                   SizedBox(height: 24),
                   Padding(
                     padding: EdgeInsets.all(16.0),

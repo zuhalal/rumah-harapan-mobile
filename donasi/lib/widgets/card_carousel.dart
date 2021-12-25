@@ -25,7 +25,7 @@ class _CardCarouselState extends State<CardCarousel> {
         children: <Widget>[
           Column(children: [
             Image.network(
-              'https://res.cloudinary.com/dnrjqdl6n/' + widget.data.fields.image,
+              "" + widget.data.fields.linkGambar,
               height: 180,
               width: 272,
               fit: BoxFit.cover,
