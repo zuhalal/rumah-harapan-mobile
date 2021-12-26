@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home/cookies.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -28,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       backgroundColor: Color.fromRGBO(89, 165, 216, 1),
       body: SingleChildScrollView(
@@ -115,63 +118,90 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ))),
-              // buat button
-              Container(
-                width: double.infinity,
-                child: TextButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromRGBO(204, 23, 40, 1)),
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                        (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.pressed))
-                        return Color.fromRGBO(255, 0, 0, 1);
-                      return null; // Defer to the widget's default.
-                    }),
-                  ),
-                  onPressed: () async {
-                    if (_loginForm.currentState!.validate()) {
-                      final response = await http.post(
-                          Uri.parse("http://localhost:8000/flutter-login"),
-                          headers: <String, String>{
-                            'Content-Type': 'application/json;charset=UTF-8',
-                          },
-                          body: jsonEncode(<String, String>{
-                            'username': username,
-                            'password': password,
-                          }));
-                      print(response);
-                      print(response.body);
-                    } else {
-                      print("Ga valid");
-                    }
-                  },
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 10),
-                child: RaisedButton(
-                  color: Color.fromRGBO(2, 62, 138, 1),
-                  textColor: Colors.white,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/tabs_screen');
-                  },
-                  child: const Text('Home'),
-                ),
-              ),
               Container(
                 child: Text(
                   "Belum punya akun? Register",
                   style: TextStyle(
                     fontSize: 20,
+                  ),
+                ),
+              ),
+              // buat button
+              Padding(
+                padding: EdgeInsets.all(15),
+                child : Container(
+                  width: double.infinity,
+                  child: TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromRGBO(2, 62, 138, 1)),
+                      foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                              (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.pressed))
+                              return Color.fromRGBO(2, 62, 138, 1);
+                            return null; // Defer to the widget's default.
+                          }),
+                    ),
+                    onPressed: () async {
+                      print("tes");
+                      final response =
+                      await request.login("https://rumah-harapan.herokuapp.com/login2", {
+                        'username': username,
+                        'password': password,
+                      });
+                      print(response);
+                      if (request.loggedIn) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(response["message"]),
+                          ),
+                        );
+                        Navigator.pushNamed(context, '/tabs_screen');
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(response["message"]),
+                          ),
+                        );
+                      }
+                    },
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(15),
+                child : Container(
+                  width: double.infinity,
+                  child: TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromRGBO(2, 62, 138, 1)),
+                      foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                              (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.pressed))
+                              return Color.fromRGBO(2, 62, 138, 1);
+                            return null; // Defer to the widget's default.
+                          }),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/tabs_screen');
+                    },
+                    child: Text(
+                      "Home",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ),
               ),

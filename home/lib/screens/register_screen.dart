@@ -1,17 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:home/cookies.dart';
+import 'package:provider/provider.dart';
+import 'dart:convert' as convert;
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({Key? key}) : super(key: key);
-  TextEditingController nameController = TextEditingController();
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
   static const routeName = '/register_screen';
 
   @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  String username = "";
+  String password1 = "";
+  String password2 = "";
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final request = context.watch<CookieRequest>();
+    Size size = MediaQuery.of(context).size;
+    return Form(
+      key : _formKey,
+      child: Stack(
+        children: [
+      Scaffold(
       backgroundColor: Color.fromRGBO(89, 165, 216, 1),
       body: SingleChildScrollView(
         child: Container(
@@ -32,35 +51,85 @@ class RegisterScreen extends StatelessWidget {
                   )),
               Padding(
                 padding: EdgeInsets.all(15),
-                child: TextField(
-                  controller: nameController,
+                child: TextFormField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Username",
                     hintText: "Enter your username",
                   ),
+                  onChanged: (String? value) {
+                    setState(() {
+                      username = value!;
+                    });
+                  },
+                  onSaved: (String? value) {
+                    setState(() {
+                      username = value!;
+                    });
+                  },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Username tidak boleh kosong';
+                    }
+                    return null;
+                  },
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(15),
-                child: TextField(
+                child: TextFormField(
                   obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Enter Password",
                     hintText: "Enter your password",
                   ),
+                  onChanged: (String ? value) {
+                    setState(() {
+                      password1 = value!;
+                    });
+                  },
+                  onSaved: (String? value) {
+                    setState(() {
+                      password1 = value!;
+                    });
+                  },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Password tidak boleh kosong';
+                    }
+                    return null;
+                  },
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(15),
-                child: TextField(
+                child: TextFormField(
                   obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Re-enter Password",
                     hintText: "Re-enter your password",
                   ),
+                  onChanged: (String? value) {
+                    setState(() {
+                      password2 = value!;
+                    });
+                  },
+                  onSaved: (String? value) {
+                    setState(() {
+                      password2 = value!;
+                    });
+                  },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Password tidak boleh kosong';
+                    }
+                    return null;
+                  },
                 ),
               ),
               Container(
@@ -72,32 +141,48 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: RaisedButton(
-                    textColor: Colors.white,
-                    color: Color.fromRGBO(2, 62, 138, 1),
-                    child: Text("Register"),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text("Akun Berhasil Dibuat"),
-                            content: Text(nameController.text),
-                            actions: <Widget>[
-                              new FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    Navigator.pushNamed(
-                                        context, '/tabs_screen');
-                                  },
-                                  child: new Text('OK'))
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  )),
+                margin: EdgeInsets.only(top: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: const Color(0xFF24262A),
+                ),
+                child: TextButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      // Submit to Django server and wait for response
+                      final response = await request.post(
+                          "https://rumah-harapan.herokuapp.com/register2",
+                          convert.jsonEncode(<String, String>{
+                            'username': username,
+                            'password1': password1,
+                            'password2': password2,
+                          }));
+                      print(response);
+                      if (response['status'] == true) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(response["message"]),
+                          ),
+                        );
+                        Navigator.pushNamed(context, '/login_screen');
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(response["message"]),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: const Text(
+                    'Register',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+
               Container(
                 margin: EdgeInsets.only(top: 10),
                 child: RaisedButton(
@@ -112,6 +197,9 @@ class RegisterScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    ),
+        ],
       ),
     );
   }
