@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:home/widgets/main_drawer.dart';
+import 'package:home/widgets/main_drawer_login.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -33,7 +33,7 @@ class _AfterLoginState extends State<AfterLogin> {
         title: const Text('Rumah Harapan'),
         backgroundColor: Color.fromRGBO(89, 165, 216, 1),
       ),
-      drawer: MainDrawer(),
+      drawer: MainDrawerLogin(),
       body: SingleChildScrollView(
           child: Column(children: <Widget>[
         Container(

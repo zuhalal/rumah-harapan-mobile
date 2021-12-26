@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:home/cookies.dart';
+import '../cookies.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert' as convert;
 import 'package:google_fonts/google_fonts.dart';
@@ -150,7 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       // Submit to Django server and wait for response
-                      final response = await request.post(
+                      final response = await request.postJson(
                           "https://rumah-harapan.herokuapp.com/register2",
                           convert.jsonEncode(<String, String>{
                             'username': username,

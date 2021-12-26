@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:home/cookies.dart';
+import '../cookies.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             content: Text(response["message"]),
                           ),
                         );
-                        Navigator.pushNamed(context, '/tabs_screen');
+                        Navigator.pushNamed(context, '/after_login');
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
