@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class AddDonasiForm extends StatefulWidget {
+  static const routeName = '/donasi-add';
   const AddDonasiForm({Key? key}) : super(key: key);
 
   @override
