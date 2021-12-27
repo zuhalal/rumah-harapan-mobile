@@ -91,9 +91,9 @@ class _DonasiHomeState extends State<DonasiHome> {
 
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
-    print(request.username);
+    // print(request.username);
     request.username != "" ? isUser = true : isUser = false;
-    print(isUser);
+    // print(isUser);
     return Scaffold(
       appBar: AppBar(
         title: Text("Donasi"),
@@ -104,7 +104,7 @@ class _DonasiHomeState extends State<DonasiHome> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DonasiContainer(isUser: false),
+                  DonasiContainer(isUser: isUser),
                   SizedBox(height: 24),
                   Padding(
                     padding: EdgeInsets.all(16.0),

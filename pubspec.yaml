@@ -65,11 +65,7 @@ flutter:
     - assets/images/
     - assets/images/donasi/
     - home/assets/
-    - assets/images/home/article.jpg
-    - assets/images/home/call.jpg
-    - assets/images/home/friend.png
-    - assets/images/home/home.png
-    - assets/images/home/write.png
+    - assets/images/home/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:home/widgets/main_drawer_login.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:rumah_harapan/widgets/main_drawer_login.dart';
 
 class AfterLogin extends StatefulWidget {
   static const routeName = '/after_login';
@@ -59,7 +59,7 @@ class _AfterLoginState extends State<AfterLogin> {
               Container(
                 padding: EdgeInsets.only(top: 20),
                 child: Image.asset(
-                  '../assets/home.png',
+                  'assets/images/home/home.png',
                   height: 300,
                   width: 300,
                 ),
@@ -98,7 +98,7 @@ class _AfterLoginState extends State<AfterLogin> {
               Container(
                 padding: EdgeInsets.only(top: 20),
                 child: Image.asset(
-                  '../assets/article.jpg',
+                  'assets/images/home/article.jpg',
                   height: 300,
                   width: 300,
                 ),
@@ -113,7 +113,7 @@ class _AfterLoginState extends State<AfterLogin> {
               Container(
                 padding: EdgeInsets.only(top: 20),
                 child: Image.asset(
-                  '../assets/call.jpg',
+                  'assets/images/home/call.jpg',
                   height: 300,
                   width: 300,
                 ),
@@ -128,7 +128,7 @@ class _AfterLoginState extends State<AfterLogin> {
               Container(
                 padding: EdgeInsets.only(top: 20),
                 child: Image.asset(
-                  '../assets/write.png',
+                  'assets/images/home/write.png',
                   height: 300,
                   width: 300,
                 ),
@@ -195,7 +195,7 @@ class _AfterLoginState extends State<AfterLogin> {
               Container(
                 padding: EdgeInsets.only(top: 20),
                 child: Image.asset(
-                  '../assets/friend.png',
+                  'assets/images/home/friend.png',
                   height: 300,
                   width: 300,
                 ),
