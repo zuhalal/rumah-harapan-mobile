@@ -89,6 +89,20 @@ class _DonasiHomeState extends State<DonasiHome> {
     }
   }
 
+  deleteDonation(int pk) async {
+    // const url2 = 'http://10.0.2.2:8000/donasi/my_donasi';
+    // buat di localhost
+    String url = 'https://rumah-harapan.herokuapp.com/donasi/delete/' + pk.toString();
+    try {
+      final request = context.watch<CookieRequest>();
+      await request.postJson(url, convert.jsonEncode(<String, String>{"id": pk.toString()}));
+      fetchData();
+      return "berhasil dihapus";
+    } catch (error) {
+      print(error);
+    }
+  }
+
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     // print(request.username);

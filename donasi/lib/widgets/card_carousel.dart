@@ -1,8 +1,12 @@
 import 'package:donasi/models/all_donasi.dart';
 import 'package:donasi/screens/donasi_detail.dart';
 import 'package:donasi/screens/donasi_edit_form.dart';
+import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rumah_harapan/cookies.dart';
+import 'package:provider/provider.dart';
+import 'dart:convert' as convert;
 
 class CardCarousel extends StatefulWidget {
   const CardCarousel({Key? key, required this.data, required this.isUser})
@@ -15,7 +19,18 @@ class CardCarousel extends StatefulWidget {
 }
 
 class _CardCarouselState extends State<CardCarousel> {
-  @override
+  deleteDonation(int pk) async {
+    // const url2 = 'http://10.0.2.2:8000/donasi/my_donasi';
+    // buat di localhost
+    String url = 'https://rumah-harapan.herokuapp.com/donasi/delete/' + pk.toString();
+    try {
+      final request = Provider.of<CookieRequest>(context, listen: false);
+      await request.postJson(url, convert.jsonEncode(<String, String>{"id": pk.toString()}));
+      return "berhasil dihapus";
+    } catch (error) {
+      print(error);
+    }
+  }
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
@@ -90,7 +105,7 @@ class _CardCarouselState extends State<CardCarousel> {
                             padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
                             shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0))),
                         onPressed: () {
-                          Route route = MaterialPageRoute(builder: (context) => EditDonasiForm());
+                          Route route = MaterialPageRoute(builder: (context) => EditDonasiForm(id: widget.data.pk));
                           Navigator.push(context, route);
                         },
                         child: const Text('Edit', style: TextStyle(color: Colors.black)),
@@ -132,7 +147,14 @@ class _CardCarouselState extends State<CardCarousel> {
                                                 borderRadius:
                                                     new BorderRadius.circular(
                                                         8.0))),
-                                        onPressed: () => Navigator.pop(context),
+                                        onPressed: () => {
+                                          deleteDonation(widget.data.pk),
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                          content: Text("Donasi berhasil dihapus!"),
+                                          )),
+                                          Navigator.pushReplacementNamed(context, DonasiHome.routeName)
+                                        },
                                         child: Text("Hapus")),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(

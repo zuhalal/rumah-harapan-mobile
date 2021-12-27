@@ -261,7 +261,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                                         'penggalang': penggalangFieldsValue,
                                         'penerima': penerimaFieldsValue,
                                         'target': targetFieldsValue,
-                                        'due_date': '2021-12-30',
+                                        'due_date': dateinput.text.toString(),
                                         'link_donasi': linkFieldsValue,
                                       }));
                                   if (response['status'] == 'success') {

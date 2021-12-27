@@ -1,11 +1,16 @@
+import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'dart:convert' as convert;
+
+import 'package:rumah_harapan/cookies.dart';
 
 class EditDonasiForm extends StatefulWidget {
   static const routeName = '/donasi-edit';
-  const EditDonasiForm({Key? key}) : super(key: key);
-
+  const EditDonasiForm({Key? key, required this.id}) : super(key: key);
+  final int id;
   @override
   _EditDonasiFormState createState() => _EditDonasiFormState();
 }
@@ -13,7 +18,7 @@ class EditDonasiForm extends StatefulWidget {
 class _EditDonasiFormState extends State<EditDonasiForm> {
   TextEditingController dateinput = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  String textFieldsValue = "";
+  String titleFieldsValue = "";
   String deskripsiFieldsValue = "";
   String imageFieldsValue = "";
   String penggalangFieldsValue = "";
@@ -29,6 +34,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
   }
 
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
@@ -68,7 +74,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                     if (value!.isEmpty) {
                                       return 'Judul tidak boleh kosong';
                                     }
-                                    textFieldsValue = value;
+                                    titleFieldsValue = value;
                                     return null;
                                   },
                                 ),
@@ -243,17 +249,35 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                   shape: new RoundedRectangleBorder(
                                       borderRadius:
                                       new BorderRadius.circular(8.0))),
-                              onPressed: () {
+                              onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  print(textFieldsValue);
-                                  print(deskripsiFieldsValue);
-                                  print(imageFieldsValue);
-                                  print(penggalangFieldsValue);
-                                  print(penerimaFieldsValue);
-                                  print(targetFieldsValue);
-                                  print(tenggatFieldsValue);
-                                  print(linkFieldsValue);
-                                }
+                                  final response = await request.postJson(
+                                  "http://rumah-harapan.herokuapp.com/donasi/editAPI/" + widget.id.toString(),
+                                  convert.jsonEncode(<String, String>{
+                                  'author': request.username,
+                                  'title': titleFieldsValue,
+                                  'deskripsi': deskripsiFieldsValue,
+                                  'link_gambar': imageFieldsValue,
+                                  'penggalang': penggalangFieldsValue,
+                                  'penerima': penerimaFieldsValue,
+                                  'target': targetFieldsValue,
+                                  'due_date': dateinput.text.toString(),
+                                  'link_donasi': linkFieldsValue,
+                                  }));
+                                  if (response['status'] == 'success') {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                  content: Text("Donasi baru telah berhasil disimpan!"),
+                                  ));
+                                  Navigator.pushReplacementNamed(
+                                  context, DonasiHome.routeName);
+                                  } else {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                  content:
+                                  Text("An error occured, please try again."),
+                                  ));
+                                }}
                               },
                               child: const Text('Donasi Sekarang'),
                             ),
