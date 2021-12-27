@@ -1,23 +1,12 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../cookies.dart';
-
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login_screen';
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _loginForm = GlobalKey<FormState>();
-
   bool passwordVision = false;
   void togglePassword() {
     setState(() {

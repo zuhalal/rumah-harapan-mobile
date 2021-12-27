@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:rumah_harapan/widgets/main_drawer_login.dart';
 
 class AfterLogin extends StatefulWidget {
@@ -15,31 +11,21 @@ class AfterLogin extends StatefulWidget {
 }
 
 class _AfterLoginState extends State<AfterLogin> {
-  final PersistentTabController? _controller =
-      PersistentTabController(initialIndex: 0);
-
-  List<Widget> _buildScreens() {
-    return [];
-  }
-
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return [];
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rumah Harapan'),
-        backgroundColor: Color.fromRGBO(89, 165, 216, 1),
+        backgroundColor: const Color.fromRGBO(89, 165, 216, 1),
       ),
       drawer: MainDrawerLogin(),
       body: SingleChildScrollView(
           child: Column(children: <Widget>[
         Container(
-          color: Color.fromRGBO(173, 232, 244, 1),
+          color: const Color.fromRGBO(173, 232, 244, 1),
           width: double.infinity,
-          padding: EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
+          padding: const EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
           child: Column(
             children: <Widget>[
               const Text(
@@ -57,7 +43,7 @@ class _AfterLoginState extends State<AfterLogin> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(top: 20),
                 child: Image.asset(
                   'assets/images/home/home.png',
                   height: 300,
@@ -70,33 +56,29 @@ class _AfterLoginState extends State<AfterLogin> {
         Container(
           color: Colors.white,
           width: double.infinity,
-          padding: EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
+          padding: const EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
           child: Column(
             children: <Widget>[
-              Container(
-                child: Center(
-                  child: const Text(
-                    'Keuntungan Menjadi',
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Color.fromRGBO(89, 165, 216, 1),
-                    ),
+              const Center(
+                child: Text(
+                  'Keuntungan Menjadi',
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: Color.fromRGBO(89, 165, 216, 1),
+                  ),
+                ),
+              ),
+              const Center(
+                child: Text(
+                  '#TemanHarapan',
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: Color.fromRGBO(89, 165, 216, 1),
                   ),
                 ),
               ),
               Container(
-                child: Center(
-                  child: const Text(
-                    '#TemanHarapan',
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Color.fromRGBO(89, 165, 216, 1),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(top: 20),
                 child: Image.asset(
                   'assets/images/home/article.jpg',
                   height: 300,
@@ -111,7 +93,7 @@ class _AfterLoginState extends State<AfterLogin> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(top: 20),
                 child: Image.asset(
                   'assets/images/home/call.jpg',
                   height: 300,
@@ -126,7 +108,7 @@ class _AfterLoginState extends State<AfterLogin> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(top: 20),
                 child: Image.asset(
                   'assets/images/home/write.png',
                   height: 300,
@@ -144,35 +126,31 @@ class _AfterLoginState extends State<AfterLogin> {
           ),
         ),
         Container(
-          color: Color.fromRGBO(173, 232, 244, 1),
+          color: const Color.fromRGBO(173, 232, 244, 1),
           width: double.infinity,
-          padding: EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
+          padding: const EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
           child: Column(
             children: <Widget>[
-              Container(
-                child: Center(
-                  child: const Text(
-                    'Gabung Menjadi',
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Color.fromRGBO(89, 165, 216, 1),
-                    ),
+              const Center(
+                child: Text(
+                  'Gabung Menjadi',
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: Color.fromRGBO(89, 165, 216, 1),
+                  ),
+                ),
+              ),
+              const Center(
+                child: Text(
+                  '#TemanHarapan',
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: Color.fromRGBO(89, 165, 216, 1),
                   ),
                 ),
               ),
               Container(
-                child: Center(
-                  child: const Text(
-                    '#TemanHarapan',
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Color.fromRGBO(89, 165, 216, 1),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 50),
+                padding: const EdgeInsets.only(top: 50),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -193,7 +171,7 @@ class _AfterLoginState extends State<AfterLogin> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(top: 20),
                 child: Image.asset(
                   'assets/images/home/friend.png',
                   height: 300,
