@@ -52,16 +52,16 @@ class MainDrawerLogin extends StatelessWidget {
           buildListTile('Donasi', Icons.volunteer_activism, () {
             Navigator.pushNamed(context, '/donasi');
           }),
-          buildListTile('Publikasi', Icons.restaurant, () {
+          buildListTile('Publikasi', Icons.announcement, () {
             Navigator.pop(context);
           }),
-          buildListTile('Update Covid', Icons.restaurant, () {
+          buildListTile('Update Covid', Icons.update, () {
             Navigator.pop(context);
           }),
-          buildListTile('Kotak Penting', Icons.restaurant, () {
+          buildListTile('Kotak Penting', Icons.contacts, () {
             Navigator.pop(context);
           }),
-          buildListTile('Logout', Icons.restaurant,  () async {
+          buildListTile('Logout', Icons.logout,  () async {
             final response = await request.logoutAccount("https://rumah-harapan.herokuapp.com/logout2");
             if (response['status']) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
