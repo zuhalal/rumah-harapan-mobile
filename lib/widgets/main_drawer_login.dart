@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rumah_harapan/cookies.dart';
+import 'package:provider/provider.dart';
+import 'package:rumah_harapan/screens/login_screen.dart';
 
 class MainDrawerLogin extends StatelessWidget {
   Widget buildListTile(
@@ -21,6 +24,7 @@ class MainDrawerLogin extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -57,9 +61,19 @@ class MainDrawerLogin extends StatelessWidget {
           buildListTile('Kotak Penting', Icons.restaurant, () {
             Navigator.pop(context);
           }),
-          buildListTile('Logout', Icons.restaurant, () {
-            Navigator.pop(context);
-            Navigator.pushNamed(context, "/login_screen");
+          buildListTile('Logout', Icons.restaurant,  () async {
+            final response = await request.logoutAccount("https://rumah-harapan.herokuapp.com/logout2");
+            if (response['status']) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text("Successfully logged out!"),
+              ));
+              Navigator.pushReplacementNamed(
+                  context, LoginScreen.routeName);
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text("An error occured, please try again."),
+              ));
+            }
           }),
         ],
       ),

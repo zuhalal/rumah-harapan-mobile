@@ -1,4 +1,6 @@
+import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
+import 'package:rumah_harapan/screens/login_screen.dart';
 
 class DonasiContainer extends StatefulWidget {
   const DonasiContainer({Key? key, required this.isUser}) : super(key: key);
@@ -114,7 +116,7 @@ class _DonasiContainerState extends State<DonasiContainer> {
                                                             new BorderRadius
                                                                     .circular(
                                                                 8.0))),
-                                            onPressed: () => Navigator.pop(context),
+                                            onPressed: () =>  Navigator.pushReplacementNamed(context, LoginScreen.routeName),
                                             child: Text("Login")),
                                         ElevatedButton(
                                           style: ElevatedButton.styleFrom(
