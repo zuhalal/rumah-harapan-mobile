@@ -165,7 +165,7 @@ class _CardCarouselState extends State<CardCarousel> {
                                         onPressed: () async {
                                             final request = Provider.of<CookieRequest>(context, listen: false);
                                             final response =
-                                                await request.postJson('http://10.0.2.2:8000/donasi/delete/' + widget.data.pk.toString(),
+                                                await request.postJson('http://rumah-harapan.herokuapp.com/donasi/delete/' + widget.data.pk.toString(),
                                                   convert.jsonEncode(<String, String>{'id': widget.data.pk.toString(),}
                                                   )
                                                 );
