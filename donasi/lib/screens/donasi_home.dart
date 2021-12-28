@@ -129,8 +129,9 @@ class _DonasiHomeState extends State<DonasiHome> {
                             if (extractedData.length == 0) {
                               return Column(
                                 children: [
-                                  Text("Belum ada donasi :(", style: TextStyle(color: const Color(0xff59A5D8), fontSize: 16),),
-                                  Image.asset("assets/images/donasi/2953962.png")
+                                  Text("Belum ada donasi :(", style: TextStyle(color: const Color(0xff59A5D8), fontSize: 20),),
+                                  SizedBox(height: 8),
+                                  Image.asset("assets/images/donasi/no-data.png", width: 200,)
                                 ],
                               );
                             } else {
@@ -209,8 +210,9 @@ class _DonasiHomeState extends State<DonasiHome> {
                                       if (extractedUserDonationData.length == 0) {
                                         return Column(
                                           children: [
-                                            Text("Anda belum membuat donasi :(", style: TextStyle(color: const Color(0xff59A5D8), fontSize: 16),),
-                                            Image.asset("assets/images/donasi/2953962.png")
+                                            Text("Anda belum membuat donasi :(", style: TextStyle(color: const Color(0xff59A5D8), fontSize: 20),),
+                                            SizedBox(height: 8),
+                                            Image.asset("assets/images/donasi/no-data.png", width: 200,)
                                           ],
                                         );
                                       } else {
