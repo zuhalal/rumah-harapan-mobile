@@ -44,7 +44,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.0.0
-  http: ^0.13.1
+  http: ^0.13.4
   provider: ^6.0.1
   shared_preferences: ^2.0.11
   persistent_bottom_nav_bar: ^4.0.2
@@ -70,11 +70,7 @@ flutter:
     - assets/images/
     - assets/images/donasi/
     - home/assets/
-    - assets/images/home/article.jpg
-    - assets/images/home/call.jpg
-    - assets/images/home/friend.png
-    - assets/images/home/home.png
-    - assets/images/home/write.png
+    - assets/images/home/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

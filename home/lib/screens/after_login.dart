@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:home/widgets/main_drawer_login.dart';
+import 'package:rumah_harapan/widgets/main_drawer_login.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rumah_harapan/cookies.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../datacovid.dart';
-
 
 class AfterLogin extends StatefulWidget {
   static const routeName = '/after_login';
@@ -95,19 +94,18 @@ class _AfterLoginState extends State<AfterLogin> {
                       ),
                     ),
                     Container(
-                      child: FutureBuilder<DataCovid>(
-                        future: request2,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Text("${snapshot.data!.recovered}");
-                          } else if (snapshot.hasError) {
-                            return Text('${snapshot.error}');
-                          }
-                          // By default, show a loading spinner.
-                          return const CircularProgressIndicator();
-                        },
-                      )
-                    ),
+                        child: FutureBuilder<DataCovid>(
+                      future: request2,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text("${snapshot.data!.recovered}");
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    )),
                     Text(
                       "Jumlah Kematian",
                       style: TextStyle(
@@ -117,18 +115,17 @@ class _AfterLoginState extends State<AfterLogin> {
                     ),
                     Container(
                         child: FutureBuilder<DataCovid>(
-                          future: request2,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Text("${snapshot.data!.deaths}");
-                            } else if (snapshot.hasError) {
-                              return Text('${snapshot.error}');
-                            }
-                            // By default, show a loading spinner.
-                            return const CircularProgressIndicator();
-                          },
-                        )
-                    ),
+                      future: request2,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text("${snapshot.data!.deaths}");
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    )),
                     Text(
                       "Jumlah COVID",
                       style: TextStyle(
@@ -138,18 +135,17 @@ class _AfterLoginState extends State<AfterLogin> {
                     ),
                     Container(
                         child: FutureBuilder<DataCovid>(
-                          future: request2,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Text("${snapshot.data!.confirmed}");
-                            } else if (snapshot.hasError) {
-                              return Text('${snapshot.error}');
-                            }
-                            // By default, show a loading spinner.
-                            return const CircularProgressIndicator();
-                          },
-                        )
-                    ),
+                      future: request2,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text("${snapshot.data!.confirmed}");
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    )),
                   ],
                 ),
               ),

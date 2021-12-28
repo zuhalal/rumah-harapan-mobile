@@ -7,15 +7,15 @@ import 'dart:convert' as convert;
 
 import 'package:rumah_harapan/cookies.dart';
 
-class AddDonasiForm extends StatefulWidget {
-  static const routeName = '/donasi-add';
-  const AddDonasiForm({Key? key}) : super(key: key);
-
+class EditDonasiForm extends StatefulWidget {
+  static const routeName = '/donasi-edit';
+  const EditDonasiForm({Key? key, required this.id}) : super(key: key);
+  final int id;
   @override
-  _AddDonasiFormState createState() => _AddDonasiFormState();
+  _EditDonasiFormState createState() => _EditDonasiFormState();
 }
 
-class _AddDonasiFormState extends State<AddDonasiForm> {
+class _EditDonasiFormState extends State<EditDonasiForm> {
   TextEditingController dateinput = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String titleFieldsValue = "";
@@ -39,7 +39,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text("Tambahkan Donasi"),
+          title: Text("Edit Donasi"),
         ),
         body: SingleChildScrollView(
             child: Padding(
@@ -52,7 +52,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                           children: [
                             Column(
                               children: [
-                                Text("Tambahkan Donasi",
+                                Text("Edit Donasi",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                                     labelText: "Judul",
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            new BorderRadius.circular(5.0)),
+                                        new BorderRadius.circular(5.0)),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
@@ -90,7 +90,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                                 labelText: "Deskripsi",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                        new BorderRadius.circular(5.0)),
+                                    new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -110,11 +110,11 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                                 labelText: "Link Gambar",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                        new BorderRadius.circular(5.0)),
+                                    new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'deskripsi tidak boleh kosong';
+                                  return 'link gambar tidak boleh kosong';
                                 }
                                 imageFieldsValue = value;
                                 return null;
@@ -130,7 +130,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                                 labelText: "Penggalang",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                        new BorderRadius.circular(5.0)),
+                                    new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -150,7 +150,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                                 labelText: "Penerima",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                        new BorderRadius.circular(5.0)),
+                                    new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -174,7 +174,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                                 labelText: "Target",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                        new BorderRadius.circular(5.0)),
+                                    new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -224,7 +224,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                                 labelText: "Link Donasi",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                        new BorderRadius.circular(5.0)),
+                                    new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -248,37 +248,36 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                                       left: 12, right: 12, top: 8, bottom: 8),
                                   shape: new RoundedRectangleBorder(
                                       borderRadius:
-                                          new BorderRadius.circular(8.0))),
+                                      new BorderRadius.circular(8.0))),
                               onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  final response = await request.postJson(
-                                      "http://10.0.2.2:8000/donasi/addAPI",
-                                      convert.jsonEncode(<String, String>{
-                                        'author': request.username,
-                                        'title': titleFieldsValue,
-                                        'deskripsi': deskripsiFieldsValue,
-                                        'link_gambar': imageFieldsValue,
-                                        'penggalang': penggalangFieldsValue,
-                                        'penerima': penerimaFieldsValue,
-                                        'target': targetFieldsValue,
-                                        'due_date': dateinput.text.toString(),
-                                        'link_donasi': linkFieldsValue,
-                                      }));
-                                  if (response['status'] == 'success') {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content: Text("Donasi baru telah berhasil disimpan!"),
-                                    ));
-                                    Navigator.pushReplacementNamed(
-                                        context, DonasiHome.routeName);
-                                  } else {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content:
-                                      Text("An error occured, please try again."),
-                                    ));
-                                  }
-                                }
+                                  if (_formKey.currentState!.validate()) {
+                                    final response = await request.postJson(
+                                        "http://10.0.2.2:8000/donasi/editAPI/" + widget.id.toString(),
+                                        convert.jsonEncode(<String, String>{
+                                          'author': request.username,
+                                          'title': titleFieldsValue,
+                                          'deskripsi': deskripsiFieldsValue,
+                                          'link_gambar': imageFieldsValue,
+                                          'penggalang': penggalangFieldsValue,
+                                          'penerima': penerimaFieldsValue,
+                                          'target': targetFieldsValue,
+                                          'due_date': dateinput.text,
+                                          'link_donasi': linkFieldsValue,
+                                        }));
+                                    if (response['status'] == 'success') {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content: Text("Donasi berhasil diedit!"),
+                                      ));
+                                      Navigator.pushReplacementNamed(
+                                          context, DonasiHome.routeName);
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content:
+                                        Text("An error occured, please try again."),
+                                      ));
+                                    }}
                               },
                               child: const Text('Donasi Sekarang'),
                             ),

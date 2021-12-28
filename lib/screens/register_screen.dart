@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import '../cookies.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert' as convert;
-import 'package:google_fonts/google_fonts.dart';
-
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -25,7 +21,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
-    Size size = MediaQuery.of(context).size;
     return Form(
       key : _formKey,
       child: Stack(
@@ -185,9 +180,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
               Container(
                 margin: EdgeInsets.only(top: 10),
-                child: RaisedButton(
-                  color: Color.fromRGBO(2, 62, 138, 1),
-                  textColor: Colors.white,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(2, 62, 138, 1),
+                    onPrimary: Colors.white,
+                  ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/tabs_screen');
                   },

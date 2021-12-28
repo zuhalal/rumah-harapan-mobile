@@ -1,23 +1,18 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../cookies.dart';
-
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+<<<<<<< HEAD
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
+=======
+>>>>>>> 26862ff135e7f125fb7e53cc6db3978c615acc3a
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login_screen';
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _loginForm = GlobalKey<FormState>();
-
   bool passwordVision = false;
   void togglePassword() {
     setState(() {
@@ -147,26 +142,29 @@ class _LoginScreenState extends State<LoginScreen> {
                           }),
                     ),
                     onPressed: () async {
-                      print("tes");
-                      final response =
-                      await request.login("https://rumah-harapan.herokuapp.com/login2", {
-                        'username': username,
-                        'password': password,
-                      });
-                      print(response);
-                      if (request.loggedIn) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(response["message"]),
-                          ),
-                        );
-                        Navigator.pushNamed(context, '/after_login');
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(response["message"]),
-                          ),
-                        );
+                      try {
+                        final response =
+                        await request.login("http://10.0.2.2:8000/login2", {
+                          'username': username,
+                          'password': password,
+                        });
+                        print(response);
+                        if (request.loggedIn) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(response["message"]),
+                            ),
+                          );
+                          Navigator.pushNamed(context, '/after_login');
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(response["message"]),
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        print(e);
                       }
                     },
                     child: Text(
