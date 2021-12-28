@@ -413,8 +413,6 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
-<<<<<<< HEAD
-=======
   url_launcher:
     dependency: transitive
     description:
@@ -471,7 +469,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
->>>>>>> 26862ff135e7f125fb7e53cc6db3978c615acc3a
   vaksin:
     dependency: transitive
     description:

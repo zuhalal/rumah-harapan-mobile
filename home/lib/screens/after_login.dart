@@ -48,6 +48,7 @@ class _AfterLoginState extends State<AfterLogin> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+    print(request);
     String username = request.username;
     final request2 = fetchDataCovid();
     return Scaffold(

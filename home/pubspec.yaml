@@ -29,8 +29,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rumah_harapan:
-    path: ../.
 
   rumah_harapan:
     path: ../.
