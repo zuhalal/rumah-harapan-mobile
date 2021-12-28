@@ -1,5 +1,6 @@
 import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
+import 'package:update_covid/update_covid.dart';
 import 'cookies.dart';
 import 'package:home/screens/after_login.dart';
 import 'screens/login_screen.dart';
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
             RegisterScreen.routeName: (ctx) => RegisterScreen(),
             LoginScreen.routeName: (ctx) => LoginScreen(),
             AfterLogin.routeName: (ctx) => AfterLogin(),
-            DonasiHome.routeName: (ctx) => DonasiHome()
+            DonasiHome.routeName: (ctx) => DonasiHome(),
+            UpdateCovid.routeName: (ctx) => UpdateCovid(),
           },
         ));
   }
