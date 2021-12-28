@@ -1,3 +1,4 @@
+import 'package:donasi/screens/donasi_add_form.dart';
 import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
 import 'cookies.dart';
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
             RegisterScreen.routeName: (ctx) => RegisterScreen(),
             LoginScreen.routeName: (ctx) => LoginScreen(),
             AfterLogin.routeName: (ctx) => AfterLogin(),
-            DonasiHome.routeName: (ctx) => DonasiHome()
+            DonasiHome.routeName: (ctx) => DonasiHome(),
+            AddDonasiForm.routeName: (ctx) => AddDonasiForm()
           },
         ));
   }

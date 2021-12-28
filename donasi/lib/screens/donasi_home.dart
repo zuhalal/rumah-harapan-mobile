@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:donasi/widgets/card_carousel.dart';
 import 'package:http/http.dart' as http;
 import 'package:rumah_harapan/cookies.dart';
+import 'package:rumah_harapan/widgets/main_drawer.dart';
 import 'package:rumah_harapan/widgets/main_drawer_login.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert' as convert;
@@ -27,7 +28,7 @@ class _DonasiHomeState extends State<DonasiHome> {
   fetchData() async {
     // const url = 'http://10.0.2.2:8000/donasi/all_donasi';
     // buat di localhost
-    const url = 'http://rumah-harapan.herokuapp.com/donasi/all_donasi';
+    const url = 'http://10.0.2.2:8000/donasi/all_donasi';
     try {
       extractedData = [];
       final response = await http.get(Uri.parse(url));
@@ -59,7 +60,7 @@ class _DonasiHomeState extends State<DonasiHome> {
   fetchUserDonation() async {
     // const url2 = 'http://10.0.2.2:8000/donasi/my_donasi';
     // buat di localhost
-    const url = 'https://rumah-harapan.herokuapp.com/donasi/my_donasi';
+    const url = 'http://10.0.2.2:8000/donasi/my_donasi';
     try {
       extractedUserDonationData = [];
       final request = context.watch<CookieRequest>();
@@ -88,30 +89,14 @@ class _DonasiHomeState extends State<DonasiHome> {
     }
   }
 
-  deleteDonation(int pk) async {
-    // const url2 = 'http://10.0.2.2:8000/donasi/my_donasi';
-    // buat di localhost
-    String url = 'https://rumah-harapan.herokuapp.com/donasi/delete/' + pk.toString();
-    try {
-      final request = context.watch<CookieRequest>();
-      await request.postJson(url, convert.jsonEncode(<String, String>{"id": pk.toString()}));
-      fetchData();
-      return "berhasil dihapus";
-    } catch (error) {
-      print(error);
-    }
-  }
-
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
-    // print(request.username);
     request.username != "" ? isUser = true : isUser = false;
-    // print(isUser);
     return Scaffold(
       appBar: AppBar(
         title: Text("Donasi"),
       ),
-      drawer: MainDrawerLogin(),
+      drawer: isUser ? MainDrawerLogin() : MainDrawer(),
       body: Center(
           child: SingleChildScrollView(
               child: Column(
@@ -141,17 +126,26 @@ class _DonasiHomeState extends State<DonasiHome> {
                               )),
                             );
                           } else {
-                            return CarouselSlider(
-                              options: CarouselOptions(height: 388.0),
-                              items: extractedData.map((data) {
-                                return Builder(builder: (BuildContext context) {
+                            if (extractedData.length == 0) {
+                              return Column(
+                                children: [
+                                  Text("Belum ada donasi :(", style: TextStyle(color: const Color(0xff59A5D8), fontSize: 16),),
+                                  Image.asset("assets/images/donasi/2953962.png")
+                                ],
+                              );
+                            } else {
+                              return CarouselSlider(
+                                options: CarouselOptions(height: 388.0),
+                                items: extractedData.map((data) {
+                                  return Builder(builder: (BuildContext context) {
                                     return Container(
                                         margin: EdgeInsets.symmetric(horizontal: 4.0),
                                         child: CardCarousel(data: data, isUser: false));
                                   },
-                            );
-                            }).toList(),
-                          );
+                                  );
+                                }).toList(),
+                              );
+                            }
                         }
                       }
                     ),
@@ -212,20 +206,30 @@ class _DonasiHomeState extends State<DonasiHome> {
                                         )),
                                       );
                                     } else {
-                                      return CarouselSlider(
-                                        options: CarouselOptions(height: 388.0),
-                                        items: extractedUserDonationData.map((data) {
-                                          return Builder(
-                                            builder: (BuildContext context) {
-                                              return Container(
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 4.0),
-                                                  child: CardCarousel(
-                                                      data: data, isUser: true));
-                                            },
-                                          );
-                                        }).toList(),
-                                      );
+                                      if (extractedUserDonationData.length == 0) {
+                                        return Column(
+                                          children: [
+                                            Text("Anda belum membuat donasi :(", style: TextStyle(color: const Color(0xff59A5D8), fontSize: 16),),
+                                            Image.asset("assets/images/donasi/2953962.png")
+                                          ],
+                                        );
+                                      } else {
+                                        return CarouselSlider(
+                                          options: CarouselOptions(height: 388.0),
+                                          items: extractedUserDonationData.map((data) {
+                                            return Builder(
+                                              builder: (BuildContext context) {
+                                                return Container(
+                                                    margin: EdgeInsets.symmetric(
+                                                        horizontal: 4.0),
+                                                    child: CardCarousel(
+                                                        data: data, isUser: true)
+                                                );
+                                              },
+                                            );
+                                          }).toList(),
+                                        );
+                                      }
                                     }
                                   }
                                 ),

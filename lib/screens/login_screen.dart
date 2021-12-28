@@ -134,26 +134,31 @@ class _LoginScreenState extends State<LoginScreen> {
                           }),
                     ),
                     onPressed: () async {
-                      print("tes");
-                      final response =
-                      await request.login("https://rumah-harapan.herokuapp.com/login2", {
-                        'username': username,
-                        'password': password,
-                      });
-                      print(response);
-                      if (request.loggedIn) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(response["message"]),
-                          ),
-                        );
-                        Navigator.pushNamed(context, '/after_login');
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(response["message"]),
-                          ),
-                        );
+                      print(username);
+                      print(password);
+                      try {
+                        final response =
+                        await request.login("http://10.0.2.2:8000/login2", {
+                          'username': username,
+                          'password': password,
+                        });
+                        print(response);
+                        if (request.loggedIn) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(response["message"]),
+                            ),
+                          );
+                          Navigator.pushNamed(context, '/after_login');
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(response["message"]),
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        print(e);
                       }
                     },
                     child: Text(

@@ -18,18 +18,7 @@ class CardCarousel extends StatefulWidget {
 }
 
 class _CardCarouselState extends State<CardCarousel> {
-  deleteDonation(int pk) async {
-    // const url2 = 'http://10.0.2.2:8000/donasi/my_donasi';
-    // buat di localhost
-    String url = 'https://rumah-harapan.herokuapp.com/donasi/delete/' + pk.toString();
-    try {
-      final request = Provider.of<CookieRequest>(context, listen: false);
-      await request.postJson(url, convert.jsonEncode(<String, String>{"id": pk.toString()}));
-      return "berhasil dihapus";
-    } catch (error) {
-      print(error);
-    }
-  }
+
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
@@ -46,38 +35,53 @@ class _CardCarouselState extends State<CardCarousel> {
             ),
             Container(
               padding: EdgeInsets.all(12),
-              child: Text(widget.data.fields.deskripsi, textAlign: TextAlign.justify),
+              child: Text(widget.data.fields.deskripsi,
+                  textAlign: TextAlign.justify),
             ),
           ]),
           Column(
-            children: !widget.isUser ? [
-              Padding(
-                padding: EdgeInsets.fromLTRB(12, 8, 12, 8),
-                child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Target:", style: TextStyle(color: const Color(0xff27ae60), fontSize: 16)),
-                      Text("${widget.data.fields.target}", textAlign: TextAlign.justify, style: TextStyle(color: const Color(0xff27ae60),fontSize: 16)),
-                    ]),
-                    Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Tenggat Waktu:", style: TextStyle(fontSize: 16)),
-                      Text("${widget.data.fields.dueDate}", textAlign: TextAlign.right, style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                ],
-                ),
-              )
-            ] : [],
+            children: !widget.isUser
+                ? [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(12, 8, 12, 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Target:",
+                                    style: TextStyle(
+                                        color: const Color(0xff27ae60),
+                                        fontSize: 16)),
+                                Text("${widget.data.fields.target}",
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                        color: const Color(0xff27ae60),
+                                        fontSize: 16)),
+                              ]),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Tenggat Waktu:",
+                                  style: TextStyle(fontSize: 16)),
+                              Text("${widget.data.fields.dueDate}",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(fontSize: 16)),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ]
+                : [],
           ),
           Padding(
             padding: EdgeInsets.all(12),
             child: Row(
-              mainAxisAlignment: widget.isUser ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
+              mainAxisAlignment: widget.isUser
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.center,
               children: widget.isUser
                   ? [
                       ElevatedButton(
@@ -85,12 +89,16 @@ class _CardCarouselState extends State<CardCarousel> {
                           textStyle: const TextStyle(fontSize: 20),
                           onPrimary: Colors.white,
                           primary: const Color(0xff023E8A),
-                          side: BorderSide(width: 2, color: const Color(0xff023E8A)),
-                          padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
-                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
+                          side: BorderSide(
+                              width: 2, color: const Color(0xff023E8A)),
+                          padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(8.0)),
                         ),
                         onPressed: () {
-                          Route route = MaterialPageRoute(builder: (context) => DonasiDetail(data: widget.data.fields));
+                          Route route = MaterialPageRoute(
+                              builder: (context) =>
+                                  DonasiDetail(data: widget.data.fields));
                           Navigator.push(context, route);
                         },
                         child: const Text('Lihat'),
@@ -100,14 +108,19 @@ class _CardCarouselState extends State<CardCarousel> {
                         style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(fontSize: 20),
                             primary: Colors.white,
-                            side: BorderSide(width: 2, color: const Color(0xff023E8A)),
-                            padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
-                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0))),
+                            side: BorderSide(
+                                width: 2, color: const Color(0xff023E8A)),
+                            padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+                            shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(8.0))),
                         onPressed: () {
-                          Route route = MaterialPageRoute(builder: (context) => EditDonasiForm(id: widget.data.pk));
+                          Route route = MaterialPageRoute(
+                              builder: (context) =>
+                                  EditDonasiForm(id: widget.data.pk));
                           Navigator.push(context, route);
                         },
-                        child: const Text('Edit', style: TextStyle(color: Colors.black)),
+                        child: const Text('Edit',
+                            style: TextStyle(color: Colors.black)),
                       ),
                       SizedBox(height: 4),
                       ElevatedButton(
@@ -115,9 +128,11 @@ class _CardCarouselState extends State<CardCarousel> {
                             textStyle: const TextStyle(fontSize: 20),
                             onPrimary: Colors.white,
                             primary: const Color(0xffEB5757),
-                            side: BorderSide(width: 2, color: const Color(0xffEB5757)),
-                            padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
-                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0))),
+                            side: BorderSide(
+                                width: 2, color: const Color(0xffEB5757)),
+                            padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+                            shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(8.0))),
                         onPressed: () {
                           showDialog(
                               context: context,
@@ -141,18 +156,29 @@ class _CardCarouselState extends State<CardCarousel> {
                                             side: BorderSide(
                                                 width: 2,
                                                 color: const Color(0xffEB5757)),
-                                            padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
+                                            padding: EdgeInsets.fromLTRB(
+                                                12.0, 8.0, 12.0, 8.0),
                                             shape: new RoundedRectangleBorder(
                                                 borderRadius:
                                                     new BorderRadius.circular(
                                                         8.0))),
-                                        onPressed: () => {
-                                          deleteDonation(widget.data.pk),
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                          content: Text("Donasi berhasil dihapus!"),
-                                          )),
-                                          Navigator.pushReplacementNamed(context, DonasiHome.routeName)
+                                        onPressed: () async {
+                                            final request = Provider.of<CookieRequest>(context, listen: false);
+                                            final response =
+                                                await request.postJson('http://10.0.2.2:8000/donasi/delete/' + widget.data.pk.toString(),
+                                                  convert.jsonEncode(<String, String>{'id': widget.data.pk.toString(),}
+                                                  )
+                                                );
+                                            if (response['status'] == 'success') {
+                                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                                content: Text("Donasi berhasil dihapus!")));
+                                              Navigator.pushReplacementNamed(context,DonasiHome.routeName);
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                                content: Text(
+                                                    "An error occured, please try again."),
+                                              ));
+                                            }
                                         },
                                         child: Text("Hapus")),
                                     ElevatedButton(
@@ -164,7 +190,8 @@ class _CardCarouselState extends State<CardCarousel> {
                                         side: BorderSide(
                                             width: 2,
                                             color: const Color(0xff023E8A)),
-                                        padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
+                                        padding: EdgeInsets.fromLTRB(
+                                            12.0, 8.0, 12.0, 8.0),
                                         shape: new RoundedRectangleBorder(
                                             borderRadius:
                                                 new BorderRadius.circular(8.0)),
@@ -189,12 +216,14 @@ class _CardCarouselState extends State<CardCarousel> {
                           primary: const Color(0xff023E8A),
                           side: BorderSide(
                               width: 2, color: const Color(0xff023E8A)),
-                          padding: EdgeInsets.fromLTRB(12.0,8.0,12.0,8.0),
+                          padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(8.0)),
                         ),
                         onPressed: () {
-                          Route route = MaterialPageRoute(builder: (context) => DonasiDetail(data: widget.data.fields));
+                          Route route = MaterialPageRoute(
+                              builder: (context) =>
+                                  DonasiDetail(data: widget.data.fields));
                           Navigator.push(context, route);
                         },
                         child: const Text('Lihat'),
