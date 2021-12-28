@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  rumah_harapan:
+    path: ../.
 
 
   # The following adds the Cupertino Icons font to your application.

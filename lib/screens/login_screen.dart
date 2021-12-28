@@ -7,7 +7,7 @@ import '../cookies.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -27,6 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String username = "";
   String password = "";
+
+
 
   @override
   Widget build(BuildContext context) {
