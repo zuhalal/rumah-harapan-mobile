@@ -1,3 +1,4 @@
+import 'package:donasi/models/all_donasi.dart';
 import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,8 +10,9 @@ import 'package:rumah_harapan/cookies.dart';
 
 class EditDonasiForm extends StatefulWidget {
   static const routeName = '/donasi-edit';
-  const EditDonasiForm({Key? key, required this.id}) : super(key: key);
+  const EditDonasiForm({Key? key, required this.id, required this.data}) : super(key: key);
   final int id;
+  final Fields data;
   @override
   _EditDonasiFormState createState() => _EditDonasiFormState();
 }
@@ -35,6 +37,16 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
 
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+
+    titleFieldsValue = widget.data.title;
+    deskripsiFieldsValue = widget.data.deskripsi;
+    imageFieldsValue = widget.data.linkGambar;
+    penggalangFieldsValue = widget.data.penggalang;
+    penerimaFieldsValue = widget.data.penerima;
+    targetFieldsValue = widget.data.target.toString();
+    linkFieldsValue = widget.data.linkDonasi;
+    dateinput.text = widget.data.dueDate;
+
     return Scaffold(
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
@@ -63,6 +75,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                 ),
                                 TextFormField(
                                   autofocus: true,
+                                  initialValue: widget.data.title,
                                   decoration: new InputDecoration(
                                     hintText: "masukan judul donasi",
                                     labelText: "Judul",
@@ -85,6 +98,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                             ),
                             TextFormField(
                               autofocus: true,
+                              initialValue: widget.data.deskripsi,
                               decoration: new InputDecoration(
                                 hintText: "masukan deskripsi donasi",
                                 labelText: "Deskripsi",
@@ -105,6 +119,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                             ),
                             TextFormField(
                               autofocus: true,
+                              initialValue: widget.data.linkGambar,
                               decoration: new InputDecoration(
                                 hintText: "masukan link gambar donasi",
                                 labelText: "Link Gambar",
@@ -125,6 +140,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                             ),
                             TextFormField(
                               autofocus: true,
+                              initialValue: widget.data.penggalang,
                               decoration: new InputDecoration(
                                 hintText: "masukan nama penggalang donasi",
                                 labelText: "Penggalang",
@@ -145,6 +161,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                             ),
                             TextFormField(
                               autofocus: true,
+                              initialValue: widget.data.penerima,
                               decoration: new InputDecoration(
                                 hintText: "masukan nama penerima donasi",
                                 labelText: "Penerima",
@@ -164,6 +181,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                               height: 36,
                             ),
                             TextFormField(
+                              initialValue: widget.data.target.toString(),
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly,
                               ],
@@ -219,6 +237,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                             ),
                             TextFormField(
                               autofocus: true,
+                              initialValue: widget.data.linkDonasi,
                               decoration: new InputDecoration(
                                 hintText: "masukan link donasi",
                                 labelText: "Link Donasi",

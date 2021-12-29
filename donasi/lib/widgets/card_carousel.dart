@@ -116,7 +116,7 @@ class _CardCarouselState extends State<CardCarousel> {
                         onPressed: () {
                           Route route = MaterialPageRoute(
                               builder: (context) =>
-                                  EditDonasiForm(id: widget.data.pk));
+                                  EditDonasiForm(id: widget.data.pk, data: widget.data.fields));
                           Navigator.push(context, route);
                         },
                         child: const Text('Edit',
