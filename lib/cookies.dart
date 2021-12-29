@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -88,11 +88,10 @@ class CookieRequest {
     print(data);
     // Add additional header
     headers['Content-Type'] = 'application/json; charset=UTF-8';
+    headers['Connection'] = 'Keep-Alive';
     http.Response response =
     await _client.post(Uri.parse(url), body: data, headers: headers);
     // Remove used additional header
-    print("ini respon ");
-    print(response);
     print(response.body);
     headers.remove('Content-Type');
     updateCookie(response);

@@ -1,3 +1,4 @@
+import 'package:donasi/screens/donasi_add_form.dart';
 import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
 import 'package:update_covid/update_covid.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
             AfterLogin.routeName: (ctx) => AfterLogin(),
             DonasiHome.routeName: (ctx) => DonasiHome(),
             UpdateCovid.routeName: (ctx) => UpdateCovid(),
+            AddDonasiForm.routeName: (ctx) => AddDonasiForm()
           },
         ));
   }

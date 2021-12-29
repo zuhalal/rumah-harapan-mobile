@@ -106,15 +106,15 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                             TextFormField(
                               autofocus: true,
                               decoration: new InputDecoration(
-                                hintText: "masukan gambar donasi",
-                                labelText: "Image",
+                                hintText: "masukan link gambar donasi",
+                                labelText: "Link Gambar",
                                 border: OutlineInputBorder(
                                     borderRadius:
                                     new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'deskripsi tidak boleh kosong';
+                                  return 'link gambar tidak boleh kosong';
                                 }
                                 imageFieldsValue = value;
                                 return null;
@@ -250,34 +250,34 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                       borderRadius:
                                       new BorderRadius.circular(8.0))),
                               onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  final response = await request.postJson(
-                                  "http://rumah-harapan.herokuapp.com/donasi/editAPI/" + widget.id.toString(),
-                                  convert.jsonEncode(<String, String>{
-                                  'author': request.username,
-                                  'title': titleFieldsValue,
-                                  'deskripsi': deskripsiFieldsValue,
-                                  'link_gambar': imageFieldsValue,
-                                  'penggalang': penggalangFieldsValue,
-                                  'penerima': penerimaFieldsValue,
-                                  'target': targetFieldsValue,
-                                  'due_date': dateinput.text.toString(),
-                                  'link_donasi': linkFieldsValue,
-                                  }));
-                                  if (response['status'] == 'success') {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                  content: Text("Donasi baru telah berhasil disimpan!"),
-                                  ));
-                                  Navigator.pushReplacementNamed(
-                                  context, DonasiHome.routeName);
-                                  } else {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                  content:
-                                  Text("An error occured, please try again."),
-                                  ));
-                                }}
+                                  if (_formKey.currentState!.validate()) {
+                                    final response = await request.postJson(
+                                        "http://10.0.2.2:8000/donasi/editAPI/" + widget.id.toString(),
+                                        convert.jsonEncode(<String, String>{
+                                          'author': request.username,
+                                          'title': titleFieldsValue,
+                                          'deskripsi': deskripsiFieldsValue,
+                                          'link_gambar': imageFieldsValue,
+                                          'penggalang': penggalangFieldsValue,
+                                          'penerima': penerimaFieldsValue,
+                                          'target': targetFieldsValue,
+                                          'due_date': dateinput.text,
+                                          'link_donasi': linkFieldsValue,
+                                        }));
+                                    if (response['status'] == 'success') {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content: Text("Donasi berhasil diedit!"),
+                                      ));
+                                      Navigator.pushReplacementNamed(
+                                          context, DonasiHome.routeName);
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content:
+                                        Text("An error occured, please try again."),
+                                      ));
+                                    }}
                               },
                               child: const Text('Donasi Sekarang'),
                             ),

@@ -106,8 +106,8 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                             TextFormField(
                               autofocus: true,
                               decoration: new InputDecoration(
-                                hintText: "masukan gambar donasi",
-                                labelText: "Image",
+                                hintText: "masukan link gambar donasi",
+                                labelText: "Link Gambar",
                                 border: OutlineInputBorder(
                                     borderRadius:
                                         new BorderRadius.circular(5.0)),
@@ -252,7 +252,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   final response = await request.postJson(
-                                      "http://rumah-harapan.herokuapp.com/donasi/addAPI",
+                                      "http://10.0.2.2:8000/donasi/addAPI",
                                       convert.jsonEncode(<String, String>{
                                         'author': request.username,
                                         'title': titleFieldsValue,
