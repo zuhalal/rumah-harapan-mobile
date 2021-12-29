@@ -187,7 +187,7 @@ class _DonasiHomeState extends State<DonasiHome> {
                                   )
                                 ],
                               ),
-                              SizedBox(height: 24),
+                              SizedBox(height: 12),
                               Text("Donasi Saya",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
