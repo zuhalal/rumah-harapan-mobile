@@ -77,8 +77,7 @@ class _DonasiHomeState extends State<DonasiHome> {
             dueDate: data["fields"]["due_date"],
             linkDonasi: data["fields"]["link_donasi"]);
 
-        AllDonasi donate =
-        AllDonasi(fields: fields, model: data["model"], pk: data["pk"]);
+        AllDonasi donate = AllDonasi(fields: fields, model: data["model"], pk: data["pk"]);
         extractedUserDonationData.add(donate);
       }
       return extractedUserDonationData;
