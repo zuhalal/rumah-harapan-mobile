@@ -63,14 +63,18 @@ class _AfterLoginState extends State<AfterLogin> {
             color: Color.fromRGBO(173, 232, 244, 1),
             width: double.infinity,
             padding:
-                EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
+                EdgeInsets.only(top: 100, left: 12, right: 12, bottom: 50),
             child: Column(children: <Widget>[
               Text(
                 "Halo,  $username !",
                 style: TextStyle(
                   fontSize: 40,
+                  fontWeight: FontWeight.bold,
                   color: Color.fromRGBO(89, 165, 216, 1),
                 ),
+              ),
+              SizedBox(
+                height: 5,
               ),
               const Text(
                 'Semoga kamu, keluargamu, dan seluruh #TemanHarapan selalu diberkahi kesehatan dikala pandemi ini.',
@@ -78,6 +82,7 @@ class _AfterLoginState extends State<AfterLogin> {
                   fontSize: 20,
                   color: Color.fromRGBO(89, 165, 216, 1),
                 ),
+                textAlign: TextAlign.center,
               ),
               Container(
                 color: Colors.white,
@@ -94,6 +99,9 @@ class _AfterLoginState extends State<AfterLogin> {
                         color: Color.fromRGBO(89, 165, 216, 1),
                       ),
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
                         child: FutureBuilder<DataCovid>(
                       future: request2,
@@ -107,12 +115,18 @@ class _AfterLoginState extends State<AfterLogin> {
                         return const CircularProgressIndicator();
                       },
                     )),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(
                       "Jumlah Kematian",
                       style: TextStyle(
                         fontSize: 20,
                         color: Color.fromRGBO(89, 165, 216, 1),
                       ),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     Container(
                         child: FutureBuilder<DataCovid>(
@@ -127,12 +141,18 @@ class _AfterLoginState extends State<AfterLogin> {
                         return const CircularProgressIndicator();
                       },
                     )),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(
                       "Jumlah COVID",
                       style: TextStyle(
                         fontSize: 20,
                         color: Color.fromRGBO(89, 165, 216, 1),
                       ),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     Container(
                         child: FutureBuilder<DataCovid>(
@@ -150,7 +170,34 @@ class _AfterLoginState extends State<AfterLogin> {
                   ],
                 ),
               ),
-            ]))
+            ])),
+            Container(
+                width: double.infinity,
+                padding:
+                EdgeInsets.only(top: 100, left: 12, right: 12, bottom: 50),
+                child: Column(children: <Widget>[
+                  Center(
+                    child: Text(
+                      "Top 3 Daerah Penyebaran COVID-19",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(89, 165, 216, 1),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Image.asset(
+                      'assets/images/home/map.png',
+                      height: 300,
+                      width: 300,
+                    ),
+                  ),
+                ]),
+            ),
+
       ])),
     );
   }

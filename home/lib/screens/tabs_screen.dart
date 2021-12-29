@@ -31,8 +31,13 @@ class _TabsScreenState extends State<TabsScreen> {
                 'Rumah Harapan',
                 style: TextStyle(
                   fontSize: 40,
+                  fontWeight: FontWeight.bold,
                   color: Color.fromRGBO(89, 165, 216, 1),
                 ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 5,
               ),
               const Text(
                 'Aplikasi ini berisikan segala informasi mengenai COVID-19, mulai dari angka penyebaran, angka kematian, sembuh, dan kasus aktif, informasi vaksin, dan sebagainya.',
@@ -40,6 +45,7 @@ class _TabsScreenState extends State<TabsScreen> {
                   fontSize: 20,
                   color: Color.fromRGBO(89, 165, 216, 1),
                 ),
+                textAlign: TextAlign.center,
               ),
               Container(
                 padding: const EdgeInsets.only(top: 20),
@@ -62,7 +68,8 @@ class _TabsScreenState extends State<TabsScreen> {
                 child: Text(
                   'Keuntungan Menjadi',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
                     color: Color.fromRGBO(89, 165, 216, 1),
                   ),
                 ),
@@ -71,7 +78,8 @@ class _TabsScreenState extends State<TabsScreen> {
                 child: Text(
                   '#TemanHarapan',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
                     color: Color.fromRGBO(89, 165, 216, 1),
                   ),
                 ),
@@ -135,6 +143,7 @@ class _TabsScreenState extends State<TabsScreen> {
                   'Gabung Menjadi',
                   style: TextStyle(
                     fontSize: 40,
+                    fontWeight: FontWeight.bold,
                     color: Color.fromRGBO(89, 165, 216, 1),
                   ),
                 ),
@@ -144,6 +153,7 @@ class _TabsScreenState extends State<TabsScreen> {
                   '#TemanHarapan',
                   style: TextStyle(
                     fontSize: 40,
+                    fontWeight: FontWeight.bold,
                     color: Color.fromRGBO(89, 165, 216, 1),
                   ),
                 ),
