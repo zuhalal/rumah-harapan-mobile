@@ -195,9 +195,374 @@ class _AfterLoginState extends State<AfterLogin> {
                       width: 300,
                     ),
                   ),
+                  DataTable(
+                    columns: [
+                      DataColumn(label: Text(
+                          'N0',
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color.fromRGBO(89, 165, 216, 1), )
+                      )),
+                      DataColumn(label: Text(
+                          'Provinsi',
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color.fromRGBO(89, 165, 216, 1),)
+                      )),
+                      DataColumn(label: Text(
+                          'Jumlah Positif',
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color.fromRGBO(89, 165, 216, 1),)
+                      )),
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        DataCell(Text('1')),
+                        DataCell(Text('')),
+                        DataCell(Text('')),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text('2')),
+                        DataCell(Text('')),
+                        DataCell(Text('')),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text('3')),
+                        DataCell(Text('')),
+                        DataCell(Text('')),
+                      ]),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                 ]),
             ),
-
+          Container(
+              color: Color.fromRGBO(173, 232, 244, 1),
+              width: double.infinity,
+              padding: EdgeInsets.only(top: 50, left: 12, right: 12, bottom: 50),
+              child: Column(
+                children: <Widget>[
+                  Center(
+                    child: Text(
+                      "Yuk, coba fitur Rumah Harapan",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(89, 165, 216, 1),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/home/donate.jpg'),
+                        ListTile(
+                          title: const Text(
+                            'Donasi',
+                            style: TextStyle(
+                              color: Color.fromRGBO(89, 165, 216, 1),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, left: 16, right: 16, bottom: 5),
+                          child: Text(
+                            'Tempat untuk #TemanHarapan saling membantu satu sama lain',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, left: 12, right: 16, bottom: 5),
+                          child : ButtonBar(
+                              alignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                TextButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(
+                                        Color.fromRGBO(2, 62, 138, 1)),
+                                    foregroundColor:
+                                    MaterialStateProperty.all<Color>(Colors.white),
+                                    overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                                            (Set<MaterialState> states) {
+                                          if (states.contains(MaterialState.pressed))
+                                            return Color.fromRGBO(2, 62, 138, 1);
+                                          return null; // Defer to the widget's default.
+                                        }),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '');
+                                  },
+                                  child: Text(
+                                    "Pelajari lebih lanjut",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              ]
+                          )
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/home/new_article.jpg'),
+                        ListTile(
+                          title: const Text(
+                            'Artikel',
+                            style: TextStyle(
+                              color: Color.fromRGBO(89, 165, 216, 1),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, left: 16, right: 16, bottom: 5),
+                          child: Text(
+                            'Tempat untuk menelusuri segala informasi yang berhubungan dengan Pandemi COVID',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.only(top: 5, left: 12, right: 16, bottom: 5),
+                            child : ButtonBar(
+                                alignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  TextButton(
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(
+                                          Color.fromRGBO(2, 62, 138, 1)),
+                                      foregroundColor:
+                                      MaterialStateProperty.all<Color>(Colors.white),
+                                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                                              (Set<MaterialState> states) {
+                                            if (states.contains(MaterialState.pressed))
+                                              return Color.fromRGBO(2, 62, 138, 1);
+                                            return null; // Defer to the widget's default.
+                                          }),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '');
+                                    },
+                                    child: Text(
+                                      "Pelajari lebih lanjut",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ]
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/home/vaccine.jpg'),
+                        ListTile(
+                          title: const Text(
+                            'Vaksin',
+                            style: TextStyle(
+                              color: Color.fromRGBO(89, 165, 216, 1),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, left: 16, right: 16, bottom: 5),
+                          child: Text(
+                            'Tempat untuk mencari informasi mengenai vaksin di Indonesia',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.only(top: 5, left: 12, right: 16, bottom: 5),
+                            child : ButtonBar(
+                                alignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  TextButton(
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(
+                                          Color.fromRGBO(2, 62, 138, 1)),
+                                      foregroundColor:
+                                      MaterialStateProperty.all<Color>(Colors.white),
+                                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                                              (Set<MaterialState> states) {
+                                            if (states.contains(MaterialState.pressed))
+                                              return Color.fromRGBO(2, 62, 138, 1);
+                                            return null; // Defer to the widget's default.
+                                          }),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '');
+                                    },
+                                    child: Text(
+                                      "Pelajari lebih lanjut",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ]
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/home/data.jpg'),
+                        ListTile(
+                          title: const Text(
+                            'Data Harian',
+                            style: TextStyle(
+                              color: Color.fromRGBO(89, 165, 216, 1),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, left: 16, right: 16, bottom: 5),
+                          child: Text(
+                            'Tempat mencari penyebaran data covid di setiap daerah di Indonesia',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.only(top: 5, left: 12, right: 16, bottom: 5),
+                            child : ButtonBar(
+                                alignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  TextButton(
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(
+                                          Color.fromRGBO(2, 62, 138, 1)),
+                                      foregroundColor:
+                                      MaterialStateProperty.all<Color>(Colors.white),
+                                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                                              (Set<MaterialState> states) {
+                                            if (states.contains(MaterialState.pressed))
+                                              return Color.fromRGBO(2, 62, 138, 1);
+                                            return null; // Defer to the widget's default.
+                                          }),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '');
+                                    },
+                                    child: Text(
+                                      "Pelajari lebih lanjut",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ]
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/home/ambulance.jpg'),
+                        ListTile(
+                          title: const Text(
+                            'Kontak Penting',
+                            style: TextStyle(
+                              color: Color.fromRGBO(89, 165, 216, 1),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, left: 16, right: 16, bottom: 5),
+                          child: Text(
+                            'Tempat untuk mecari kontak-kontak penting, seperti : rumah sakit dan ambulance',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.only(top: 5, left: 12, right: 16, bottom: 5),
+                            child : ButtonBar(
+                                alignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  TextButton(
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(
+                                          Color.fromRGBO(2, 62, 138, 1)),
+                                      foregroundColor:
+                                      MaterialStateProperty.all<Color>(Colors.white),
+                                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                                              (Set<MaterialState> states) {
+                                            if (states.contains(MaterialState.pressed))
+                                              return Color.fromRGBO(2, 62, 138, 1);
+                                            return null; // Defer to the widget's default.
+                                          }),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '');
+                                    },
+                                    child: Text(
+                                      "Pelajari lebih lanjut",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ]
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+          ),
       ])),
     );
   }

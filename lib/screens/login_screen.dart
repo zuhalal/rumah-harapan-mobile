@@ -109,12 +109,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ))),
               Container(
-                child: Text(
-                  "Belum punya akun? Register",
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
+                child: InkWell(
+                  child: Text(
+                      "Belum punya akun? Register",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontSize: 20,
+                      )),
+                  onTap: () => Navigator.pushNamed(context, '/register_screen'),
                 ),
+                // Text(
+                //   "Belum punya akun? Register",
+                //   style: TextStyle(
+                //     fontSize: 20,
+                //   ),
+                // ),
               ),
               // buat button
               Padding(

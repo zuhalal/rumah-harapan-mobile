@@ -36,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       backgroundColor: Color.fromRGBO(89, 165, 216, 1),
       body: SingleChildScrollView(
         child: Container(
-          height: 650,
+          height: 700,
           width: double.infinity,
           color: Colors.white,
           margin: EdgeInsets.only(top: 70, right: 20, left: 20, bottom: 70),
@@ -157,11 +157,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               Container(
-                child: Text(
-                  "Sudah punya akun? Login",
-                  style: TextStyle(
-                    fontSize: 20,
+                child: InkWell(
+                  child: Text(
+                      "Sudah punya akun? Login",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontSize: 20,
+                      ),
                   ),
+                  onTap: () => Navigator.pushNamed(context, '/login_screen'),
                 ),
               ),
               Container(
