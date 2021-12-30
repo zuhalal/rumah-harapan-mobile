@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rumah_harapan/cookies.dart';
@@ -5,9 +7,11 @@ import 'package:provider/provider.dart';
 import 'package:update_covid/models/harapan.dart';
 
 class CardHarapan extends StatefulWidget {
-  const CardHarapan({Key? key, required this.data}) // Nambah usernya nanti
+  const CardHarapan({Key? key, required this.data, required this.userPk, required this.userName}) 
       : super(key: key);
   final Harapan data;
+  final Map<String,int> userPk;
+  final Map<int,String> userName;
   
 
   @override
@@ -17,10 +21,11 @@ class CardHarapan extends StatefulWidget {
 class _CardHarapanState extends State<CardHarapan> {
   String harapan = "";
   int like = 0;
-  Icon x = Icon(Icons.thumb_up, color:Colors.yellow);
-  String status = "";
+  Icon x = Icon(Icons.thumb_down,color:Colors.yellow);
+  String status = "Tidak Suka";
   DateTime tanggal = DateTime.now();
   int idAuthor = 0;
+  int idUser = 0;
   String username = "admin";
   bool isUser = false;
 
@@ -37,6 +42,19 @@ class _CardHarapanState extends State<CardHarapan> {
       }
     });
   }
+
+  String _getUsername(Map<int,String> map, int pk) {
+    String x = map[pk].toString();
+    print(x);
+    return x;
+  }
+
+  int _getPK(Map<String,int> map, String username) {
+    int x = 0;
+    if (map[username] != null)
+      x = map[username]!.toInt();
+    return x;
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -45,10 +63,14 @@ class _CardHarapanState extends State<CardHarapan> {
     harapan = widget.data.fields.message;
     like = widget.data.fields.like.length;
     tanggal = widget.data.fields.publishedDate;
+    username = _getUsername(widget.userName, idAuthor);
+    idUser = _getPK(widget.userPk, request.username);
 
     if (request.username == username) username = "Anda";
 
-    if (status == "Tidak Suka") x = Icon(Icons.thumb_down, color:Colors.yellow);
+    if (widget.data.fields.like.contains(idUser)) status = "Suka";
+
+    if (status == "Suka") x = Icon(Icons.thumb_up, color:Colors.yellow);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -97,12 +119,11 @@ class _CardHarapanState extends State<CardHarapan> {
             padding: EdgeInsets.all(10),
             child: ListView(
               // mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text(harapan,style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-              ],
+              children: <Widget> [Text(harapan,style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),]
             ),
           ),
-        ),
+        ), 
+        request.loggedIn == true ?
         Container(
           height: 65,
           color: Color.fromRGBO(89, 165, 216, 1),
@@ -127,7 +148,7 @@ class _CardHarapanState extends State<CardHarapan> {
               ],
             ),
           ),
-        ),
+        ) : Text(""),
         Text(" ",),
       ],
     );
