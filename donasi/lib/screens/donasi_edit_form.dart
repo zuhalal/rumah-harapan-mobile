@@ -1,10 +1,18 @@
+import 'package:donasi/models/all_donasi.dart';
+import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'dart:convert' as convert;
+
+import 'package:rumah_harapan/cookies.dart';
 
 class EditDonasiForm extends StatefulWidget {
-  const EditDonasiForm({Key? key}) : super(key: key);
-
+  static const routeName = '/donasi-edit';
+  const EditDonasiForm({Key? key, required this.id, required this.data}) : super(key: key);
+  final int id;
+  final Fields data;
   @override
   _EditDonasiFormState createState() => _EditDonasiFormState();
 }
@@ -12,7 +20,7 @@ class EditDonasiForm extends StatefulWidget {
 class _EditDonasiFormState extends State<EditDonasiForm> {
   TextEditingController dateinput = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  String textFieldsValue = "";
+  String titleFieldsValue = "";
   String deskripsiFieldsValue = "";
   String imageFieldsValue = "";
   String penggalangFieldsValue = "";
@@ -28,6 +36,17 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
   }
 
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
+    titleFieldsValue = widget.data.title;
+    deskripsiFieldsValue = widget.data.deskripsi;
+    imageFieldsValue = widget.data.linkGambar;
+    penggalangFieldsValue = widget.data.penggalang;
+    penerimaFieldsValue = widget.data.penerima;
+    targetFieldsValue = widget.data.target.toString();
+    linkFieldsValue = widget.data.linkDonasi;
+    dateinput.text = widget.data.dueDate;
+
     return Scaffold(
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
@@ -56,6 +75,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                 ),
                                 TextFormField(
                                   autofocus: true,
+                                  initialValue: widget.data.title,
                                   decoration: new InputDecoration(
                                     hintText: "masukan judul donasi",
                                     labelText: "Judul",
@@ -67,7 +87,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                     if (value!.isEmpty) {
                                       return 'Judul tidak boleh kosong';
                                     }
-                                    textFieldsValue = value;
+                                    titleFieldsValue = value;
                                     return null;
                                   },
                                 ),
@@ -78,6 +98,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                             ),
                             TextFormField(
                               autofocus: true,
+                              initialValue: widget.data.deskripsi,
                               decoration: new InputDecoration(
                                 hintText: "masukan deskripsi donasi",
                                 labelText: "Deskripsi",
@@ -98,16 +119,17 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                             ),
                             TextFormField(
                               autofocus: true,
+                              initialValue: widget.data.linkGambar,
                               decoration: new InputDecoration(
-                                hintText: "masukan gambar donasi",
-                                labelText: "Image",
+                                hintText: "masukan link gambar donasi",
+                                labelText: "Link Gambar",
                                 border: OutlineInputBorder(
                                     borderRadius:
                                     new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'deskripsi tidak boleh kosong';
+                                  return 'link gambar tidak boleh kosong';
                                 }
                                 imageFieldsValue = value;
                                 return null;
@@ -118,6 +140,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                             ),
                             TextFormField(
                               autofocus: true,
+                              initialValue: widget.data.penggalang,
                               decoration: new InputDecoration(
                                 hintText: "masukan nama penggalang donasi",
                                 labelText: "Penggalang",
@@ -138,6 +161,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                             ),
                             TextFormField(
                               autofocus: true,
+                              initialValue: widget.data.penerima,
                               decoration: new InputDecoration(
                                 hintText: "masukan nama penerima donasi",
                                 labelText: "Penerima",
@@ -157,6 +181,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                               height: 36,
                             ),
                             TextFormField(
+                              initialValue: widget.data.target.toString(),
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly,
                               ],
@@ -212,6 +237,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                             ),
                             TextFormField(
                               autofocus: true,
+                              initialValue: widget.data.linkDonasi,
                               decoration: new InputDecoration(
                                 hintText: "masukan link donasi",
                                 labelText: "Link Donasi",
@@ -242,17 +268,35 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                   shape: new RoundedRectangleBorder(
                                       borderRadius:
                                       new BorderRadius.circular(8.0))),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  print(textFieldsValue);
-                                  print(deskripsiFieldsValue);
-                                  print(imageFieldsValue);
-                                  print(penggalangFieldsValue);
-                                  print(penerimaFieldsValue);
-                                  print(targetFieldsValue);
-                                  print(tenggatFieldsValue);
-                                  print(linkFieldsValue);
-                                }
+                              onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    final response = await request.postJson(
+                                        "http://rumah-harapan.herokuapp.com/donasi/editAPI/" + widget.id.toString(),
+                                        convert.jsonEncode(<String, String>{
+                                          'author': request.username,
+                                          'title': titleFieldsValue,
+                                          'deskripsi': deskripsiFieldsValue,
+                                          'link_gambar': imageFieldsValue,
+                                          'penggalang': penggalangFieldsValue,
+                                          'penerima': penerimaFieldsValue,
+                                          'target': targetFieldsValue,
+                                          'due_date': dateinput.text,
+                                          'link_donasi': linkFieldsValue,
+                                        }));
+                                    if (response['status'] == 'success') {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content: Text("Donasi berhasil diedit!"),
+                                      ));
+                                      Navigator.pushReplacementNamed(
+                                          context, DonasiHome.routeName);
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content:
+                                        Text("An error occured, please try again."),
+                                      ));
+                                    }}
                               },
                               child: const Text('Donasi Sekarang'),
                             ),

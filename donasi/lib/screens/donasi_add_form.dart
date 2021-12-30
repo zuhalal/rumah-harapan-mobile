@@ -1,8 +1,14 @@
+import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'dart:convert' as convert;
+
+import 'package:rumah_harapan/cookies.dart';
 
 class AddDonasiForm extends StatefulWidget {
+  static const routeName = '/donasi-add';
   const AddDonasiForm({Key? key}) : super(key: key);
 
   @override
@@ -12,7 +18,7 @@ class AddDonasiForm extends StatefulWidget {
 class _AddDonasiFormState extends State<AddDonasiForm> {
   TextEditingController dateinput = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  String textFieldsValue = "";
+  String titleFieldsValue = "";
   String deskripsiFieldsValue = "";
   String imageFieldsValue = "";
   String penggalangFieldsValue = "";
@@ -28,6 +34,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
   }
 
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
@@ -67,7 +74,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                                     if (value!.isEmpty) {
                                       return 'Judul tidak boleh kosong';
                                     }
-                                    textFieldsValue = value;
+                                    titleFieldsValue = value;
                                     return null;
                                   },
                                 ),
@@ -99,8 +106,8 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                             TextFormField(
                               autofocus: true,
                               decoration: new InputDecoration(
-                                hintText: "masukan gambar donasi",
-                                labelText: "Image",
+                                hintText: "masukan link gambar donasi",
+                                labelText: "Link Gambar",
                                 border: OutlineInputBorder(
                                     borderRadius:
                                         new BorderRadius.circular(5.0)),
@@ -242,16 +249,35 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                                   shape: new RoundedRectangleBorder(
                                       borderRadius:
                                           new BorderRadius.circular(8.0))),
-                              onPressed: () {
+                              onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  print(textFieldsValue);
-                                  print(deskripsiFieldsValue);
-                                  print(imageFieldsValue);
-                                  print(penggalangFieldsValue);
-                                  print(penerimaFieldsValue);
-                                  print(targetFieldsValue);
-                                  print(tenggatFieldsValue);
-                                  print(linkFieldsValue);
+                                  final response = await request.postJson(
+                                      "http://rumah-harapan.herokuapp.com/donasi/addAPI",
+                                      convert.jsonEncode(<String, String>{
+                                        'author': request.username,
+                                        'title': titleFieldsValue,
+                                        'deskripsi': deskripsiFieldsValue,
+                                        'link_gambar': imageFieldsValue,
+                                        'penggalang': penggalangFieldsValue,
+                                        'penerima': penerimaFieldsValue,
+                                        'target': targetFieldsValue,
+                                        'due_date': dateinput.text.toString(),
+                                        'link_donasi': linkFieldsValue,
+                                      }));
+                                  if (response['status'] == 'success') {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content: Text("Donasi baru telah berhasil disimpan!"),
+                                    ));
+                                    Navigator.pushReplacementNamed(
+                                        context, DonasiHome.routeName);
+                                  } else {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content:
+                                      Text("An error occured, please try again."),
+                                    ));
+                                  }
                                 }
                               },
                               child: const Text('Donasi Sekarang'),

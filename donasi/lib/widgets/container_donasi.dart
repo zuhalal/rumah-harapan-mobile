@@ -1,4 +1,6 @@
+import 'package:donasi/screens/donasi_add_form.dart';
 import 'package:flutter/material.dart';
+import 'package:rumah_harapan/screens/login_screen.dart';
 
 class DonasiContainer extends StatefulWidget {
   const DonasiContainer({Key? key, required this.isUser}) : super(key: key);
@@ -44,37 +46,27 @@ class _DonasiContainerState extends State<DonasiContainer> {
                       ? [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              textStyle: const TextStyle(fontSize: 20),
-                              primary: Colors.black12,
-                              onPrimary: Colors.white,
-                              side: BorderSide(
-                                width: 2, color: const Color(0xff023E8A)),
-                                padding: EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
-                                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
-                              ),
-                            onPressed: () {},
-                            child: const Text('Lihat Donasi saya'),
-                          ),
-                          SizedBox(height: 4),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
                                 textStyle: const TextStyle(fontSize: 20),
                                 onPrimary: Colors.white,
                                 primary: const Color(0xff023E8A),
                                 side: BorderSide(width: 2, color: const Color(0xff023E8A)),
                                 padding: EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
                                 shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0))),
-                            onPressed: () {},
-                            child: const Text('Donasi Sekarang'),
+                            onPressed: () {
+                              Route route = MaterialPageRoute(
+                                  builder: (context) => AddDonasiForm());
+                              Navigator.push(context, route);
+                            },
+                            child: const Text('Buat Donasi'),
                           ),
                         ]
                       : [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               textStyle: const TextStyle(fontSize: 20),
-                              primary: Colors.black12,
-                              onPrimary: Colors.white,
+                              primary: const Color(0xff023E8A),
                               side: BorderSide(width: 2, color: const Color(0xff023E8A)),
+                              onPrimary: Colors.white,
                               padding: EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
                               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
                             ),
@@ -114,7 +106,7 @@ class _DonasiContainerState extends State<DonasiContainer> {
                                                             new BorderRadius
                                                                     .circular(
                                                                 8.0))),
-                                            onPressed: () => Navigator.pop(context),
+                                            onPressed: () =>  Navigator.pushReplacementNamed(context, LoginScreen.routeName),
                                             child: Text("Login")),
                                         ElevatedButton(
                                           style: ElevatedButton.styleFrom(
@@ -133,20 +125,6 @@ class _DonasiContainerState extends State<DonasiContainer> {
                                   });
                             },
                             child: const Text('Buat Donasi'),
-                          ),
-                          SizedBox(height: 4),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                textStyle: const TextStyle(fontSize: 20),
-                                onPrimary: Colors.white,
-                                primary: const Color(0xff023E8A),
-                                side: BorderSide(
-                                    width: 2,
-                                    color: const Color(0xff023E8A)),
-                                    padding: EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
-                                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0))),
-                            onPressed: () {},
-                            child: const Text('Donasi Sekarang'),
                           ),
                         ],
                 ),

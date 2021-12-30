@@ -41,8 +41,7 @@ class _DonasiDetailState extends State<DonasiDetail> {
                           fontSize: 36, color: const Color(0xff59A5D8)),
                     ),
                     SizedBox(height: 24),
-                    Image.network('https://res.cloudinary.com/dnrjqdl6n/' +
-                        widget.data.image),
+                    Image.network("" + widget.data.linkGambar),
                     SizedBox(height: 48),
                     Row(
                       children: [
