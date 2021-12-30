@@ -147,7 +147,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () async {
                       try {
                         final response =
+<<<<<<< HEAD
                             await request.login("http://rumah-harapan.herokuapp.com/login2", {
+=======
+                        await request.login("http://rumah-harapan.herokuapp.com/login2", {
+>>>>>>> 35176fc4862ded8c8619c2d68729b20062ffcdc9
                           'username': username,
                           'password': password,
                         });
