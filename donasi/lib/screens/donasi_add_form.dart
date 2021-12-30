@@ -252,7 +252,7 @@ class _AddDonasiFormState extends State<AddDonasiForm> {
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   final response = await request.postJson(
-                                      "http://10.0.2.2:8000/donasi/addAPI",
+                                      "http://rumah-harapan.herokuapp.com/donasi/addAPI",
                                       convert.jsonEncode(<String, String>{
                                         'author': request.username,
                                         'title': titleFieldsValue,

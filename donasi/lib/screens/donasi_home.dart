@@ -10,7 +10,6 @@ import 'package:rumah_harapan/cookies.dart';
 import 'package:rumah_harapan/widgets/main_drawer.dart';
 import 'package:rumah_harapan/widgets/main_drawer_login.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert' as convert;
 
 class DonasiHome extends StatefulWidget {
   static const routeName = '/donasi';
@@ -28,7 +27,7 @@ class _DonasiHomeState extends State<DonasiHome> {
   fetchData() async {
     // const url = 'http://10.0.2.2:8000/donasi/all_donasi';
     // buat di localhost
-    const url = 'http://10.0.2.2:8000/donasi/all_donasi';
+    const url = 'http://rumah-harapan.herokuapp.com/donasi/all_donasi';
     try {
       extractedData = [];
       final response = await http.get(Uri.parse(url));
@@ -60,7 +59,7 @@ class _DonasiHomeState extends State<DonasiHome> {
   fetchUserDonation() async {
     // const url2 = 'http://10.0.2.2:8000/donasi/my_donasi';
     // buat di localhost
-    const url = 'http://10.0.2.2:8000/donasi/my_donasi';
+    const url = 'http://rumah-harapan.herokuapp.com/donasi/my_donasi';
     try {
       extractedUserDonationData = [];
       final request = context.watch<CookieRequest>();
@@ -78,8 +77,7 @@ class _DonasiHomeState extends State<DonasiHome> {
             dueDate: data["fields"]["due_date"],
             linkDonasi: data["fields"]["link_donasi"]);
 
-        AllDonasi donate =
-        AllDonasi(fields: fields, model: data["model"], pk: data["pk"]);
+        AllDonasi donate = AllDonasi(fields: fields, model: data["model"], pk: data["pk"]);
         extractedUserDonationData.add(donate);
       }
       return extractedUserDonationData;
@@ -129,8 +127,9 @@ class _DonasiHomeState extends State<DonasiHome> {
                             if (extractedData.length == 0) {
                               return Column(
                                 children: [
-                                  Text("Belum ada donasi :(", style: TextStyle(color: const Color(0xff59A5D8), fontSize: 16),),
-                                  Image.asset("assets/images/donasi/2953962.png")
+                                  Text("Belum ada donasi :(", style: TextStyle(color: const Color(0xff59A5D8), fontSize: 20),),
+                                  SizedBox(height: 8),
+                                  Image.asset("assets/images/donasi/no-data.png", width: 200,)
                                 ],
                               );
                             } else {
@@ -187,7 +186,7 @@ class _DonasiHomeState extends State<DonasiHome> {
                                   )
                                 ],
                               ),
-                              SizedBox(height: 24),
+                              SizedBox(height: 12),
                               Text("Donasi Saya",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -209,8 +208,9 @@ class _DonasiHomeState extends State<DonasiHome> {
                                       if (extractedUserDonationData.length == 0) {
                                         return Column(
                                           children: [
-                                            Text("Anda belum membuat donasi :(", style: TextStyle(color: const Color(0xff59A5D8), fontSize: 16),),
-                                            Image.asset("assets/images/donasi/2953962.png")
+                                            Text("Anda belum membuat donasi :(", style: TextStyle(color: const Color(0xff59A5D8), fontSize: 20),),
+                                            SizedBox(height: 8),
+                                            Image.asset("assets/images/donasi/no-data.png", width: 200,)
                                           ],
                                         );
                                       } else {
