@@ -12,7 +12,6 @@ import 'screens/register_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:vaksin/screens/home_vaksin.dart';
 import 'package:vaksin/screens/add_forum_vaksin.dart';
-import 'package:vaksin/screens/edit_forum_vaksin.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,16 +42,12 @@ class MyApp extends StatelessWidget {
             LoginScreen.routeName: (ctx) => LoginScreen(),
             AfterLogin.routeName: (ctx) => AfterLogin(),
             DonasiHome.routeName: (ctx) => DonasiHome(),
-<<<<<<< HEAD
             AddDonasiForm.routeName: (ctx) => AddDonasiForm(),
             HomeVaksin.routeName: (ctx) => HomeVaksin(),
             AddForumVaksin.routeName: (ctx) => AddForumVaksin(),
-=======
             UpdateCovid.routeName: (ctx) => UpdateCovid(indexPage: 0),
             UCProv.routeName: (ctx) => UpdateCovid(indexPage: 1),
             HarapanUC.routeName: (ctx) => UpdateCovid(indexPage: 2),
-            AddDonasiForm.routeName: (ctx) => AddDonasiForm()
->>>>>>> 9d74febabe64a7f29d3e6e632925f8887bb3df49
           },
         ));
   }

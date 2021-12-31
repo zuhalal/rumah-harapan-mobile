@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/src/provider.dart';
-import 'package:rumah_harapan/cookies.dart';
-import 'package:rumah_harapan/screens/login_screen.dart';
 import 'package:vaksin/models/konten_vaksin.dart';
-import 'package:vaksin/screens/add_forum_vaksin.dart';
 
 class ForumInformasiContainer extends StatefulWidget {
   const ForumInformasiContainer(
@@ -25,8 +21,6 @@ class _ForumInformasiContainer extends State<ForumInformasiContainer> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
-
     return SizedBox(
       width: double.infinity,
       child: Container(
