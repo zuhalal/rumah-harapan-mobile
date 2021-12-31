@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:kritik_saran/models/get_kritik_saran.dart';
 import 'package:kritik_saran/screens/kritik_saran_form.dart';
 import 'package:kritik_saran/widgets.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:rumah_harapan/cookies.dart';
 import 'package:rumah_harapan/screens/login_screen.dart';
 
