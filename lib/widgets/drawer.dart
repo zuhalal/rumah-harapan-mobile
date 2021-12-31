@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kritik_saran/screens/kritik_saran_home.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -15,44 +16,44 @@ class _DrawerScreenState extends State<DrawerScreen> {
         children: <Widget>[
           UserAccountsDrawerHeader(
             accountName: Text("Zuhal 'Alimul Hadi"),
-            currentAccountPicture: CircleAvatar(backgroundImage: AssetImage("assets/images/orang.png"),),
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: AssetImage("assets/images/orang.png"),
+            ),
             accountEmail: Text("zuhalalimulhadi19@gmail.com"),
           ),
           DrawerListTile(
             iconData: Icons.home,
             title: "Home",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
           DrawerListTile(
             iconData: Icons.monetization_on,
             title: "Donasi",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
           DrawerListTile(
             iconData: Icons.announcement,
             title: "Publikasi",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
           DrawerListTile(
             iconData: Icons.update,
             title: "Update Covid",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
           DrawerListTile(
             iconData: Icons.contacts,
             title: "Kontak Penting",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
+          DrawerListTile(
+            iconData: Icons.message,
+            title: "Kritik dan Saran",
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(
+                  context, KritikSaranHome.routeName);
+            },
+          )
         ],
       ),
     );
@@ -60,10 +61,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
 }
 
 class DrawerListTile extends StatelessWidget {
-  final IconData iconData ;
+  final IconData iconData;
   final String title;
   final VoidCallback onTilePressed;
-  const DrawerListTile({Key? key, required this.iconData, required this.title, required this.onTilePressed}) : super(key: key);
+  const DrawerListTile(
+      {Key? key,
+      required this.iconData,
+      required this.title,
+      required this.onTilePressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +77,10 @@ class DrawerListTile extends StatelessWidget {
       onTap: onTilePressed,
       dense: true,
       leading: Icon(iconData),
-      title: Text(title, style: TextStyle(fontSize: 16),),
+      title: Text(
+        title,
+        style: TextStyle(fontSize: 16),
+      ),
     );
   }
 }
-

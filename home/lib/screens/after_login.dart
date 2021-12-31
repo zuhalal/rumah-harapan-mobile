@@ -425,7 +425,7 @@ class _AfterLoginState extends State<AfterLogin> {
                                   }),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '');
+                                  Navigator.pushNamed(context, '/donasi');
                                 },
                                 child: Text(
                                   "Pelajari lebih lanjut",
@@ -620,7 +620,7 @@ class _AfterLoginState extends State<AfterLogin> {
                                   }),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '');
+                                  Navigator.pushNamed(context, '/updateCovid');
                                 },
                                 child: Text(
                                   "Pelajari lebih lanjut",
@@ -685,7 +685,7 @@ class _AfterLoginState extends State<AfterLogin> {
                                   }),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '');
+                                  Navigator.pushNamed(context, '/kontak');
                                 },
                                 child: Text(
                                   "Pelajari lebih lanjut",

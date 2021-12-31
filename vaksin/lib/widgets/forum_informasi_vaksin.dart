@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+// ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 import 'package:rumah_harapan/cookies.dart';
 import 'package:vaksin/models/konten_vaksin.dart';
@@ -23,6 +24,7 @@ class _ForumInformasiContainer extends State<ForumInformasiContainer> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final request = context.watch<CookieRequest>();
     judul = widget.forum.fields.judul;
     penulis = widget.forum.fields.penulis;
