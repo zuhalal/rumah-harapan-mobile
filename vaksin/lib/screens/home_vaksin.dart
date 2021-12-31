@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:rumah_harapan/cookies.dart';
 import 'package:rumah_harapan/screens/login_screen.dart';
@@ -303,6 +302,46 @@ class _HomeVaksinState extends State<HomeVaksin> {
                           ],
                         );
                     },
+                  ),
+                ),
+                Container(
+                  color: Color.fromRGBO(173, 232, 244, 1),
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Center(
+                        child: Column(
+                      children: [
+                        Text(
+                          ' ',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                              color: Color.fromRGBO(173, 232, 244, 1)),
+                        ),
+                        Text(
+                          'Forum Informasi',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 28,
+                              color: Color.fromRGBO(89, 165, 216, 1)),
+                        ),
+                        Text(
+                          ' ',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                              color: Color.fromRGBO(173, 232, 244, 1)),
+                        ),
+                        Column(
+                          children: extractedForumData
+                              .map((list) => ForumInformasiContainer(
+                                    forum: list,
+                                  ))
+                              .toList(),
+                        )
+                      ],
+                    )),
                   ),
                 )
               ])),

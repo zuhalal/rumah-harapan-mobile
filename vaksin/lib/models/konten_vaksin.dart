@@ -31,24 +31,25 @@ class AllForum {
 }
 
 class Fields {
-  String judul, penulis, tanggalPublikasi, konten;
-
   Fields(
       {required this.judul,
       required this.penulis,
       required this.tanggalPublikasi,
       required this.konten});
 
+  String judul, penulis, konten;
+  DateTime tanggalPublikasi;
+
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
       judul: json['judul'],
       penulis: json['penulis'],
-      tanggalPublikasi: json['tanggal_publikasi'],
+      tanggalPublikasi: DateTime.parse(json['tanggal_publikasi']),
       konten: json['konten']);
 
   Map<String, dynamic> toJson() => {
         'judul': judul,
         'penulis': penulis,
-        'tanggal_publikasi': tanggalPublikasi,
+        'tanggal_publikasi': tanggalPublikasi.toIso8601String(),
         'konten': konten
       };
 }
