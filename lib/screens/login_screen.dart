@@ -110,8 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ))),
               Container(
                 child: InkWell(
-                  child: Text(
-                      "Belum punya akun? Register",
+                  child: Text("Belum punya akun? Register",
                       style: TextStyle(
                         color: Colors.blue,
                         decoration: TextDecoration.underline,
@@ -146,12 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     onPressed: () async {
                       try {
-                        final response =
-<<<<<<< HEAD
-                            await request.login("http://rumah-harapan.herokuapp.com/login2", {
-=======
-                        await request.login("http://rumah-harapan.herokuapp.com/login2", {
->>>>>>> 35176fc4862ded8c8619c2d68729b20062ffcdc9
+                        final response = await request.login(
+                            "http://rumah-harapan.herokuapp.com/login2", {
                           'username': username,
                           'password': password,
                         });
