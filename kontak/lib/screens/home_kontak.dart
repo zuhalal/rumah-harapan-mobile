@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:rumah_harapan/cookies.dart';
 import '../screens/list_kontak.dart';
 import '../screens/detail_kontak.dart';
@@ -253,10 +253,12 @@ class _ContactHome extends State<ContactHome> {
                   child: Text('Lihat Semua'),
                   onPressed: () {
                     isUser == true
-                        ? (Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ListContact())))
+                        ? () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ListContact()));
+                          }()
                         : (SnackBar(
                             content: Text("Silahkan login terlebih dahulu."),
                           ));

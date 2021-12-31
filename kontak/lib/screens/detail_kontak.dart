@@ -99,16 +99,14 @@ class DetailPage extends StatelessWidget {
       style: TextStyle(fontSize: 18.0),
     );
     final readButton = Container(
-        padding: EdgeInsets.symmetric(vertical: 16.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        width: MediaQuery.of(context).size.width,
-        child: RaisedButton(
-          onPressed: () => {},
-          color: Color.fromRGBO(13, 110, 253, 1),
-          child: Text(field.nomorkontak, style: TextStyle(color: Colors.white)),
-        ));
+      padding: EdgeInsets.symmetric(vertical: 16.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Color.fromRGBO(13, 110, 253, 1),
+      ),
+      width: MediaQuery.of(context).size.width,
+      child: Text(field.nomorkontak, style: TextStyle(color: Colors.white)),
+    );
     final bottomContent = Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.all(40.0),
