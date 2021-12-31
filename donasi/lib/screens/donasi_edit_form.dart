@@ -10,7 +10,8 @@ import 'package:rumah_harapan/cookies.dart';
 
 class EditDonasiForm extends StatefulWidget {
   static const routeName = '/donasi-edit';
-  const EditDonasiForm({Key? key, required this.id, required this.data}) : super(key: key);
+  const EditDonasiForm({Key? key, required this.id, required this.data})
+      : super(key: key);
   final int id;
   final Fields data;
   @override
@@ -81,7 +82,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                     labelText: "Judul",
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        new BorderRadius.circular(5.0)),
+                                            new BorderRadius.circular(5.0)),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
@@ -104,7 +105,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                 labelText: "Deskripsi",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                    new BorderRadius.circular(5.0)),
+                                        new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -125,7 +126,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                 labelText: "Link Gambar",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                    new BorderRadius.circular(5.0)),
+                                        new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -146,7 +147,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                 labelText: "Penggalang",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                    new BorderRadius.circular(5.0)),
+                                        new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -167,7 +168,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                 labelText: "Penerima",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                    new BorderRadius.circular(5.0)),
+                                        new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -192,7 +193,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                 labelText: "Target",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                    new BorderRadius.circular(5.0)),
+                                        new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -206,28 +207,34 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                               height: 36,
                             ),
                             TextField(
-                              controller: dateinput, //editing controller of this TextField
+                              controller:
+                                  dateinput, //editing controller of this TextField
                               decoration: InputDecoration(
-                                  icon: Icon(Icons.calendar_today), //icon of text field
+                                  icon: Icon(Icons
+                                      .calendar_today), //icon of text field
                                   labelText: "Enter Date" //label text of field
-                              ), //set it true, so that user will not able to edit text
+                                  ), //set it true, so that user will not able to edit text
                               onTap: () async {
                                 DateTime? pickedDate = await showDatePicker(
-                                    context: context, initialDate: DateTime.now(),
-                                    firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-                                    lastDate: DateTime(2101)
-                                );
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(
+                                        2000), //DateTime.now() - not to allow to choose before today.
+                                    lastDate: DateTime(2101));
 
-                                if(pickedDate != null ){
+                                if (pickedDate != null) {
                                   //print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
-                                  String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                                  print(formattedDate); //formatted date output using intl package =>  2021-03-16
+                                  String formattedDate =
+                                      DateFormat('yyyy-MM-dd')
+                                          .format(pickedDate);
+                                  //formatted date output using intl package =>  2021-03-16
                                   //you can implement different kind of Date Format here according to your requirement
 
                                   setState(() {
-                                    dateinput.text = formattedDate; //set output date to TextField value.
+                                    dateinput.text =
+                                        formattedDate; //set output date to TextField value.
                                   });
-                                }else{
+                                } else {
                                   print("Date is not selected");
                                 }
                               },
@@ -243,7 +250,7 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                 labelText: "Link Donasi",
                                 border: OutlineInputBorder(
                                     borderRadius:
-                                    new BorderRadius.circular(5.0)),
+                                        new BorderRadius.circular(5.0)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -267,46 +274,44 @@ class _EditDonasiFormState extends State<EditDonasiForm> {
                                       left: 12, right: 12, top: 8, bottom: 8),
                                   shape: new RoundedRectangleBorder(
                                       borderRadius:
-                                      new BorderRadius.circular(8.0))),
+                                          new BorderRadius.circular(8.0))),
                               onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    final response = await request.postJson(
-                                        "http://rumah-harapan.herokuapp.com/donasi/editAPI/" + widget.id.toString(),
-                                        convert.jsonEncode(<String, String>{
-                                          'author': request.username,
-                                          'title': titleFieldsValue,
-                                          'deskripsi': deskripsiFieldsValue,
-                                          'link_gambar': imageFieldsValue,
-                                          'penggalang': penggalangFieldsValue,
-                                          'penerima': penerimaFieldsValue,
-                                          'target': targetFieldsValue,
-                                          'due_date': dateinput.text,
-                                          'link_donasi': linkFieldsValue,
-                                        }));
-                                    if (response['status'] == 'success') {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                        content: Text("Donasi berhasil diedit!"),
-                                      ));
-                                      Navigator.pushReplacementNamed(
-                                          context, DonasiHome.routeName);
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                        content:
-                                        Text("An error occured, please try again."),
-                                      ));
-                                    }}
+                                if (_formKey.currentState!.validate()) {
+                                  final response = await request.postJson(
+                                      "http://rumah-harapan.herokuapp.com/donasi/editAPI/" +
+                                          widget.id.toString(),
+                                      convert.jsonEncode(<String, String>{
+                                        'author': request.username,
+                                        'title': titleFieldsValue,
+                                        'deskripsi': deskripsiFieldsValue,
+                                        'link_gambar': imageFieldsValue,
+                                        'penggalang': penggalangFieldsValue,
+                                        'penerima': penerimaFieldsValue,
+                                        'target': targetFieldsValue,
+                                        'due_date': dateinput.text,
+                                        'link_donasi': linkFieldsValue,
+                                      }));
+                                  if (response['status'] == 'success') {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content: Text("Donasi berhasil diedit!"),
+                                    ));
+                                    Navigator.pushReplacementNamed(
+                                        context, DonasiHome.routeName);
+                                  } else {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content: Text(
+                                          "An error occured, please try again."),
+                                    ));
+                                  }
+                                }
                               },
                               child: const Text('Donasi Sekarang'),
                             ),
                           ],
-                        )
-                    )
+                        ))
                   ],
-                )
-            )
-        )
-    );
+                ))));
   }
 }
