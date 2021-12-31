@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../datacovid.dart';
+import 'package:update_covid/models/prov.dart';
 
 class AfterLogin extends StatefulWidget {
   static const routeName = '/after_login';
@@ -15,27 +16,63 @@ class AfterLogin extends StatefulWidget {
   State<AfterLogin> createState() => _AfterLoginState();
 }
 
-Future<DataCovid> fetchDataCovid() async {
-  final response = await http.get(Uri.parse('https://covid19.mathdro.id/api'));
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return DataCovid.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load album');
-  }
-}
-
 class _AfterLoginState extends State<AfterLogin> {
   late Future<DataCovid> futureDataCovid;
+  List<dynamic> responseJson = [];
+  List<Prov> listProv = [];
+
+  Future<DataCovid> fetchDataCovid() async {
+    await fetchDataTop3();
+    final response =
+        await http.get(Uri.parse('https://covid19.mathdro.id/api'));
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return DataCovid.fromJson(jsonDecode(response.body));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
+  }
+
+  Future<void> fetchDataTop3() async {
+    const url = 'http://rumah-harapan.herokuapp.com/updateCovid/jsonProv';
+    try {
+      final response = await http.get(Uri.parse(url));
+      final json = response.body;
+      responseJson = jsonDecode(json);
+      // print(responseJson);
+      int len = responseJson.length;
+      for (int i = 0; i < len; i++) {
+        Fields fields = Fields(
+          kota: responseJson[i]['fields']['kota'],
+          positif: responseJson[i]['fields']['positif'],
+          sembuh: responseJson[i]['fields']['sembuh'],
+          kematian: responseJson[i]['fields']['kematian'],
+          urutan: responseJson[i]['fields']['urutan'],
+        );
+
+        Prov prov = Prov(
+          model: responseJson[i]['model'],
+          pk: responseJson[i]['pk'],
+          fields: fields,
+        );
+
+        listProv.add(prov);
+      }
+      // print(listProv);
+      return;
+    } catch (error) {
+      print(error);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     String username = request.username;
-    final request2 = fetchDataCovid();
+    final request3 = fetchDataCovid();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rumah Harapan'),
@@ -88,7 +125,7 @@ class _AfterLoginState extends State<AfterLogin> {
                     ),
                     Container(
                         child: FutureBuilder<DataCovid>(
-                      future: request2,
+                      future: request3,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return Text("${snapshot.data!.recovered}");
@@ -114,7 +151,7 @@ class _AfterLoginState extends State<AfterLogin> {
                     ),
                     Container(
                         child: FutureBuilder<DataCovid>(
-                      future: request2,
+                      future: request3,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return Text("${snapshot.data!.deaths}");
@@ -140,7 +177,7 @@ class _AfterLoginState extends State<AfterLogin> {
                     ),
                     Container(
                         child: FutureBuilder<DataCovid>(
-                      future: request2,
+                      future: request3,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return Text("${snapshot.data!.confirmed}");
@@ -155,75 +192,169 @@ class _AfterLoginState extends State<AfterLogin> {
                 ),
               ),
             ])),
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.only(top: 100, left: 12, right: 12, bottom: 50),
-          child: Column(children: <Widget>[
-            Center(
-              child: Text(
-                "Top 3 Daerah Penyebaran COVID-19",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(89, 165, 216, 1),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.only(top: 20),
-              child: Image.asset(
-                'assets/images/home/map.png',
-                height: 300,
-                width: 300,
-              ),
-            ),
-            DataTable(
-              columns: [
-                DataColumn(
-                    label: Text('N0',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(89, 165, 216, 1),
-                        ))),
-                DataColumn(
-                    label: Text('Provinsi',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(89, 165, 216, 1),
-                        ))),
-                DataColumn(
-                    label: Text('Jumlah Positif',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(89, 165, 216, 1),
-                        ))),
-              ],
-              rows: [
-                DataRow(cells: [
-                  DataCell(Text('1')),
-                  DataCell(Text('')),
-                  DataCell(Text('')),
+        FutureBuilder(
+          future: fetchDataTop3(),
+          builder: (context, snapshot) {
+            if (listProv.length != 0) {
+              return Container(
+                width: double.infinity,
+                padding:
+                    EdgeInsets.only(top: 100, left: 12, right: 12, bottom: 50),
+                child: Column(children: <Widget>[
+                  Center(
+                    child: Text(
+                      "Top 3 Daerah Penyebaran COVID-19",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(89, 165, 216, 1),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Image.asset(
+                      'assets/images/home/map.png',
+                      height: 300,
+                      width: 300,
+                    ),
+                  ),
+                  DataTable(
+                    columns: [
+                      DataColumn(
+                          label: Text('N0',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(89, 165, 216, 1),
+                              ))),
+                      DataColumn(
+                          label: Text('Provinsi',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(89, 165, 216, 1),
+                              ))),
+                      DataColumn(
+                          label: Text('Jumlah Positif',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(89, 165, 216, 1),
+                              ))),
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        DataCell(Text('1')),
+                        DataCell(
+                          Container(
+                            height: 72,
+                            child: Center(
+                              child: Text(
+                                listProv[0].fields.kota,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Color.fromRGBO(89, 165, 216, 1)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Container(
+                            height: 72,
+                            child: Center(
+                              child: Text(
+                                listProv[0].fields.positif,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Color.fromRGBO(89, 165, 216, 1)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text('2')),
+                        DataCell(
+                          Container(
+                            height: 72,
+                            child: Center(
+                              child: Text(
+                                listProv[1].fields.kota,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Color.fromRGBO(89, 165, 216, 1)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Container(
+                            height: 72,
+                            child: Center(
+                              child: Text(
+                                listProv[1].fields.positif,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Color.fromRGBO(89, 165, 216, 1)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text('3')),
+                        DataCell(
+                          Container(
+                            height: 72,
+                            child: Center(
+                              child: Text(
+                                listProv[2].fields.kota,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Color.fromRGBO(89, 165, 216, 1)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Container(
+                            height: 72,
+                            child: Center(
+                              child: Text(
+                                listProv[2].fields.positif,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Color.fromRGBO(89, 165, 216, 1)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                 ]),
-                DataRow(cells: [
-                  DataCell(Text('2')),
-                  DataCell(Text('')),
-                  DataCell(Text('')),
-                ]),
-                DataRow(cells: [
-                  DataCell(Text('3')),
-                  DataCell(Text('')),
-                  DataCell(Text('')),
-                ]),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-          ]),
+              );
+            } else {
+              return Text("");
+            }
+          },
         ),
         Container(
           color: Color.fromRGBO(173, 232, 244, 1),

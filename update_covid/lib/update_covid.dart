@@ -1,7 +1,7 @@
 library update_covid;
 
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:rumah_harapan/cookies.dart';
 import 'package:rumah_harapan/widgets/main_drawer.dart';
 import 'package:rumah_harapan/widgets/main_drawer_login.dart';
@@ -35,7 +35,7 @@ class _UpdateCovidState extends State<UpdateCovid> {
         'page': UCProv(),
       },
       {
-        'page': HarapanUC(), 
+        'page': HarapanUC(),
       },
     ];
     super.initState();
@@ -54,35 +54,34 @@ class _UpdateCovidState extends State<UpdateCovid> {
     // _selectedPageIndex = widget.indexPage;
     // print(_selectedPageIndex);
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Rumah Harapan🏠'),
-          backgroundColor: const Color.fromRGBO(89, 165, 216, 1),
-        ),
-        drawer: request.username != "" ? MainDrawerLogin() : MainDrawer(),
-        body: _pages[_selectedPageIndex]['page'],
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: _selectPage,
-          backgroundColor: Color.fromRGBO(89, 165, 216, 1),
-          unselectedItemColor: Color.fromRGBO(2, 62, 128, 1),
-          selectedItemColor: Colors.white,
-          currentIndex: _selectedPageIndex,
-          // type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.query_stats),
-              label: 'Harian Covid',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list_alt),
-              label: 'Data Provinsi',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.comment),
-              label: 'Kotak Harapan',
-            ),
-          ],
-        ),
+      appBar: AppBar(
+        title: const Text('Rumah Harapan🏠'),
+        backgroundColor: const Color.fromRGBO(89, 165, 216, 1),
+      ),
+      drawer: request.username != "" ? MainDrawerLogin() : MainDrawer(),
+      body: _pages[_selectedPageIndex]['page'],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectPage,
+        backgroundColor: Color.fromRGBO(89, 165, 216, 1),
+        unselectedItemColor: Color.fromRGBO(2, 62, 128, 1),
+        selectedItemColor: Colors.white,
+        currentIndex: _selectedPageIndex,
+        // type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.query_stats),
+            label: 'Harian Covid',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt),
+            label: 'Data Provinsi',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.comment),
+            label: 'Kotak Harapan',
+          ),
+        ],
+      ),
     );
   }
 }
-

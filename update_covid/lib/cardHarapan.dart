@@ -7,12 +7,15 @@ import 'package:update_covid/models/harapan.dart';
 import 'dart:convert' as convert;
 
 class CardHarapan extends StatefulWidget {
-  const CardHarapan({Key? key, required this.data, required this.userPk, required this.userName}) 
+  const CardHarapan(
+      {Key? key,
+      required this.data,
+      required this.userPk,
+      required this.userName})
       : super(key: key);
   final Harapan data;
-  final Map<String,int> userPk;
-  final Map<int,String> userName;
-  
+  final Map<String, int> userPk;
+  final Map<int, String> userName;
 
   @override
   _CardHarapanState createState() => _CardHarapanState();
@@ -21,7 +24,7 @@ class CardHarapan extends StatefulWidget {
 class _CardHarapanState extends State<CardHarapan> {
   String harapan = "";
   int like = 0;
-  Icon x = Icon(Icons.thumb_down,color:Colors.yellow);
+  Icon x = Icon(Icons.thumb_down, color: Colors.yellow);
   String status = "Suka";
   DateTime tanggal = DateTime.now();
   int idAuthor = 0;
@@ -30,30 +33,25 @@ class _CardHarapanState extends State<CardHarapan> {
   int idHarapan = 0;
 
   void _incrementCounter(var request, int id) async {
-      print(idHarapan);
-      final response = await request.postJson(
+    await request.postJson(
         "https://rumah-harapan.herokuapp.com/updateCovid/likeMobile",
         convert.jsonEncode(<String, int>{
           'id': id,
         }));
-        Navigator.pushReplacementNamed(
-          context, HarapanUC.routeName
-        );
+    Navigator.pushReplacementNamed(context, HarapanUC.routeName);
   }
 
-  String _getUsername(Map<int,String> map, int pk) {
+  String _getUsername(Map<int, String> map, int pk) {
     String x = map[pk].toString();
-    print(x);
     return x;
   }
 
-  int _getPK(Map<String,int> map, String username) {
+  int _getPK(Map<String, int> map, String username) {
     int x = 0;
-    if (map[username] != null)
-      x = map[username]!.toInt();
+    if (map[username] != null) x = map[username]!.toInt();
     return x;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -69,7 +67,7 @@ class _CardHarapanState extends State<CardHarapan> {
 
     if (widget.data.fields.like.contains(idUser)) status = "Tidak Suka";
 
-    if (status == "Suka") x = Icon(Icons.thumb_up, color:Colors.yellow);
+    if (status == "Suka") x = Icon(Icons.thumb_up, color: Colors.yellow);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -84,10 +82,10 @@ class _CardHarapanState extends State<CardHarapan> {
               children: <Widget>[
                 Row(
                   // mainAxisSize: MainAxisSize.min,
-                  children: <Widget> [
+                  children: <Widget>[
                     Row(
                       // mainAxisSize: MainAxisSize.min,
-                      children: <Widget> [
+                      children: <Widget>[
                         Icon(
                           Icons.person_pin,
                           size: 32,
@@ -95,10 +93,16 @@ class _CardHarapanState extends State<CardHarapan> {
                         Column(
                           // mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            Text(username,
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                            Text(
+                              username,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 14),
                             ),
-                            Text("   " + DateFormat('kk:mm – dd-MM-yyyy').format(tanggal).toString(), 
+                            Text(
+                              "   " +
+                                  DateFormat('kk:mm – dd-MM-yyyy')
+                                      .format(tanggal)
+                                      .toString(),
                               style: const TextStyle(fontSize: 14),
                             ),
                           ],
@@ -117,38 +121,48 @@ class _CardHarapanState extends State<CardHarapan> {
           child: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(
-              // mainAxisSize: MainAxisSize.min,
-              children: <Widget> [Text(harapan,style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),]
-            ),
+                // mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    harapan,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ]),
           ),
-        ), 
-        request.loggedIn == true ?
-        Container(
-          height: 65,
-          color: Color.fromRGBO(89, 165, 216, 1),
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget> [
-                    FlatButton.icon(
-                      onPressed: () {
-                        _incrementCounter(request, idHarapan);
-                      }, 
-                      icon: x, 
-                      label: Text(status),
-                    ),
-                    Text(like.toString() + " Suka  ", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                  ],
+        ),
+        request.loggedIn == true
+            ? Container(
+                height: 65,
+                color: Color.fromRGBO(89, 165, 216, 1),
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          TextButton.icon(
+                            onPressed: () {
+                              _incrementCounter(request, idHarapan);
+                            },
+                            icon: x,
+                            label: Text(status),
+                          ),
+                          Text(like.toString() + " Suka  ",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-        ) : Text(""),
-        Text(" ",),
+              )
+            : Text(""),
+        Text(
+          " ",
+        ),
       ],
     );
   }
