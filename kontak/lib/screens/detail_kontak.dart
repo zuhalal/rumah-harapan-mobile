@@ -102,20 +102,17 @@ class DetailPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Color.fromRGBO(13, 110, 253, 1),
+        //color: Color.fromRGBO(13, 110, 253, 1),
       ),
       width: MediaQuery.of(context).size.width,
-      child: Text(field.nomorkontak, style: TextStyle(color: Colors.white)),
+      child: ElevatedButton(
+          onPressed: () {},
+          child:
+              Text(field.nomorkontak, style: TextStyle(color: Colors.white))),
     );
     final bottomContent = Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.all(40.0),
-      // decoration: BoxDecoration(
-      //   image: DecorationImage(
-      //     image: AssetImage('assets/images/man.jpg'),
-      //     fit: BoxFit.cover,
-      //   ),
-      // ),
       child: Center(
         child: Column(
           children: <Widget>[bottomContentText, readButton],

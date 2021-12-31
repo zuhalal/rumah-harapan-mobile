@@ -1,7 +1,5 @@
-//import 'dart:html';
 //ignore_for_file: prefer_const_constructors, avoid_print
 import 'dart:convert';
-import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -10,9 +8,6 @@ import '../screens/list_kontak.dart';
 import '../screens/detail_kontak.dart';
 import '../screens/form.dart';
 import '../models/list_all_kontak.dart';
-// import 'package:rumah_harapan/widgets/main_drawer.dart';
-// import 'package:rumah_harapan/widgets/main_drawer_login.dart';
-//import 'text_section.dart';
 
 class ListItem {
   final String kategori;
@@ -254,14 +249,12 @@ class _ContactHome extends State<ContactHome> {
                   child: Text('Lihat Semua'),
                   onPressed: () {
                     isUser == true
-                        ? () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ListContact()));
-                          }()
-                        : (ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Login terlebih dahulu"))));
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ListContact()))
+                        : ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Login terlebih dahulu")));
                   },
                 ),
               ),
@@ -343,56 +336,6 @@ class _ContactHome extends State<ContactHome> {
             ),
           ]));
 
-  // Widget buildList({required AsyncSnapshot contact, required int idx}) =>
-  //     Container(
-  //         height: 140,
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(20),
-  //           color: Colors.white,
-  //           boxShadow: const [
-  //             BoxShadow(
-  //               color: Colors.grey,
-  //               spreadRadius: 0.5,
-  //               offset: Offset(1, 1),
-  //               blurRadius: 2.0,
-  //             ),
-  //           ],
-  //         ),
-  //         child:
-  //             Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-  //           const SizedBox(height: 10),
-  //           Padding(
-  //             padding: EdgeInsets.only(top: 4, left: 20, bottom: 4),
-  //             child: Text(
-  //               contact.data[idx]["fields"]["kategori"].toString(),
-  //               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-  //             ),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.only(top: 4, left: 20, bottom: 4),
-  //             child: Text(
-  //               "Nama: " + contact.data[idx]["fields"]["namakontak"].toString(),
-  //               style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-  //             ),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.only(top: 4, left: 20, bottom: 4),
-  //             child: Text(
-  //               "Region: " + contact.data[idx]["fields"]["region"].toString(),
-  //               style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-  //             ),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.only(top: 4, left: 20, bottom: 4),
-  //             child: Text(
-  //               "Kota/Kabupaten: " +
-  //                   contact.data[idx]["fields"]["kota"].toString() +
-  //                   ", " +
-  //                   contact.data[idx]["fields"]["provinsi"].toString(),
-  //               style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-  //             ),
-  //           ),
-  //         ]));
   Fields getField({required AsyncSnapshot contact, required int idx}) => Fields(
       region: contact.data[idx]["fields"]["region"].toString(),
       provinsi: contact.data[idx]["fields"]["provinsi"].toString(),
