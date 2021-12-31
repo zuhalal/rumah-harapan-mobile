@@ -61,6 +61,9 @@ class MainDrawerLogin extends StatelessWidget {
           buildListTile('Kontak Penting', Icons.contacts, () {
             Navigator.pushNamed(context, '/kontak');
           }),
+          buildListTile('Kritik dan Saran', Icons.message, () {
+            Navigator.pushNamed(context, '/kritikSaran');
+          }),
           buildListTile('Logout', Icons.logout, () async {
             final response = await request
                 .logoutAccount("http://rumah-harapan.herokuapp.com/logout2");

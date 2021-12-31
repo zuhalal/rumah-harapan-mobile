@@ -18,7 +18,6 @@ class CardCarousel extends StatefulWidget {
 }
 
 class _CardCarouselState extends State<CardCarousel> {
-
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
@@ -115,8 +114,9 @@ class _CardCarouselState extends State<CardCarousel> {
                                 borderRadius: new BorderRadius.circular(8.0))),
                         onPressed: () {
                           Route route = MaterialPageRoute(
-                              builder: (context) =>
-                                  EditDonasiForm(id: widget.data.pk, data: widget.data.fields));
+                              builder: (context) => EditDonasiForm(
+                                  id: widget.data.pk,
+                                  data: widget.data.fields));
                           Navigator.push(context, route);
                         },
                         child: const Text('Edit',
@@ -163,22 +163,33 @@ class _CardCarouselState extends State<CardCarousel> {
                                                     new BorderRadius.circular(
                                                         8.0))),
                                         onPressed: () async {
-                                            final request = Provider.of<CookieRequest>(context, listen: false);
-                                            final response =
-                                                await request.postJson('http://rumah-harapan.herokuapp.com/donasi/delete/' + widget.data.pk.toString(),
-                                                  convert.jsonEncode(<String, String>{'id': widget.data.pk.toString(),}
-                                                  )
-                                                );
-                                            if (response['status'] == 'success') {
-                                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                                content: Text("Donasi berhasil dihapus!")));
-                                              Navigator.pushReplacementNamed(context,DonasiHome.routeName);
-                                            } else {
-                                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                                content: Text(
-                                                    "An error occured, please try again."),
-                                              ));
-                                            }
+                                          final request =
+                                              Provider.of<CookieRequest>(
+                                                  context,
+                                                  listen: false);
+                                          final response =
+                                              await request.postJson(
+                                                  'http://rumah-harapan.herokuapp.com/donasi/delete/' +
+                                                      widget.data.pk.toString(),
+                                                  convert.jsonEncode(<String,
+                                                      String>{
+                                                    'id': widget.data.pk
+                                                        .toString(),
+                                                  }));
+                                          if (response['status'] == 'success') {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                                    content: Text(
+                                                        "Donasi berhasil dihapus!")));
+                                            Navigator.pushReplacementNamed(
+                                                context, DonasiHome.routeName);
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                              content: Text(
+                                                  "An error occured, please try again."),
+                                            ));
+                                          }
                                         },
                                         child: Text("Hapus")),
                                     ElevatedButton(
