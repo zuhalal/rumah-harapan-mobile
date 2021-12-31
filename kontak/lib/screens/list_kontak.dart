@@ -19,7 +19,8 @@ class ListContact extends StatefulWidget {
 
 class _ListContact extends State<ListContact> {
   List<dynamic> extractedData = [];
-  List<Fields> contacts = [];
+  List<AllKontak> contacts = [];
+  List<AllKontak> kontaks = [];
   String query = '';
   fetchData() async {
     const url = 'http://rumah-harapan.herokuapp.com/kontak/list_kontak';
@@ -27,7 +28,23 @@ class _ListContact extends State<ListContact> {
       final response = await http.get(Uri.parse(url));
       // print(response.body);
       extractedData = jsonDecode(response.body);
-      print(extractedData);
+      //print(extractedData);
+
+      for (var data in extractedData) {
+        Fields field = Fields(
+            region: data["fields"]["region"].toString(),
+            provinsi: data["fields"]["provinsi"].toString(),
+            kategori: data["fields"]["kategori"].toString(),
+            kota: data["fields"]["kota"].toString(),
+            namakontak: data["fields"]["namakontak"].toString(),
+            nomorkontak: data["fields"]["nomorkontak"].toString(),
+            alamatkontak: data["fields"]["alamatkontak"].toString(),
+            keterangan: data["fields"]["keterangan"].toString());
+
+        AllKontak kontak =
+            AllKontak(model: data["model"], pk: data["pk"], fields: field);
+        contacts.add(kontak);
+      }
       return extractedData;
     } catch (error) {
       print(error);
@@ -38,6 +55,12 @@ class _ListContact extends State<ListContact> {
   void didChangeDependencies() {
     fetchData();
     super.didChangeDependencies();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    kontaks = contacts;
   }
 
   @override
@@ -53,6 +76,7 @@ class _ListContact extends State<ListContact> {
         backgroundColor: Color.fromRGBO(173, 232, 242, 1),
         body: SingleChildScrollView(
             child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+          buildSearch(),
           Padding(
               padding: EdgeInsets.all(20),
               child: Column(children: [
@@ -205,4 +229,27 @@ class _ListContact extends State<ListContact> {
                                 : Icon(Icons.other_houses,
                                     size: 40, color: Colors.white)),
           ));
+  Widget buildSearch() => SearchList(
+        text: query,
+        hintText: 'Cari Kontak',
+        onChanged: searchContact,
+      );
+
+  void searchContact(String query) {
+    final kontaks = contacts.where((contact) {
+      final kategoriLower = contact.fields.kategori.toLowerCase();
+      final provinsiLower = contact.fields.provinsi.toLowerCase();
+      final namaLower = contact.fields.namakontak.toLowerCase();
+      final searchLower = query.toLowerCase();
+
+      return kategoriLower.contains(searchLower) ||
+          provinsiLower.contains(searchLower) ||
+          namaLower.contains(searchLower);
+    }).toList();
+
+    setState(() {
+      this.query = query;
+      this.kontaks = kontaks;
+    });
+  }
 }
