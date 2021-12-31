@@ -12,6 +12,11 @@ dependencies:
     sdk: flutter
 
   http: ^0.13.1
+  intl: ^0.17.0
+  provider: ^6.0.1
+
+  rumah_harapan:
+    path: ../.
 
 dev_dependencies:
   flutter_test:
