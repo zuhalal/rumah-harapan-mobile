@@ -150,7 +150,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           'username': username,
                           'password': password,
                         });
-                        print(response);
                         if (request.loggedIn) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

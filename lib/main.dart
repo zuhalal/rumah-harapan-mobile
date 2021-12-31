@@ -1,6 +1,9 @@
 import 'package:donasi/screens/donasi_add_form.dart';
 import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
+import 'package:update_covid/UCProv.dart';
+import 'package:update_covid/harapan_uc.dart';
+import 'package:update_covid/update_covid.dart';
 import 'cookies.dart';
 import 'package:home/screens/after_login.dart';
 import 'screens/login_screen.dart';
@@ -37,6 +40,9 @@ class MyApp extends StatelessWidget {
             LoginScreen.routeName: (ctx) => LoginScreen(),
             AfterLogin.routeName: (ctx) => AfterLogin(),
             DonasiHome.routeName: (ctx) => DonasiHome(),
+            UpdateCovid.routeName: (ctx) => UpdateCovid(indexPage: 0),
+            UCProv.routeName: (ctx) => UpdateCovid(indexPage: 1),
+            HarapanUC.routeName: (ctx) => UpdateCovid(indexPage: 2),
             AddDonasiForm.routeName: (ctx) => AddDonasiForm()
           },
         ));

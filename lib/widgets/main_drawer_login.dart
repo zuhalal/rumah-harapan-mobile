@@ -56,7 +56,7 @@ class MainDrawerLogin extends StatelessWidget {
             Navigator.pop(context);
           }),
           buildListTile('Update Covid', Icons.update, () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/updateCovid');
           }),
           buildListTile('Kotak Penting', Icons.contacts, () {
             Navigator.pop(context);

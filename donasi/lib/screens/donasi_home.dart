@@ -25,7 +25,7 @@ class _DonasiHomeState extends State<DonasiHome> {
   bool isUser = false;
 
   fetchData() async {
-    // const url = 'http://10.0.2.2:8000/donasi/all_donasi';
+    // const url = 'https://rumah-harapan.herokuapp.com/donasi/all_donasi';
     // buat di localhost
     const url = 'http://rumah-harapan.herokuapp.com/donasi/all_donasi';
     try {
@@ -57,7 +57,7 @@ class _DonasiHomeState extends State<DonasiHome> {
   }
 
   fetchUserDonation() async {
-    // const url2 = 'http://10.0.2.2:8000/donasi/my_donasi';
+    // const url2 = 'https://rumah-harapan.herokuapp.com/donasi/my_donasi';
     // buat di localhost
     const url = 'http://rumah-harapan.herokuapp.com/donasi/my_donasi';
     try {
