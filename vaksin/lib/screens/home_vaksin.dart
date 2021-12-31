@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:rumah_harapan/cookies.dart';
+import 'package:rumah_harapan/screens/login_screen.dart';
 import 'package:rumah_harapan/widgets/main_drawer.dart';
 import 'package:rumah_harapan/widgets/main_drawer_login.dart';
 import 'package:vaksin/models/konten_vaksin.dart';
+import 'package:vaksin/screens/add_forum_vaksin.dart';
 import 'package:vaksin/widgets/home_vaksin_container.dart';
 import 'package:vaksin/widgets/forum_informasi_vaksin.dart';
 
@@ -20,8 +22,8 @@ class HomeVaksin extends StatefulWidget {
 class _HomeVaksinState extends State<HomeVaksin> {
   List<AllForum> extractedForumData = [];
   bool isUser = false;
-  int totalsasaran = 0;
-  int sasaransdmk = 0;
+  String totalsasaran = '';
+  String sasaransdmk = '';
   String sasaranlansia = '';
   String sasaranpetugas = '';
   String dosis1 = '';
@@ -29,7 +31,7 @@ class _HomeVaksinState extends State<HomeVaksin> {
   String lastUpdate = '';
 
   fetchDataKonten() async {
-    const url = 'http://rumah-harapan.herokuapp.com/vaksin/all_forum';
+    const url = 'http://rumah-harapan.herokuapp.com/vaksin/all-forum';
 
     try {
       extractedForumData = [];
@@ -58,15 +60,14 @@ class _HomeVaksinState extends State<HomeVaksin> {
     const url = 'https://vaksincovid19-api.vercel.app/api/vaksin';
     try {
       final response = await http.get(Uri.parse(url));
-      final json = response.body;
-      Map<String, dynamic> responseJson = jsonDecode(json);
-      totalsasaran = responseJson['totalsasaran']['value'];
-      sasaransdmk = responseJson['sasaranvaksinsdmk']['value'];
-      sasaranlansia = responseJson['sasaranvaksinlansia']['value'];
-      sasaranpetugas = responseJson['sasaranvaksinpetugaspublik']['value'];
-      dosis1 = responseJson['vaksinasi1']['value'];
-      dosis2 = responseJson['vaksinasi2']['value'];
-      lastUpdate = responseJson['lastUpdate']['value'];
+      Map<String, dynamic> json = jsonDecode(response.body);
+      totalsasaran = json['totalsasaran'];
+      sasaransdmk = json['sasaranvaksinsdmk'];
+      sasaranlansia = json['sasaranvaksinlansia'];
+      sasaranpetugas = json['sasaranvaksinpetugaspublik'];
+      dosis1 = json['vaksinasi1'];
+      dosis2 = json['vaksinasi2'];
+      lastUpdate = json['lastUpdate'];
       return;
     } catch (error) {
       print(error);
@@ -307,7 +308,118 @@ class _HomeVaksinState extends State<HomeVaksin> {
                     fontSize: 28,
                     color: Colors.white,
                   ),
-                )
+                ),
+                for (AllForum i in extractedForumData)
+                  ForumInformasiContainer(konten: i, isUser: isUser),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: isUser
+                      ? [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                textStyle: const TextStyle(fontSize: 20),
+                                onPrimary: Colors.white,
+                                primary: const Color(0xff023E8A),
+                                side: BorderSide(
+                                    width: 2, color: const Color(0xff023E8A)),
+                                padding: EdgeInsets.only(
+                                    left: 12, right: 12, top: 8, bottom: 8),
+                                shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(8.0))),
+                            onPressed: () {
+                              Route route = MaterialPageRoute(
+                                  builder: (context) => AddForumVaksin());
+                              Navigator.push(context, route);
+                            },
+                            child: const Text('Tambah Informasi'),
+                          ),
+                        ]
+                      : [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 20),
+                              primary: const Color(0xff023E8A),
+                              side: BorderSide(
+                                  width: 2, color: const Color(0xff023E8A)),
+                              onPrimary: Colors.white,
+                              padding: EdgeInsets.only(
+                                  left: 12, right: 12, top: 8, bottom: 8),
+                              shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(8.0)),
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(
+                                        'Anda Belum Login',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      content: Text(
+                                        'Silakan Login untuk Menambahkan Informasi',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      actions: [
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                textStyle: const TextStyle(
+                                                    fontSize: 20),
+                                                onPrimary: Colors.white,
+                                                primary:
+                                                    const Color(0xff023E8A),
+                                                side: BorderSide(
+                                                    width: 2,
+                                                    color: const Color(
+                                                        0xff023E8A)),
+                                                padding: EdgeInsets.only(
+                                                    left: 12,
+                                                    right: 12,
+                                                    top: 10,
+                                                    bottom: 10),
+                                                shape:
+                                                    new RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            new BorderRadius
+                                                                    .circular(
+                                                                8.0))),
+                                            onPressed: () =>
+                                                Navigator.pushReplacementNamed(
+                                                    context,
+                                                    LoginScreen.routeName),
+                                            child: Text('Login')),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            textStyle:
+                                                const TextStyle(fontSize: 20),
+                                            primary: Colors.black12,
+                                            onPrimary: Colors.white,
+                                            side: BorderSide(
+                                                width: 2,
+                                                color: const Color(0xff023E8A)),
+                                            padding: EdgeInsets.only(
+                                                left: 12,
+                                                right: 12,
+                                                top: 10,
+                                                bottom: 10),
+                                            shape: new RoundedRectangleBorder(
+                                                borderRadius:
+                                                    new BorderRadius.circular(
+                                                        8.0)),
+                                          ),
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: const Text('Batal'),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: const Text('Tambah Informasi'),
+                          ),
+                        ],
+                ),
               ],
             ),
           ),
