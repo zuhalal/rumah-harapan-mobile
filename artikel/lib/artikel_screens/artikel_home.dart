@@ -5,11 +5,15 @@ import 'package:http/http.dart' as http;
 import 'package:artikel/artikel_models/get_artikel.dart';
 import 'package:artikel/artikel_screens/form_artikel.dart';
 import 'package:artikel/widget_artikel.dart';
+import 'package:provider/src/provider.dart';
+import 'package:rumah_harapan/cookies.dart';
+import 'package:rumah_harapan/screens/login_screen.dart';
+
 
 class ArtikelHome extends StatefulWidget {
   static const routeName = "/artikel";
   const ArtikelHome({Key? key}): super(key:key);
-  
+
   @override
   _ArtikelHomeState createState() => _ArtikelHomeState();
 }
@@ -56,7 +60,6 @@ class _ArtikelHomeState extends State<ArtikelHome> {
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -86,40 +89,151 @@ class _ArtikelHomeState extends State<ArtikelHome> {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ArtikelForm()));
-                        },
-                        child: Text('Tambahkan Artikel'),
-                        style: ElevatedButton.styleFrom(
-                          primary: const Color(0xFF023E8A),
-                          onPrimary: Colors.white,
-                          shadowColor: Colors.transparent,
-                          padding: EdgeInsets.only(
-                              left: 12, right: 12, top: 8, bottom: 8),
-                          fixedSize: const Size(460, 30),
-                        ),
-                      )
-                    ],
-                  )),
-              // Column(
-              //   crossAxisAlignment: CrossAxisAlignment.stretch,
-              //   children: [
-              //     Container(
-              //       decoration: BoxDecoration(
-              //         color: const Color(0xffade8f4),
-              //       ),
-              //       child: new Image.asset(
-              //           'assets/images/kritik_saran/kritiksaran.png'),
-              //       width: 300,
-              //       height: 400,
-              //     ),
-              //   ],
-              // )
+
+                    children: isUser
+                        ? [
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    textStyle: const TextStyle(fontSize: 20),
+                                    onPrimary: Colors.white,
+                                    primary: const Color(0xff023E8A),
+                                    side: BorderSide(
+                                        width: 2,
+                                        color: const Color(0xff023E8A)),
+                                    padding: EdgeInsets.only(
+                                        left: 12, right: 12, top: 8, bottom: 8),
+                                    shape: new RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(8.0))),
+                                onPressed: () {
+                                  Route route = MaterialPageRoute(
+                                      builder: (context) => ArtikelForm());
+                                  Navigator.push(context, route);
+                                },
+                                child: const Text('Tambahkan Kritik/Saran'),
+                              ),
+                            ]
+                          : [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  textStyle: const TextStyle(fontSize: 20),
+                                  primary: const Color(0xff023E8A),
+                                  side: BorderSide(
+                                      width: 2, color: const Color(0xff023E8A)),
+                                  onPrimary: Colors.white,
+                                  padding: EdgeInsets.only(
+                                      left: 12, right: 12, top: 8, bottom: 8),
+                                  shape: new RoundedRectangleBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(8.0)),
+                                ),
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                            'Anda Belum Login',
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          content: Text(
+                                            'Silakan Login Untuk Menambahkan Kritik dan Saran',
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          actions: [
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    textStyle: const TextStyle(
+                                                        fontSize: 20),
+                                                    onPrimary: Colors.white,
+                                                    primary:
+                                                        const Color(0xff023E8A),
+                                                    side: BorderSide(
+                                                        width: 2,
+                                                        color: const Color(
+                                                            0xff023E8A)),
+                                                    padding: EdgeInsets.only(
+                                                        left: 12,
+                                                        right: 12,
+                                                        top: 8,
+                                                        bottom: 8),
+                                                    shape: new RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            new BorderRadius
+                                                                    .circular(
+                                                                8.0))),
+                                                onPressed: () => Navigator
+                                                    .pushReplacementNamed(
+                                                        context,
+                                                        LoginScreen.routeName),
+                                                child: Text("Login")),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                textStyle: const TextStyle(
+                                                    fontSize: 20),
+                                                primary: Colors.black12,
+                                                onPrimary: Colors.white,
+                                                side: BorderSide(
+                                                    width: 2,
+                                                    color: const Color(
+                                                        0xff023E8A)),
+                                                padding: EdgeInsets.only(
+                                                    left: 12,
+                                                    right: 12,
+                                                    top: 8,
+                                                    bottom: 8),
+                                                shape:
+                                                    new RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            new BorderRadius
+                                                                .circular(8.0)),
+                                              ),
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              child: const Text('Batal'),
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                };
+                                child: const Text('Tambahkan Artikel'),
+                              ),
+                            ])),
+
+                  //   children: [
+                  //     ElevatedButton(
+                  //       onPressed: () {
+                  //         Navigator.push(
+                  //             context,
+                  //             MaterialPageRoute(
+                  //                 builder: (context) => ArtikelForm()));
+                  //       },
+                  //       child: Text('Tambahkan Artikel'),
+                  //       style: ElevatedButton.styleFrom(
+                  //         primary: const Color(0xFF023E8A),
+                  //         onPrimary: Colors.white,
+                  //         shadowColor: Colors.transparent,
+                  //         padding: EdgeInsets.only(
+                  //             left: 12, right: 12, top: 8, bottom: 8),
+                  //         fixedSize: const Size(460, 30),
+                  //       ),
+                  //     )
+                  //   ],
+                  // )),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xffade8f4),
+                    ),
+                    child: new Image.asset(
+                        'assets/images/artikel/artikel.png'),
+                    width: 300,
+                    height: 400,
+                  ),
+                ],
+              )
             ],
           ),
           SizedBox(height: 20),

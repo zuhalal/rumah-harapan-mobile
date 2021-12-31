@@ -1,6 +1,7 @@
 name: update_covid
 description: A new Flutter package project.
 version: 0.0.1
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 homepage:
 
 environment:
@@ -10,6 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  rumah_harapan:
+    path: ../.
 
 dev_dependencies:
   flutter_test:

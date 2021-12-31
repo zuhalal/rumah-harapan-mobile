@@ -47,7 +47,7 @@ class MainDrawerLogin extends StatelessWidget {
             height: 20,
           ),
           buildListTile('Home', Icons.home, () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/after_login');
           }),
           buildListTile('Donasi', Icons.volunteer_activism, () {
             Navigator.pushNamed(context, '/donasi');
@@ -56,19 +56,19 @@ class MainDrawerLogin extends StatelessWidget {
             Navigator.pushNamed(context, '/artikel');
           }),
           buildListTile('Update Covid', Icons.update, () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/updateCovid');
           }),
           buildListTile('Kotak Penting', Icons.contacts, () {
             Navigator.pop(context);
           }),
-          buildListTile('Logout', Icons.logout,  () async {
-            final response = await request.logoutAccount("http://rumah-harapan.herokuapp.com/logout2");
+          buildListTile('Logout', Icons.logout, () async {
+            final response = await request
+                .logoutAccount("http://rumah-harapan.herokuapp.com/logout2");
             if (response['status']) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text("Successfully logged out!"),
               ));
-              Navigator.pushReplacementNamed(
-                  context, LoginScreen.routeName);
+              Navigator.pushReplacementNamed(context, LoginScreen.routeName);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text("An error occured, please try again."),
