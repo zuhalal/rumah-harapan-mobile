@@ -31,8 +31,8 @@ class AllForum {
 }
 
 class Fields {
-  String judul, penulis, tanggalPublikasi, konten;
-
+  String judul, tanggalPublikasi, konten;
+  int penulis;
   Fields(
       {required this.judul,
       required this.penulis,

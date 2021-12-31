@@ -1,6 +1,7 @@
 import 'package:donasi/screens/donasi_add_form.dart';
 import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
+import 'package:kritik_saran/screens/kritik_saran_home.dart';
 import 'package:update_covid/UCProv.dart';
 import 'package:update_covid/harapan_uc.dart';
 import 'package:update_covid/update_covid.dart';
@@ -12,6 +13,8 @@ import 'screens/register_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:vaksin/screens/home_vaksin.dart';
 import 'package:vaksin/screens/add_forum_vaksin.dart';
+import 'package:kontak/screens/home_kontak.dart';
+import 'package:kontak/screens/form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,11 +46,14 @@ class MyApp extends StatelessWidget {
             AfterLogin.routeName: (ctx) => AfterLogin(),
             DonasiHome.routeName: (ctx) => DonasiHome(),
             AddDonasiForm.routeName: (ctx) => AddDonasiForm(),
-            HomeVaksin.routeName: (ctx) => HomeVaksin(),
-            AddForumVaksin.routeName: (ctx) => AddForumVaksin(),
+            ContactHome.routeName: (ctx) => ContactHome(),
+            AddKontakForm.routeName: (ctx) => AddKontakForm(),
             UpdateCovid.routeName: (ctx) => UpdateCovid(indexPage: 0),
             UCProv.routeName: (ctx) => UpdateCovid(indexPage: 1),
             HarapanUC.routeName: (ctx) => UpdateCovid(indexPage: 2),
+            KritikSaranHome.routeName: (ctx) => KritikSaranHome(),
+            HomeVaksin.routeName: (ctx) => HomeVaksin(),
+            AddForumVaksin.routeName: (ctx) => AddForumVaksin(),
           },
         ));
   }
