@@ -1,6 +1,7 @@
 //import 'dart:html';
 //ignore_for_file: prefer_const_constructors, avoid_print
 import 'dart:convert';
+import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -259,9 +260,8 @@ class _ContactHome extends State<ContactHome> {
                                 MaterialPageRoute(
                                     builder: (context) => ListContact()));
                           }()
-                        : (SnackBar(
-                            content: Text("Silahkan login terlebih dahulu."),
-                          ));
+                        : (ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Login terlebih dahulu"))));
                   },
                 ),
               ),
