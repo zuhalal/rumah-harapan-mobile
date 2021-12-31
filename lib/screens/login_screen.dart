@@ -157,7 +157,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               content: Text(response["message"]),
                             ),
                           );
-                          Navigator.pushNamed(context, '/after_login');
+                          Navigator.pushReplacementNamed(
+                              context, '/after_login');
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
