@@ -48,14 +48,20 @@ class MainDrawer extends StatelessWidget {
           buildListTile('Donasi', Icons.volunteer_activism, () {
             Navigator.pushNamed(context, '/donasi');
           }),
-          buildListTile('Publikasi', Icons.announcement, () {
-            Navigator.pushNamed(context, "/artikel");
+          buildListTile('Artikel', Icons.announcement, () {
+            Navigator.pushNamed(context, '/artikel');
           }),
           buildListTile('Update Covid', Icons.update, () {
             Navigator.pushNamed(context, '/updateCovid');
           }),
-          buildListTile('Kotak Penting', Icons.contacts, () {
-            Navigator.pop(context);
+          buildListTile('Kontak Penting', Icons.contacts, () {
+            Navigator.pushNamed(context, '/kontak');
+          }),
+          buildListTile('Kritik dan Saran', Icons.message, () {
+            Navigator.pushNamed(context, '/kritikSaran');
+          }),
+          buildListTile('Vaksin', Icons.coronavirus, () {
+            Navigator.pushNamed(context, '/vaksin');
           }),
           buildListTile('Login', Icons.login, () {
             Navigator.pop(context);

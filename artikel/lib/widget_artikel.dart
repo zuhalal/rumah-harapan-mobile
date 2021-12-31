@@ -1,4 +1,3 @@
-import 'package:artikel/artikel_screens/detail_artikel.dart';
 import 'package:flutter/material.dart';
 
 class CardWidget extends StatelessWidget {

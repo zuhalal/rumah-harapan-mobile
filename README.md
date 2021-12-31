@@ -53,7 +53,6 @@ Dengan kekhawatiran itu, kelompok kami memutuskan membangun sebuah aplikasi web 
 3. Membuat fungsi async untuk setiap proses yang berkaitan dengan mengambil, mengirim, ataupun mengubah data
 4. Untuk mengambil data akan digunakan http.GET dari end point data di web yang hasil pemanggilannya akan digunakan untuk ditampilkan pada widget yang digunakan
 5. Untuk mengirim data akan digunakan http.POST yang menuju ke end point untuk menyimpan data yang disimpan di database Django
-6. Untuk mengubah data akan digunakan http.PUT yang menuju ke end point untuk mengubah data yang disimpan di database Django
 
 ## Persona 
     1. User Yang Tidak Login    

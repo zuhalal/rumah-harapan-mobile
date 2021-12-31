@@ -1,7 +1,6 @@
 import 'dart:convert' as convert;
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:artikel/artikel_screens/artikel_home.dart';
 import 'package:provider/provider.dart';
 import 'package:rumah_harapan/cookies.dart';

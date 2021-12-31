@@ -1,12 +1,8 @@
 import 'dart:convert';
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:artikel/artikel_models/get_artikel.dart';
 import 'package:artikel/artikel_screens/form_artikel.dart';
-import 'package:artikel/widget_artikel.dart';
-import 'package:provider/src/provider.dart';
-import 'package:rumah_harapan/cookies.dart';
 import 'package:rumah_harapan/screens/login_screen.dart';
 
 
@@ -261,8 +257,8 @@ class _ArtikelHomeState extends State<ArtikelHome> {
               ),
             ],
           ),
-          
-          
+
+
 
           // Container(
           //   child: FutureBuilder(
