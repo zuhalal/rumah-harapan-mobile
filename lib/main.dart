@@ -7,6 +7,9 @@ import 'screens/login_screen.dart';
 import 'package:home/screens/tabs_screen.dart';
 import 'screens/register_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:vaksin/screens/home_vaksin.dart';
+import 'package:vaksin/screens/add_forum_vaksin.dart';
+import 'package:vaksin/screens/edit_forum_vaksin.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +40,9 @@ class MyApp extends StatelessWidget {
             LoginScreen.routeName: (ctx) => LoginScreen(),
             AfterLogin.routeName: (ctx) => AfterLogin(),
             DonasiHome.routeName: (ctx) => DonasiHome(),
-            AddDonasiForm.routeName: (ctx) => AddDonasiForm()
+            AddDonasiForm.routeName: (ctx) => AddDonasiForm(),
+            HomeVaksin.routeName: (ctx) => HomeVaksin(),
+            AddForumVaksin.routeName: (ctx) => AddForumVaksin(),
           },
         ));
   }
