@@ -6,6 +6,7 @@ import 'package:rumah_harapan/cookies.dart';
 import 'package:rumah_harapan/widgets/main_drawer.dart';
 import 'package:rumah_harapan/widgets/main_drawer_login.dart';
 import 'package:vaksin/models/konten_vaksin.dart';
+import 'package:vaksin/widgets/forum_informasi_vaksin.dart';
 import 'package:vaksin/widgets/home_vaksin_container.dart';
 
 class HomeVaksin extends StatefulWidget {
@@ -28,7 +29,7 @@ class _HomeVaksinState extends State<HomeVaksin> {
 
   fetchDataKonten() async {
     const url = 'http://rumah-harapan.herokuapp.com/vaksin/all-forum';
-
+    print("masuk");
     try {
       extractedForumData = [];
       final response = await http.get(Uri.parse(url));
@@ -41,11 +42,9 @@ class _HomeVaksinState extends State<HomeVaksin> {
             tanggalPublikasi: data['fields']['tanggal_publikasi'],
             konten: data['fields']['konten']);
 
-        AllForum forum =
-            AllForum(fields: fields, model: data['model'], pk: data['pk']);
+        AllForum forum = AllForum(fields: fields, model: data['model'], pk: data['pk']);
         extractedForumData.add(forum);
       }
-      print(extractedForumData);
       return extractedForumData;
     } catch (error) {
       print(error);
@@ -301,45 +300,57 @@ class _HomeVaksinState extends State<HomeVaksin> {
                     },
                   ),
                 ),
-                Column(
-                  children: [
-                    FutureBuilder(
-                      future: fetchDataKonten(),
-                      builder: (context, snapshot) {
-                        // Here you told Flutter to use the word "snapshot".
-                        if (snapshot.connectionState == ConnectionState.waiting)
-                          return Center(child: CircularProgressIndicator());
-                        else
-                          return SingleChildScrollView(
-                            child: Center(
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 200,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(12),
-                                    child: Card(
-                                      color: Color.fromRGBO(89, 165, 216, 1),
-                                      child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: extractedForumData.map((data)=> Column(
-                                              children: [
-                                                Text(data.fields.judul, style: TextStyle(color: Colors.white, fontSize: 24),),
-                                                SizedBox(height: 8),
-                                                Text(data.fields.tanggalPublikasi.toString(), style: TextStyle(color: Colors.white, fontSize: 16),),
-                                                SizedBox(height: 8,),
-                                                Text(data.fields.konten, style: TextStyle(color: Colors.white, fontSize: 16),)
-                                              ]
-                                          )).toList()
-                                      ),
-                                    ),
-                                  ),
-                                )
-                            ),
-                          );
-                        }),
-                    ],
-                  )
+                Container(
+                  color: Color.fromRGBO(173, 232, 244, 1),
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Center(
+                        child: Column(
+                      children: [
+                        Text(
+                          ' ',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                              color: Color.fromRGBO(173, 232, 244, 1)),
+                        ),
+                        Text(
+                          'Forum Informasi',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 28,
+                              color: Color.fromRGBO(89, 165, 216, 1)),
+                        ),
+                        Text(
+                          ' ',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                              color: Color.fromRGBO(173, 232, 244, 1)),
+                        ),
+                        SingleChildScrollView(
+                          child: FutureBuilder(
+                        future: fetchDataKonten(),
+                        builder: (context, snapshot) {
+                      // Here you told Flutter to use the word "snapshot".
+                          if (snapshot.connectionState == ConnectionState.waiting)
+                            return Center(child: CircularProgressIndicator());
+                          else
+                            return  Column(
+                                children: extractedForumData
+                                    .map((list) => ForumInformasiContainer(
+                                  forum: list,
+                                ))
+                                    .toList(),
+                              );
+                            }
+                          )
+                        )
+                      ],
+                    )),
+                  ),
+                )
               ])),
         ));
   }

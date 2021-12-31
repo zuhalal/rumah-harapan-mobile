@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:rumah_harapan/cookies.dart';
 import 'package:vaksin/models/konten_vaksin.dart';
 
 class ForumInformasiContainer extends StatefulWidget {
   const ForumInformasiContainer(
-      {Key? key, required this.konten, required this.isUser})
+      {Key? key,
+      required this.forum})
       : super(key: key);
-  final AllForum konten;
-  final bool isUser;
+  final AllForum forum;
 
   @override
   _ForumInformasiContainer createState() => _ForumInformasiContainer();
@@ -15,87 +16,84 @@ class ForumInformasiContainer extends StatefulWidget {
 
 class _ForumInformasiContainer extends State<ForumInformasiContainer> {
   String judul = '';
-  String penulis = '';
-  DateTime tanggalPublikasi = '' as DateTime;
+  //String penulis = '';
+  String tanggalPublikasi = '';
   String konten = '';
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Container(
-          color: Colors.white,
+    // ignore: unused_local_variable
+    final request = context.watch<CookieRequest>();
+    judul = widget.forum.fields.judul;
+   // penulis = widget.forum.fields.penulis;
+    tanggalPublikasi = widget.forum.fields.tanggalPublikasi;
+    konten = widget.forum.fields.konten;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          color: Color.fromRGBO(89, 165, 216, 1),
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(8),
             child: Column(
-              children: [
-                SizedBox(
-                  height: 24,
-                ),
-                Container(
-                  height: 50,
-                  color: Color.fromRGBO(89, 165, 216, 1),
-                  child: Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  // mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Row(
+                      // mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Row(
+                        Icon(
+                          Icons.person_pin,
+                          size: 32,
+                        ),
+                        Column(
+                          // mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Column(
-                                  children: <Widget>[
-                                    Text(
-                                      judul,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          color: Colors.white),
-                                    ),
-                                    Text(
-                                      'Penulis: ' + penulis,
-                                      style: const TextStyle(
-                                          fontSize: 14, color: Colors.white),
-                                    ),
-                                    Text(
-                                      "Tanggal Publikasi: " +
-                                          DateFormat('kk:mm - dd-MM-yyyy')
-                                              .format(tanggalPublikasi),
-                                      style: const TextStyle(
-                                          fontSize: 14, color: Colors.white),
-                                    ),
-                                  ],
-                                )
-                              ],
+                            Text(
+                              judul,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                            // Text(
+                            //   penulis,
+                            //   style: const TextStyle(
+                            //       fontSize: 14),
+                            // ),
+                            Text(
+                              tanggalPublikasi,
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ],
-                        ),
+                        )
                       ],
                     ),
-                  ),
-                ),
-                Container(
-                  height: 60,
-                  color: Colors.white,
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ListView(
-                        // mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text(
-                            konten,
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        ]),
-                  ),
-                ),
-                SizedBox(
-                  height: 24,
+                  ],
                 ),
               ],
             ),
-          )),
+          ),
+        ),
+        Container(
+          height: 60,
+          color: Color.fromRGBO(89, 165, 216, 1),
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: ListView(
+                // mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    konten,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ]),
+          ),
+        ),
+        
+      ],
     );
   }
 }
