@@ -85,14 +85,12 @@ class CookieRequest {
       dynamic c = _client;
       c.withCredentials = true;
     }
-    print(data);
     // Add additional header
     headers['Content-Type'] = 'application/json; charset=UTF-8';
     headers['Connection'] = 'Keep-Alive';
     http.Response response =
-    await _client.post(Uri.parse(url), body: data, headers: headers);
+        await _client.post(Uri.parse(url), body: data, headers: headers);
     // Remove used additional header
-    print(response.body);
     headers.remove('Content-Type');
     updateCookie(response);
     return json.decode(response.body); // Expects and returns JSON request body
@@ -146,8 +144,7 @@ class CookieRequest {
   }
 
   Future<dynamic> logoutAccount(String url) async {
-    http.Response response =
-    await _client.post(Uri.parse(url));
+    http.Response response = await _client.post(Uri.parse(url));
 
     if (response.statusCode == 200) {
       loggedIn = false;
