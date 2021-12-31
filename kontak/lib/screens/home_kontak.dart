@@ -3,10 +3,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/src/provider.dart';
+import 'package:rumah_harapan/cookies.dart';
 import '../screens/list_kontak.dart';
 import '../screens/detail_kontak.dart';
 import '../screens/form.dart';
 import '../models/list_all_kontak.dart';
+// import 'package:rumah_harapan/widgets/main_drawer.dart';
+// import 'package:rumah_harapan/widgets/main_drawer_login.dart';
 //import 'text_section.dart';
 
 class ListItem {
@@ -46,9 +50,10 @@ class ContactHome extends StatefulWidget {
 }
 
 class _ContactHome extends State<ContactHome> {
+  bool isUser = false;
   List<CardItem> items = [
     CardItem(
-      image: 'assets/images/donasi/covidambulans.png',
+      image: 'assets/images/donasi/covidambulans.jpg',
       title: 'Nomor call center COVID-19 yang dapat dihubungi kapan saja!',
       subtitle:
           'Untuk menghubungi call center COVID nasional silahkan ketikkan 119 ext 9 pada telepon genggam Anda.',
@@ -114,6 +119,8 @@ class _ContactHome extends State<ContactHome> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+    request.username != "" ? isUser = true : isUser = false;
     return Scaffold(
         appBar: AppBar(
           title: Text('Kontak'),
@@ -178,30 +185,43 @@ class _ContactHome extends State<ContactHome> {
                       ]),
                   Padding(
                     padding: EdgeInsets.only(left: 24, right: 20),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(
-                              color: Colors.teal,
-                              width: 2.0,
+                    child: isUser == true
+                        ? (ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  side: BorderSide(
+                                    color: Colors.teal,
+                                    width: 2.0,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
-                      child: Text('Tambahkan'),
-                      onPressed: () {
-                        Route route = MaterialPageRoute(
-                            builder: (context) => AddKontakForm());
-                        Navigator.push(context, route);
-                        // Navigator.push(
-                        //     context, route,
-                        //     Route route = MaterialPageRoute(
-                        //         builder: (context, route) => AddKontakForm()));
-                      },
-                    ),
+                            child: Text('Tambahkan'),
+                            onPressed: () {
+                              Route route = MaterialPageRoute(
+                                  builder: (context) => AddKontakForm());
+                              Navigator.push(context, route);
+                            },
+                          ))
+                        : (ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  side: BorderSide(
+                                    color: Colors.teal,
+                                    width: 2.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            child: Text('Tambahkan'),
+                            onPressed: () {},
+                          )),
                   ),
                 ],
               ),
@@ -232,8 +252,14 @@ class _ContactHome extends State<ContactHome> {
                   ),
                   child: Text('Lihat Semua'),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ListContact()));
+                    isUser == true
+                        ? (Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ListContact())))
+                        : (SnackBar(
+                            content: Text("Silahkan login terlebih dahulu."),
+                          ));
                   },
                 ),
               ),

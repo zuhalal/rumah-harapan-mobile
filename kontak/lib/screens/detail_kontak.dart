@@ -49,15 +49,12 @@ class DetailPage extends StatelessWidget {
                 size: 36.0,
               ),
             ),
-            Expanded(
-                flex: 6,
-                child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      field.kota + ", " + field.provinsi,
-                      style: const TextStyle(color: Colors.black),
-                    ))),
-            //Expanded(flex: 1, child: coursePrice)
+            Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  field.kota + ", " + field.provinsi,
+                  style: const TextStyle(color: Colors.black),
+                )),
           ],
         ),
       ],

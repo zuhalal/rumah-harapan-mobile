@@ -1,6 +1,8 @@
 //import 'dart:html';
 //ignore_for_file: prefer_const_constructors, avoid_print, unnecessary_new
 import 'dart:convert';
+import 'package:kontak/widgets/search_list.dart';
+
 import '../models/list_all_kontak.dart';
 
 import '../screens/detail_kontak.dart';
@@ -17,6 +19,8 @@ class ListContact extends StatefulWidget {
 
 class _ListContact extends State<ListContact> {
   List<dynamic> extractedData = [];
+  List<Fields> contacts = [];
+  String query = '';
   fetchData() async {
     const url = 'http://rumah-harapan.herokuapp.com/kontak/list_kontak';
     try {

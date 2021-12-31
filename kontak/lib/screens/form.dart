@@ -40,7 +40,7 @@ class _AddKontakFormState extends State<AddKontakForm> {
     "Rumah Sakit",
     "Ambulans",
     "Bank Darah",
-    "Suplier Alat Kesehatan",
+    "Suplier Alkes",
     "Lainnya"
   ];
   List listProvinsi = [
@@ -129,7 +129,7 @@ class _AddKontakFormState extends State<AddKontakForm> {
                                   }).toList(),
                                   onChanged: (value) {
                                     setState(() {
-                                      kategoriFieldsValue = value.toString();
+                                      regionFieldsValue = value.toString();
                                     });
                                   },
                                 ),
@@ -155,7 +155,7 @@ class _AddKontakFormState extends State<AddKontakForm> {
                               }).toList(),
                               onChanged: (value) {
                                 setState(() {
-                                  kategoriFieldsValue = value.toString();
+                                  provinsiFieldsValue = value.toString();
                                 });
                               },
                             ),
@@ -217,7 +217,7 @@ class _AddKontakFormState extends State<AddKontakForm> {
                             TextFormField(
                               autofocus: true,
                               decoration: new InputDecoration(
-                                hintText: "masukan nama ontak",
+                                hintText: "masukan nama kontak",
                                 labelText: "Nama Kontak",
                                 border: OutlineInputBorder(
                                     borderRadius:
@@ -261,6 +261,26 @@ class _AddKontakFormState extends State<AddKontakForm> {
                             TextFormField(
                               autofocus: true,
                               decoration: new InputDecoration(
+                                hintText: "masukan alamat kontak",
+                                labelText: "Alamat Kontak",
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(5.0)),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'alamat kontak tidak boleh kosong';
+                                }
+                                alamatkontakFieldsValue = value;
+                                return null;
+                              },
+                            ),
+                            const SizedBox(
+                              height: 36,
+                            ),
+                            TextFormField(
+                              autofocus: true,
+                              decoration: new InputDecoration(
                                 hintText: "masukan keterangan",
                                 labelText: "Keterangan",
                                 border: OutlineInputBorder(
@@ -295,14 +315,13 @@ class _AddKontakFormState extends State<AddKontakForm> {
                                   final response = await request.postJson(
                                       "http://rumah-harapan.herokuapp.com/kontak/addAPI",
                                       convert.jsonEncode(<String, String>{
-                                        //'author': request.username,
                                         'region': regionFieldsValue,
                                         'provinsi': provinsiFieldsValue,
                                         'kategori': kategoriFieldsValue,
                                         'kota': kotaFieldsValue,
                                         'namakontak': namakontakFieldsValue,
                                         'nomorkontak': nomorkontakFieldsValue,
-                                        //'due_date': dateinput.text.toString(),
+                                        'alamatkontak': alamatkontakFieldsValue,
                                         'keterangan': keteranganFieldsValue,
                                       }));
                                   if (response['status'] == 'success') {
