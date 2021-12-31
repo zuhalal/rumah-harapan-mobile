@@ -7,6 +7,9 @@ import 'package:artikel/artikel_screens/form_artikel.dart';
 import 'package:artikel/widget_artikel.dart';
 
 class ArtikelHome extends StatefulWidget {
+  static const routeName = "/artikel";
+  const ArtikelHome({Key? key}): super(key:key);
+  
   @override
   _ArtikelHomeState createState() => _ArtikelHomeState();
 }
