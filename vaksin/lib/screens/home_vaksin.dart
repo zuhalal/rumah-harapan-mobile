@@ -29,7 +29,6 @@ class _HomeVaksinState extends State<HomeVaksin> {
 
   fetchDataKonten() async {
     const url = 'http://rumah-harapan.herokuapp.com/vaksin/all-forum';
-    print("masuk");
     try {
       extractedForumData = [];
       final response = await http.get(Uri.parse(url));
