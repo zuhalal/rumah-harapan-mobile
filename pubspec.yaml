@@ -73,6 +73,7 @@ flutter:
     - assets/images/kontak/
     - home/assets/
     - assets/images/home/
+    - assets/images/vaksin/
     - assets/images/home/map.png
     - assets/images/home/donate.jpg
     - assets/images/home/ambulance.jpg

@@ -52,8 +52,11 @@ class MainDrawerLogin extends StatelessWidget {
           buildListTile('Donasi', Icons.volunteer_activism, () {
             Navigator.pushNamed(context, '/donasi');
           }),
-          buildListTile('Publikasi', Icons.announcement, () {
+          buildListTile('Artikel', Icons.announcement, () {
             Navigator.pop(context);
+          }),
+          buildListTile('Vaksin', Icons.announcement, () {
+            Navigator.pushNamed(context, '/vaksin');
           }),
           buildListTile('Update Covid', Icons.update, () {
             Navigator.pushNamed(context, '/updateCovid');
@@ -63,6 +66,9 @@ class MainDrawerLogin extends StatelessWidget {
           }),
           buildListTile('Kritik dan Saran', Icons.message, () {
             Navigator.pushNamed(context, '/kritikSaran');
+          }),
+          buildListTile('Vaksin', Icons.coronavirus, () {
+            Navigator.pushNamed(context, '/vaksin');
           }),
           buildListTile('Logout', Icons.logout, () async {
             final response = await request

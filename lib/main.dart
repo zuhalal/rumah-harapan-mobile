@@ -11,6 +11,8 @@ import 'screens/login_screen.dart';
 import 'package:home/screens/tabs_screen.dart';
 import 'screens/register_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:vaksin/screens/home_vaksin.dart';
+import 'package:vaksin/screens/add_forum_vaksin.dart';
 import 'package:kontak/screens/home_kontak.dart';
 import 'package:kontak/screens/form.dart';
 
@@ -49,7 +51,9 @@ class MyApp extends StatelessWidget {
             UpdateCovid.routeName: (ctx) => UpdateCovid(indexPage: 0),
             UCProv.routeName: (ctx) => UpdateCovid(indexPage: 1),
             HarapanUC.routeName: (ctx) => UpdateCovid(indexPage: 2),
-            KritikSaranHome.routeName: (ctx) => KritikSaranHome()
+            KritikSaranHome.routeName: (ctx) => KritikSaranHome(),
+            HomeVaksin.routeName: (ctx) => HomeVaksin(),
+            AddForumVaksin.routeName: (ctx) => AddForumVaksin(),
           },
         ));
   }
