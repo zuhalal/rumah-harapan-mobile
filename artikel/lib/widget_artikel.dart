@@ -1,3 +1,4 @@
+import 'package:artikel/artikel_screens/detail_artikel.dart';
 import 'package:flutter/material.dart';
 
 class CardWidget extends StatelessWidget {
@@ -41,6 +42,27 @@ class CardWidget extends StatelessWidget {
                 SizedBox(height: 10),
                 Text(body),
                 SizedBox(height: 10),
+
+                // ElevatedButton(
+                //                 style: ElevatedButton.styleFrom(
+                //                     textStyle: const TextStyle(fontSize: 20),
+                //                     onPrimary: Colors.white,
+                //                     primary: const Color(0xff023E8A),
+                //                     side: BorderSide(
+                //                         width: 2,
+                //                         color: const Color(0xff023E8A)),
+                //                     padding: EdgeInsets.only(
+                //                         left: 12, right: 12, top: 8, bottom: 8),
+                //                     shape: new RoundedRectangleBorder(
+                //                         borderRadius:
+                //                             new BorderRadius.circular(8.0))),
+                //                 onPressed: () {
+                //                   Route route = MaterialPageRoute(
+                //                       builder: (context) => DetailArtikel();
+                //                   Navigator.push(context, route);
+                //                 },
+                //                 child: const Text('Lihat Detail'),
+                //               ),
               ],
             ),
           ),

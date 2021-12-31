@@ -90,9 +90,39 @@ class _ArtikelHomeState extends State<ArtikelHome> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
 
-                    children: isUser
-                        ? [
-                            ElevatedButton(
+                    children: [
+              Container(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                decoration: BoxDecoration(
+                  color: const Color(0xffade8f4),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      'Artikel',
+                      // textAlign: TextAlign.right,
+                      style: TextStyle(
+                          fontSize: 32, color: const Color(0xff59A5D8)),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Kami sangat menghargai keinginan Anda untuk membantu kami mengembangkan website yang lebih baik. Anda dapat memberikan kritik dan saran dengan menulis pesan melalui tombol di bawah ini.',
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xffade8f4),
+                  ),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+
+                      children: isUser
+                          ? [
+                              ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     textStyle: const TextStyle(fontSize: 20),
                                     onPrimary: Colors.white,
@@ -195,31 +225,11 @@ class _ArtikelHomeState extends State<ArtikelHome> {
                                           ],
                                         );
                                       });
-                                };
+                                },
                                 child: const Text('Tambahkan Artikel'),
                               ),
                             ])),
 
-                  //   children: [
-                  //     ElevatedButton(
-                  //       onPressed: () {
-                  //         Navigator.push(
-                  //             context,
-                  //             MaterialPageRoute(
-                  //                 builder: (context) => ArtikelForm()));
-                  //       },
-                  //       child: Text('Tambahkan Artikel'),
-                  //       style: ElevatedButton.styleFrom(
-                  //         primary: const Color(0xFF023E8A),
-                  //         onPrimary: Colors.white,
-                  //         shadowColor: Colors.transparent,
-                  //         padding: EdgeInsets.only(
-                  //             left: 12, right: 12, top: 8, bottom: 8),
-                  //         fixedSize: const Size(460, 30),
-                  //       ),
-                  //     )
-                  //   ],
-                  // )),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -232,56 +242,58 @@ class _ArtikelHomeState extends State<ArtikelHome> {
                     width: 300,
                     height: 400,
                   ),
+                  SizedBox(height: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                        child: Text(
+                          'Daftar Artikel',
+                          style:
+                              TextStyle(fontSize: 24, color: const Color(0xff59A5D8)),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
-              )
-            ],
-          ),
-          SizedBox(height: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Text(
-                  'Daftar Artikel',
-                  style:
-                      TextStyle(fontSize: 24, color: const Color(0xff59A5D8)),
-                  textAlign: TextAlign.center,
-                ),
               ),
             ],
           ),
+          
+          
 
-          Container(
-            child: FutureBuilder(
-                future: fetchData(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.data == null) {
-                    return Container(
-                      child: Center(
-                        child: Text("Loading..."),
-                      ),
-                    );
-                  } else {
-                    return Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: extractedData.map((data) {
-                          return Column(
-                            children: [
-                              SizedBox(height: 20),
-                              CardWidget(
-                                  data.fields.author,
-                                  data.fields.title,
-                                  data.fields.body,
-                                  data.fields.date),
-                            ],
-                          );
-                        }).toList());
-                  }
-                }),
-          ),
-        ],
-      ),
+          // Container(
+          //   child: FutureBuilder(
+          //       future: fetchData(),
+          //       builder: (BuildContext context, AsyncSnapshot snapshot) {
+          //         if (snapshot.data == null) {
+          //           return Container(
+          //             child: Center(
+          //               child: Text("Loading..."),
+          //             ),
+          //           );
+          //         } else {
+          //           return Column(
+          //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //               children: extractedData.map((data) {
+          //                 return Column(
+          //                   children: [
+          //                     SizedBox(height: 20),
+          //                     CardWidget(
+          //                         data.fields.author,
+          //                         data.fields.title,
+          //                         data.fields.body,
+          //                         data.fields.date),
+          //                   ],
+          //                 );
+          //               }).toList());
+          //         }
+          //       }),
+          // ),
+              )],
+      )]),
     );
   }
 }
