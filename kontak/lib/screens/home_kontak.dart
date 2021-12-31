@@ -100,7 +100,6 @@ class _ContactHome extends State<ContactHome> {
       final response = await http.get(Uri.parse(url));
       // print(response.body);
       extractedData = jsonDecode(response.body);
-      print(extractedData);
       return extractedData;
     } catch (error) {
       print(error);
@@ -159,13 +158,11 @@ class _ContactHome extends State<ContactHome> {
                         Container(
                           width: 120,
                           padding: EdgeInsets.only(top: 20, right: 4, left: 12),
-                          child: Expanded(
-                            child: Image.asset(
-                                'assets/images/donasi/callsupport.png',
-                                //width: 20,
-                                height: 100,
-                                fit: BoxFit.fitWidth),
-                          ),
+                          child: Image.asset(
+                              'assets/images/donasi/callsupport.png',
+                              //width: 20,
+                              height: 100,
+                              fit: BoxFit.fitWidth),
                         ),
                         Expanded(
                           child: Padding(
@@ -306,7 +303,9 @@ class _ContactHome extends State<ContactHome> {
             ],
           ),
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
             //Padding(padding: EdgeInsets.all(8)),
             Expanded(
               child: ClipRRect(
