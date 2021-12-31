@@ -10,6 +10,8 @@ import 'screens/login_screen.dart';
 import 'package:home/screens/tabs_screen.dart';
 import 'screens/register_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:kontak/screens/home_kontak.dart';
+import 'package:kontak/screens/form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,10 +42,12 @@ class MyApp extends StatelessWidget {
             LoginScreen.routeName: (ctx) => LoginScreen(),
             AfterLogin.routeName: (ctx) => AfterLogin(),
             DonasiHome.routeName: (ctx) => DonasiHome(),
+            AddDonasiForm.routeName: (ctx) => AddDonasiForm(),
+            ContactHome.routeName: (ctx) => ContactHome(),
+            AddKontakForm.routeName: (ctx) => AddKontakForm(),
             UpdateCovid.routeName: (ctx) => UpdateCovid(indexPage: 0),
             UCProv.routeName: (ctx) => UpdateCovid(indexPage: 1),
             HarapanUC.routeName: (ctx) => UpdateCovid(indexPage: 2),
-            AddDonasiForm.routeName: (ctx) => AddDonasiForm()
           },
         ));
   }
