@@ -89,14 +89,10 @@ class _HarapanUCState extends State<HarapanUC> {
     // print(userPK);
   }
 
-  // void didChangeDependencies() {
-  //   userData();
-  //   print("Masook");
-  //   super.didChangeDependencies();
-  // }
-
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+    ScrollController _controller = new ScrollController();
+
     return FutureBuilder(
       future: fetchData(),
       builder: (context, snapshot) { // Here you told Flutter to use the word "snapshot".
@@ -111,35 +107,33 @@ class _HarapanUCState extends State<HarapanUC> {
               ),
             ),
           );
-        else 
-          return Scaffold( body : SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: Container(
-              color: const Color(0xffade8f4),
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Center ( child: ListView(
-              // mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Kotak Harapan',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 28, color: Color.fromRGBO(89, 165, 216, 1)),
-                  ),
+        else
+          return Scaffold( body :Column(
+            children: [
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Container(
+                    color: const Color(0xffade8f4),
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Center ( child: Column(
+                        children: [
+                          Text(
+                            'Kotak Harapan',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 28, color: Color.fromRGBO(89, 165, 216, 1)),
+                          ),
 
-                  Text(" ",),
-                  
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: listHarapan.length,
-                    itemBuilder: (ctx,index) {
-                      return CardHarapan(data: listHarapan[index], userPk: userPK, userName: userName,); // isUser-nya nnti disesuaiin
-                    },
-                  ),
-                ],
-              ),
-            ),),),),
+                          Text(" ",),
+                          Column(
+                            children: listHarapan.map((list)=>CardHarapan(data: list, userPk: userPK, userName: userName,)).toList())
+                        ],
+                      )
+                      ),
+                    ),),
+                )),
+            ],
+          ),
 
             floatingActionButton: FloatingActionButton(
               backgroundColor: Color.fromRGBO(2, 62, 128, 1),
@@ -147,10 +141,10 @@ class _HarapanUCState extends State<HarapanUC> {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return request.loggedIn == true ? 
+                    return request.loggedIn == true ?
                     AlertDialog(
                       content: Stack(
-                        clipBehavior: Clip.none, 
+                        clipBehavior: Clip.none,
                         children: <Widget>[
                           Positioned(
                             right: -50.0,
@@ -227,7 +221,7 @@ class _HarapanUCState extends State<HarapanUC> {
                     ) :
                     AlertDialog(
                       content: Stack(
-                        clipBehavior: Clip.none, 
+                        clipBehavior: Clip.none,
                         children: <Widget>[
                           Container(
                             width: double.infinity,
