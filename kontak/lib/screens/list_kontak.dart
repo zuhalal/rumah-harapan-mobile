@@ -199,7 +199,7 @@ class _ListContact extends State<ListContact> {
                                 size: 40, color: Colors.white)
                             : (contact.data[idx]["fields"]["kategori"]
                                         .toString() ==
-                                    "Suplier Alat Kesehatan")
+                                    "Suplier Alkes")
                                 ? Icon(Icons.medical_services,
                                     size: 40, color: Colors.white)
                                 : Icon(Icons.other_houses,
