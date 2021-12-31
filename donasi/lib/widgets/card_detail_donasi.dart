@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CardDetailDonasi extends StatefulWidget {
-  const CardDetailDonasi({Key? key, required this.title, required this.icon, required this.name}) : super(key: key);
+  const CardDetailDonasi(
+      {Key? key, required this.title, required this.icon, required this.name})
+      : super(key: key);
   final String title;
   final IconData icon;
   final String name;
+
   @override
   _CardDetailDonasiState createState() => _CardDetailDonasiState();
 }
@@ -27,15 +30,25 @@ class _CardDetailDonasiState extends State<CardDetailDonasi> {
         children: [
           Row(
             children: [
-              Text(widget.title, textAlign:TextAlign.justify, style: TextStyle(fontSize: 24, color: const Color(0xff59A5D8)),)
+              Text(
+                widget.title,
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 24, color: const Color(0xff59A5D8)),
+              )
             ],
           ),
           SizedBox(height: 12),
           Row(
             children: [
               Icon(widget.icon, color: const Color(0xff59A5D8)),
-              SizedBox(width: 24,),
-              Text(widget.name, textAlign:TextAlign.justify, style: TextStyle(fontSize: 20, color: const Color(0xff59A5D8)),)
+              SizedBox(
+                width: 24,
+              ),
+              Text(
+                widget.name,
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 20, color: const Color(0xff59A5D8)),
+              )
             ],
           )
         ],

@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:kritik_saran/models/get_kritik_saran.dart';
 
 class KritikSaranHome extends StatefulWidget {
+  static const routeName = '/kritik_saran';
   @override
   _KritikSaranHomeState createState() => _KritikSaranHomeState();
 }
