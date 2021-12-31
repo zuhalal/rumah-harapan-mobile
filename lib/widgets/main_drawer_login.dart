@@ -62,7 +62,7 @@ class MainDrawerLogin extends StatelessWidget {
             Navigator.pop(context);
           }),
           buildListTile('Logout', Icons.logout,  () async {
-            final response = await request.logoutAccount("http://rumah-harapan.herokuapp.com/logout2");
+            final response = await request.logoutAccount("https://rumah-harapan.herokuapp.com/logout2");
             if (response['status']) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text("Successfully logged out!"),

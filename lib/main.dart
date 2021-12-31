@@ -40,7 +40,9 @@ class MyApp extends StatelessWidget {
             LoginScreen.routeName: (ctx) => LoginScreen(),
             AfterLogin.routeName: (ctx) => AfterLogin(),
             DonasiHome.routeName: (ctx) => DonasiHome(),
-            UpdateCovid.routeName: (ctx) => UpdateCovid(),
+            UpdateCovid.routeName: (ctx) => UpdateCovid(indexPage: 0),
+            UCProv.routeName: (ctx) => UpdateCovid(indexPage: 1),
+            HarapanUC.routeName: (ctx) => UpdateCovid(indexPage: 2),
             AddDonasiForm.routeName: (ctx) => AddDonasiForm()
           },
         ));

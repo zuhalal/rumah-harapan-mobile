@@ -5,6 +5,7 @@ import 'models/prov.dart';
 
 class UCProv extends StatefulWidget {
   const UCProv({Key? key}) : super(key: key);
+  static const routeName = '/updateCovid/prov';
 
   get listProv => null;
 
@@ -62,7 +63,16 @@ class _UCProvState extends State<UCProv> {
       future: fetchData(),
       builder: (context, snapshot) { // Here you told Flutter to use the word "snapshot".
         if (snapshot.connectionState == ConnectionState.waiting)
-          return Center(child: CircularProgressIndicator());
+          return SizedBox(
+            width: double.infinity,
+            child: Container(
+              color: const Color(0xffade8f4),
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(child: CircularProgressIndicator()),
+              ),
+            ),
+          );
         else
           return SizedBox(
             width: double.infinity,

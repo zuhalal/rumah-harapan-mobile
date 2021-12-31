@@ -14,6 +14,13 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
+  bool passwordVision = false;
+  void togglePassword() {
+    setState(() {
+      passwordVision = !passwordVision;
+    });
+  }
+
   String username = "";
   String password1 = "";
   String password2 = "";
@@ -29,10 +36,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       backgroundColor: Color.fromRGBO(89, 165, 216, 1),
       body: SingleChildScrollView(
         child: Container(
-          height: 600,
+          height: 650,
           width: double.infinity,
           color: Colors.white,
-          margin: EdgeInsets.only(top: 70, right: 20, left: 20),
+          margin: EdgeInsets.only(top: 70, right: 20, left: 20, bottom: 70),
           child: Column(
             children: <Widget>[
               Container(
@@ -74,11 +81,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Padding(
                 padding: EdgeInsets.all(15),
                 child: TextFormField(
-                  obscureText: true,
+                  obscureText: !passwordVision,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Enter Password",
                     hintText: "Enter your password",
+                    hintStyle: TextStyle(
+                      color: Color.fromRGBO(200, 200, 200, 1),
+                    ),
+                    suffixIcon: IconButton(
+                      color: Color.fromRGBO(200, 200, 200, 1),
+                      splashRadius: 1,
+                      icon: Icon(passwordVision
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined),
+                      onPressed: togglePassword,
+                    ),
                   ),
                   onChanged: (String ? value) {
                     setState(() {
@@ -102,11 +120,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Padding(
                 padding: EdgeInsets.all(15),
                 child: TextFormField(
-                  obscureText: true,
+                  obscureText: !passwordVision,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Re-enter Password",
                     hintText: "Re-enter your password",
+                    hintStyle: TextStyle(
+                      color: Color.fromRGBO(200, 200, 200, 1),
+                    ),
+                    suffixIcon: IconButton(
+                      color: Color.fromRGBO(200, 200, 200, 1),
+                      splashRadius: 1,
+                      icon: Icon(passwordVision
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined),
+                      onPressed: togglePassword,
+                    ),
                   ),
                   onChanged: (String? value) {
                     setState(() {
@@ -136,12 +165,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: const Color(0xFF24262A),
-                ),
+                width: double.infinity,
+                padding: EdgeInsets.all(15),
                 child: TextButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Color.fromRGBO(2, 62, 138, 1)),
+                    foregroundColor:
+                    MaterialStateProperty.all<Color>(Colors.white),
+                    overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                            (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.pressed))
+                            return Color.fromRGBO(2, 62, 138, 1);
+                          return null; // Defer to the widget's default.
+                        }),
+                  ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       // Submit to Django server and wait for response
@@ -179,16 +217,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
 
               Container(
-                margin: EdgeInsets.only(top: 10),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromRGBO(2, 62, 138, 1),
-                    onPrimary: Colors.white,
+                width: double.infinity,
+                padding: EdgeInsets.all(15),
+                child: Container(
+                  width: double.infinity,
+                  child: TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromRGBO(2, 62, 138, 1)),
+                      foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                              (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.pressed))
+                              return Color.fromRGBO(2, 62, 138, 1);
+                            return null; // Defer to the widget's default.
+                          }),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/tabs_screen');
+                    },
+                    child: Text(
+                      "Home",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/tabs_screen');
-                  },
-                  child: const Text('Home'),
                 ),
               ),
             ],

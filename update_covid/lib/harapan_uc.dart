@@ -1,15 +1,14 @@
-import 'dart:collection';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 import 'package:rumah_harapan/cookies.dart';
 import 'package:update_covid/cardHarapan.dart';
-import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 
 import 'models/harapan.dart';
 
 class HarapanUC extends StatefulWidget {
   // const HarapanUC({Key? key}) : super(key: key);
+  static const routeName = '/updateCovid/harapan';
   
   final _formKey = GlobalKey<FormState>();
 
@@ -19,9 +18,8 @@ class HarapanUC extends StatefulWidget {
 
 class _HarapanUCState extends State<HarapanUC> {
 
-  final cardColor = Color.fromRGBO(89, 165, 216, 1);
-  final TextEditingController pesan = TextEditingController();
   List<dynamic> responseJson = [];
+  List<dynamic> jsonHarapan = [];
   List<Harapan> listHarapan = [];
   String harapan = "";
   DateTime waktu = DateTime.now();
@@ -29,49 +27,45 @@ class _HarapanUCState extends State<HarapanUC> {
   Map<int,String> userName = new Map();
 
   userData() async {
-    const url = 'http://rumah-harapan.herokuapp.com/updateCovid/jsonUser';
+    final request = context.watch<CookieRequest>();
     // print("object");
     try {
-      final response = await http.get(Uri.parse(url));
-      final json = response.body;
-      responseJson = jsonDecode(json);
+      final response = await request.get('https://rumah-harapan.herokuapp.com/updateCovid/jsonUser');
       // print(json + "ini");
       // print(responseJson);
       print("Ini Sukses");
-      for (var user in responseJson) {
+      for (var user in response) {
         // print(user);
         // print(user['pk']);
         userPK[user['fields']['username']] = user['pk'];
         userName[user['pk']] = user['fields']['username'];
       }
-      print(userName);
-      print(userPK);
+      // print(userName);
+      // print(userPK);
     } catch (error) {
       print(error);
     }
   }
   
   Future <void> fetchData() async {
-    const url = 'http://rumah-harapan.herokuapp.com/updateCovid/json';
-    userData();
+    final request = context.watch<CookieRequest>();
+    await userData();
     try {
       listHarapan = [];
-      final response = await http.get(Uri.parse(url));
-      final json = response.body;
-      responseJson = jsonDecode(json);
+      final res = await request.get('https://rumah-harapan.herokuapp.com/updateCovid/jsonHarapan');
       print("Sukses");
-      int len = responseJson.length;
+      int len = res.length;
       for (int i = 0; i < len; i++) {
         Fields fields = Fields(
-          author: responseJson[i]['fields']['Author'],
-          message: responseJson[i]['fields']['Message'], 
-          publishedDate: DateTime.parse(responseJson[i]['fields']['published_date']), 
-          like: new List<int>.from(responseJson[i]['fields']['like']),
+          author: res[i]['fields']['Author'],
+          message: res[i]['fields']['Message'], 
+          publishedDate: DateTime.parse(res[i]['fields']['published_date']), 
+          like: new List<int>.from(res[i]['fields']['like']),
           );
         
         Harapan har = Harapan(
-          model: responseJson[i]['model'], 
-          pk: responseJson[i]['pk'], 
+          model: res[i]['model'], 
+          pk: res[i]['pk'], 
           fields: fields,
         );
 
@@ -79,7 +73,7 @@ class _HarapanUCState extends State<HarapanUC> {
   
         if (lenHar == 0) listHarapan.add(har);
         for (int j = 0; j < lenHar; j++) {
-          // print(DateTime.parse(responseJson[i]['fields']['published_date']).compareTo(DateTime.parse(responseJson[j]['fields']['published_date'])));
+          // print(DateTime.parse(jsonHarapan[i]['fields']['published_date']).compareTo(DateTime.parse(jsonHarapan[j]['fields']['published_date'])));
           if (har.fields.publishedDate.compareTo(listHarapan[j].fields.publishedDate) > 0) {
             listHarapan.insert(j, har);
             break;
@@ -91,8 +85,8 @@ class _HarapanUCState extends State<HarapanUC> {
     } catch (error) {
       print(error);
     }
-    print(userName);
-    print(userPK);
+    // print(userName);
+    // print(userPK);
   }
 
   // void didChangeDependencies() {
@@ -107,12 +101,25 @@ class _HarapanUCState extends State<HarapanUC> {
       future: fetchData(),
       builder: (context, snapshot) { // Here you told Flutter to use the word "snapshot".
         if (snapshot.connectionState == ConnectionState.waiting)
-          return Center(child: CircularProgressIndicator());
+          return SizedBox(
+            width: double.infinity,
+            child: Container(
+              color: const Color(0xffade8f4),
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(child: CircularProgressIndicator()),
+              ),
+            ),
+          );
         else 
-          return Scaffold(
-            body: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: ListView(
+          return Scaffold( body : SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Container(
+              color: const Color(0xffade8f4),
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center ( child: ListView(
               // mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
@@ -132,7 +139,7 @@ class _HarapanUCState extends State<HarapanUC> {
                   ),
                 ],
               ),
-            ),
+            ),),),),
 
             floatingActionButton: FloatingActionButton(
               backgroundColor: Color.fromRGBO(2, 62, 128, 1),
@@ -186,15 +193,30 @@ class _HarapanUCState extends State<HarapanUC> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
                                   child: Text("Kirim"),
-                                    onPressed: () {
+                                    onPressed: () async {
                                       if (widget._formKey.currentState!.validate()) {
                                         harapan = harapan;
-                                        waktu = DateTime.now();
                                         print(harapan);
-                                        print(waktu.toString());
+                                        final response = await request.postJson(
+                                        "https://rumah-harapan.herokuapp.com/updateCovid/addMobile",
+                                        convert.jsonEncode(<String, String>{
+                                          'pesan': harapan,
+                                        }));
+                                        if (response['status'] == 'success') {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                          content: Text("Berhasil!"),
+                                        ));
                                         Navigator.of(context).pop();
+                                        // Navigator.of(context).pop();
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                          content:
+                                          Text("Gagal silahkan coba lagi"),
+                                        ));
                                       }
-                                    },
+                                    }}
                                   ),
                                 ),
                               ],
@@ -209,7 +231,7 @@ class _HarapanUCState extends State<HarapanUC> {
                         children: <Widget>[
                           Container(
                             width: double.infinity,
-                            height: 70,
+                            height: 110,
                             // padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
                             child: Column(
                               children : <Widget> [
@@ -239,26 +261,6 @@ class _HarapanUCState extends State<HarapanUC> {
                               ),
                             ),
                           ),
-                          // Text("Silahkan login terlebih dahulu untuk menuliskan harapan"),
-                          // Text(""),
-                          // ElevatedButton(
-                          //   child: Text("Login"),
-                          //   onPressed: () {
-                          //     Navigator.pushNamed(context, "/login_screen");
-                          //   },
-                          // ),
-                          // Center(
-                          //   children : <Widget> [
-                          //     Text("Silahkan login terlebih dahulu untuk menuliskan harapan"),
-                          //     Text(""),
-                              // ElevatedButton(
-                              //   child: Text("Login"),
-                              //   onPressed: () {
-                              //     Navigator.pushNamed(context, "/login_screen");
-                              //   },
-                          //     ),
-                          //   ]
-                          // ),
                         ]
                       )
                     );

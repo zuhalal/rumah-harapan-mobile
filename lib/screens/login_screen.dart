@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../cookies.dart';
 import 'package:provider/provider.dart';
+
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login_screen';
   _LoginScreenState createState() => _LoginScreenState();
@@ -118,25 +119,25 @@ class _LoginScreenState extends State<LoginScreen> {
               // buat button
               Padding(
                 padding: EdgeInsets.all(15),
-                child : Container(
+                child: Container(
                   width: double.infinity,
                   child: TextButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Color.fromRGBO(2, 62, 138, 1)),
                       foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
+                          MaterialStateProperty.all<Color>(Colors.white),
                       overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                              (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.pressed))
-                              return Color.fromRGBO(2, 62, 138, 1);
-                            return null; // Defer to the widget's default.
-                          }),
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return Color.fromRGBO(2, 62, 138, 1);
+                        return null; // Defer to the widget's default.
+                      }),
                     ),
                     onPressed: () async {
                       try {
                         final response =
-                        await request.login("http://rumah-harapan.herokuapp.com/login2", {
+                            await request.login("https://rumah-harapan.herokuapp.com/login2", {
                           'username': username,
                           'password': password,
                         });
@@ -170,20 +171,20 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Padding(
                 padding: EdgeInsets.all(15),
-                child : Container(
+                child: Container(
                   width: double.infinity,
                   child: TextButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Color.fromRGBO(2, 62, 138, 1)),
                       foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
+                          MaterialStateProperty.all<Color>(Colors.white),
                       overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                              (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.pressed))
-                              return Color.fromRGBO(2, 62, 138, 1);
-                            return null; // Defer to the widget's default.
-                          }),
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return Color.fromRGBO(2, 62, 138, 1);
+                        return null; // Defer to the widget's default.
+                      }),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, '/tabs_screen');

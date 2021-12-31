@@ -1,10 +1,10 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rumah_harapan/cookies.dart';
 import 'package:provider/provider.dart';
+import 'package:update_covid/harapan_uc.dart';
 import 'package:update_covid/models/harapan.dart';
+import 'dart:convert' as convert;
 
 class CardHarapan extends StatefulWidget {
   const CardHarapan({Key? key, required this.data, required this.userPk, required this.userName}) 
@@ -22,25 +22,23 @@ class _CardHarapanState extends State<CardHarapan> {
   String harapan = "";
   int like = 0;
   Icon x = Icon(Icons.thumb_down,color:Colors.yellow);
-  String status = "Tidak Suka";
+  String status = "Suka";
   DateTime tanggal = DateTime.now();
   int idAuthor = 0;
   int idUser = 0;
-  String username = "admin";
-  bool isUser = false;
+  String username = "";
+  int idHarapan = 0;
 
-  void _incrementCounter(String status) {
-    setState(() {
-      if (status == "Suka") {
-        status = "Tidak Suka";
-        x = Icon(Icons.thumb_down,color: Colors.yellow,);
-        like++;
-      } else {
-        status = "Suka";
-        x = Icon(Icons.thumb_up,color: Colors.yellow,);
-        like--;
-      }
-    });
+  void _incrementCounter(var request, int id) async {
+      print(idHarapan);
+      final response = await request.postJson(
+        "https://rumah-harapan.herokuapp.com/updateCovid/likeMobile",
+        convert.jsonEncode(<String, int>{
+          'id': id,
+        }));
+        Navigator.pushReplacementNamed(
+          context, HarapanUC.routeName
+        );
   }
 
   String _getUsername(Map<int,String> map, int pk) {
@@ -65,10 +63,11 @@ class _CardHarapanState extends State<CardHarapan> {
     tanggal = widget.data.fields.publishedDate;
     username = _getUsername(widget.userName, idAuthor);
     idUser = _getPK(widget.userPk, request.username);
+    idHarapan = widget.data.pk;
 
     if (request.username == username) username = "Anda";
 
-    if (widget.data.fields.like.contains(idUser)) status = "Suka";
+    if (widget.data.fields.like.contains(idUser)) status = "Tidak Suka";
 
     if (status == "Suka") x = Icon(Icons.thumb_up, color:Colors.yellow);
 
@@ -137,7 +136,7 @@ class _CardHarapanState extends State<CardHarapan> {
                   children: <Widget> [
                     FlatButton.icon(
                       onPressed: () {
-                        _incrementCounter(status);
+                        _incrementCounter(request, idHarapan);
                       }, 
                       icon: x, 
                       label: Text(status),
