@@ -64,6 +64,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/donasi/
+    - assets/images/kontak/
     - home/assets/
     - assets/images/home/
 
