@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../cookies.dart';
 import 'package:provider/provider.dart';
+
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login_screen';
   _LoginScreenState createState() => _LoginScreenState();
@@ -108,46 +109,55 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ))),
               Container(
-                child: Text(
-                  "Belum punya akun? Register",
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
+                child: InkWell(
+                  child: Text("Belum punya akun? Register",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontSize: 20,
+                      )),
+                  onTap: () => Navigator.pushNamed(context, '/register_screen'),
                 ),
+                // Text(
+                //   "Belum punya akun? Register",
+                //   style: TextStyle(
+                //     fontSize: 20,
+                //   ),
+                // ),
               ),
               // buat button
               Padding(
                 padding: EdgeInsets.all(15),
-                child : Container(
+                child: Container(
                   width: double.infinity,
                   child: TextButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Color.fromRGBO(2, 62, 138, 1)),
                       foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
+                          MaterialStateProperty.all<Color>(Colors.white),
                       overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                              (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.pressed))
-                              return Color.fromRGBO(2, 62, 138, 1);
-                            return null; // Defer to the widget's default.
-                          }),
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return Color.fromRGBO(2, 62, 138, 1);
+                        return null; // Defer to the widget's default.
+                      }),
                     ),
                     onPressed: () async {
                       try {
-                        final response =
-                        await request.login("http://rumah-harapan.herokuapp.com/login2", {
+                        final response = await request.login(
+                            "http://rumah-harapan.herokuapp.com/login2", {
                           'username': username,
                           'password': password,
                         });
-                        print(response);
                         if (request.loggedIn) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(response["message"]),
                             ),
                           );
-                          Navigator.pushNamed(context, '/after_login');
+                          Navigator.pushReplacementNamed(
+                              context, '/after_login');
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -170,20 +180,20 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Padding(
                 padding: EdgeInsets.all(15),
-                child : Container(
+                child: Container(
                   width: double.infinity,
                   child: TextButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Color.fromRGBO(2, 62, 138, 1)),
                       foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
+                          MaterialStateProperty.all<Color>(Colors.white),
                       overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                              (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.pressed))
-                              return Color.fromRGBO(2, 62, 138, 1);
-                            return null; // Defer to the widget's default.
-                          }),
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return Color.fromRGBO(2, 62, 138, 1);
+                        return null; // Defer to the widget's default.
+                      }),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, '/tabs_screen');

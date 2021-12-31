@@ -43,7 +43,7 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           buildListTile('Home', Icons.home, () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/tabs_screen');
           }),
           buildListTile('Donasi', Icons.volunteer_activism, () {
             Navigator.pushNamed(context, '/donasi');
@@ -52,7 +52,7 @@ class MainDrawer extends StatelessWidget {
             Navigator.pop(context);
           }),
           buildListTile('Update Covid', Icons.update, () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/updateCovid');
           }),
           buildListTile('Kontak Penting', Icons.contacts, () {
             Navigator.pushNamed(context, '/kontak');
