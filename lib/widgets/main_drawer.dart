@@ -60,6 +60,9 @@ class MainDrawer extends StatelessWidget {
           buildListTile('Kritik dan Saran', Icons.message, () {
             Navigator.pushNamed(context, '/kritikSaran');
           }),
+          buildListTile('Vaksin', Icons.coronavirus, () {
+            Navigator.pushNamed(context, '/vaksin');
+          }),
           buildListTile('Login', Icons.login, () {
             Navigator.pop(context);
             Navigator.pushNamed(context, "/login_screen");
