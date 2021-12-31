@@ -4,7 +4,10 @@ import 'package:http/http.dart' as http;
 import 'package:artikel/artikel_models/get_artikel.dart';
 import 'package:artikel/artikel_screens/form_artikel.dart';
 import 'package:rumah_harapan/screens/login_screen.dart';
-
+import 'package:rumah_harapan/cookies.dart';
+import 'package:provider/provider.dart';
+import 'package:rumah_harapan/widgets/main_drawer.dart';
+import 'package:rumah_harapan/widgets/main_drawer_login.dart';
 
 class ArtikelHome extends StatefulWidget {
   static const routeName = "/artikel";
@@ -46,12 +49,12 @@ class _ArtikelHomeState extends State<ArtikelHome> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: Text("Artikel"),
       ),
-
+      drawer: request.loggedIn ? MainDrawerLogin() : MainDrawer(),
       body: ListView(
         children: [
           Column(

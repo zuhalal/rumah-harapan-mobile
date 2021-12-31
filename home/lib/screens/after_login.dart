@@ -490,7 +490,7 @@ class _AfterLoginState extends State<AfterLogin> {
                                   }),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '');
+                                  Navigator.pushNamed(context, '/artikel');
                                 },
                                 child: Text(
                                   "Pelajari lebih lanjut",
@@ -555,7 +555,7 @@ class _AfterLoginState extends State<AfterLogin> {
                                   }),
                                 ),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '');
+                                  Navigator.pushNamed(context, '/vaksin');
                                 },
                                 child: Text(
                                   "Pelajari lebih lanjut",
