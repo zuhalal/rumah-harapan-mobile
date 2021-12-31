@@ -1,3 +1,4 @@
+import 'package:artikel/artikel_screens/artikel_home.dart';
 import 'package:donasi/screens/donasi_add_form.dart';
 import 'package:donasi/screens/donasi_home.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
             KritikSaranHome.routeName: (ctx) => KritikSaranHome(),
             HomeVaksin.routeName: (ctx) => HomeVaksin(),
             AddForumVaksin.routeName: (ctx) => AddForumVaksin(),
+            ArtikelHome.routeName: (ctx) => ArtikelHome()
           },
         ));
   }

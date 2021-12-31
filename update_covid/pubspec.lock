@@ -186,6 +186,9 @@ packages:
     version: "1.7.0"
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> da75b5952a1a276ae072b794771318fc190bfb50
   nested:
     dependency: transitive
     description:
@@ -193,7 +196,10 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+<<<<<<< HEAD
+=======
 >>>>>>> 7e35d8614cc8123511ca2230d6ae9731ce4f61aa
+>>>>>>> da75b5952a1a276ae072b794771318fc190bfb50
   path:
     dependency: transitive
     description:
