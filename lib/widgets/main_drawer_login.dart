@@ -61,8 +61,8 @@ class MainDrawerLogin extends StatelessWidget {
           buildListTile('Kontak Penting', Icons.contacts, () {
             Navigator.pushNamed(context, '/kontak');
           }),
-          buildListTile('Kritik Saran', Icons.phone_in_talk, () {
-            Navigator.pushNamed(context, '/kritik_saran');
+          buildListTile('Kritik dan Saran', Icons.message, () {
+            Navigator.pushNamed(context, '/kritikSaran');
           }),
           buildListTile('Logout', Icons.logout, () async {
             final response = await request

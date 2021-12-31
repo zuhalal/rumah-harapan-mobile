@@ -24,7 +24,8 @@ class _TabsScreenState extends State<TabsScreen> {
         Container(
           color: const Color.fromRGBO(173, 232, 244, 1),
           width: double.infinity,
-          padding: const EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
+          padding:
+              const EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
           child: Column(
             children: <Widget>[
               const Text(
@@ -61,7 +62,8 @@ class _TabsScreenState extends State<TabsScreen> {
         Container(
           color: Colors.white,
           width: double.infinity,
-          padding: const EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
+          padding:
+              const EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
           child: Column(
             children: <Widget>[
               const Center(
@@ -135,7 +137,8 @@ class _TabsScreenState extends State<TabsScreen> {
         Container(
           color: const Color.fromRGBO(173, 232, 244, 1),
           width: double.infinity,
-          padding: const EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
+          padding:
+              const EdgeInsets.only(top: 160, left: 12, right: 12, bottom: 100),
           child: Column(
             children: <Widget>[
               const Center(

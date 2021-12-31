@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:rumah_harapan/cookies.dart';
+import 'package:rumah_harapan/widgets/main_drawer.dart';
+import 'package:rumah_harapan/widgets/main_drawer_login.dart';
 import '../screens/list_kontak.dart';
 import '../screens/detail_kontak.dart';
 import '../screens/form.dart';
@@ -120,6 +122,7 @@ class _ContactHome extends State<ContactHome> {
         appBar: AppBar(
           title: Text('Kontak'),
         ),
+        drawer: request.username != "" ? MainDrawerLogin() : MainDrawer(),
         backgroundColor: Color.fromRGBO(173, 232, 242, 1),
         body: SingleChildScrollView(
             child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
